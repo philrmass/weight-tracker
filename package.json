@@ -1,0 +1,28 @@
+{
+  "name": "weight-tracker",
+  "version": "1.0.0",
+  "description": "An app to to track your daily weight",
+  "main": "index.js",
+  "dependencies": {
+    "babel-loader": "^8.1.0"
+  },
+  "devDependencies": {
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "scripts": {
+    "start": "webpack-dev-server --config ./webpack.config.js --mode development",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/philrmass/weight-tracker.git"
+  },
+  "author": "Phil Mass",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/philrmass/weight-tracker/issues"
+  },
+  "homepage": "https://github.com/philrmass/weight-tracker#readme"
+}
