@@ -3,11 +3,15 @@
   "version": "1.0.0",
   "description": "An app to to track your daily weight",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
   "devDependencies": {
     "@babel/core": "^7.11.1",
     "@babel/plugin-transform-runtime": "^7.11.0",
     "@babel/preset-env": "^7.11.0",
+    "@babel/preset-react": "^7.10.4",
     "babel-loader": "^8.1.0",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
@@ -32,7 +36,8 @@
       "@babel/plugin-transform-runtime"
     ],
     "presets": [
-      "@babel/preset-env"
+      "@babel/preset-env",
+      "@babel/preset-react"
     ]
   }
 }
