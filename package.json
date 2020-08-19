@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "description": "An app to to track your daily weight",
   "main": "index.js",
-  "dependencies": {
-    "babel-loader": "^8.1.0"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "@babel/core": "^7.11.1",
+    "@babel/plugin-transform-runtime": "^7.11.0",
+    "@babel/preset-env": "^7.11.0",
+    "babel-loader": "^8.1.0",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
@@ -24,5 +26,13 @@
   "bugs": {
     "url": "https://github.com/philrmass/weight-tracker/issues"
   },
-  "homepage": "https://github.com/philrmass/weight-tracker#readme"
+  "homepage": "https://github.com/philrmass/weight-tracker#readme",
+  "babel": {
+    "plugins": [
+      "@babel/plugin-transform-runtime"
+    ],
+    "presets": [
+      "@babel/preset-env"
+    ]
+  }
 }
