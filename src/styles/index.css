@@ -1,5 +1,8 @@
 :root {
-  --text-blue: #2020df;
+  --space0: 4px;
+  --space1: 8px;
+  --space2: 16px;
+  --space3: 32px;
 }
 
 * {
