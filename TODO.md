@@ -1,12 +1,10 @@
 # Tasks
-- Add components and styles: Input, Weights, Week, Month, Graph
-- Set basic layout, switch if wide, graph to the right
-- Three dots on Input to open Options menu
-- Add redux with weights actions and reducer (ADD, REMOVE, IMPORT, EXPORT)
-- Store and load data from localStorage
-
-- figure out reducers (weights)
-- add redux
+- Update UI to display measurements
+- Add remove button to measurements
+- Save weight in local storage
+- Add weights actions (IMPORT, EXPORT)
+- Load data from localStorage (change to 'at')
+- Add three dots on Input to open Options menu for import/export
 - add react router
-- figure out routes (App, daily, weekly, monthly, graph)
-- layout full size
+- figure out routes (/, /daily, /weekly, /monthly, /graph), trigger with long press
+- Switch layout if wide, graph to the right
