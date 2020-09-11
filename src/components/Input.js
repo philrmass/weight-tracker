@@ -3,10 +3,14 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import styles from '../styles/Input.module.css';
+import { getDate, getTime } from '../utilities/times';
 import { addWeight } from '../redux/weights/actions';
 
 function Input({ addWeight }) {
-  const [value, setValue] = useState('');
+  const now = Date.now();
+  //???
+  const [value, setValue] = useState('200.0');
+  //const [value, setValue] = useState('');
 
   /*
   const date = new Date();
@@ -32,25 +36,40 @@ function Input({ addWeight }) {
       addWeight(Number(weight));
     }
     setValue('');
+    //??? remove
+    if (weight > 0) {
+      const change = Math.round(30 * Math.random() - 15) / 10;
+      const value = Math.round(10 * (weight + change)) / 10;
+      setValue(`${value}`);
+    }
   }
 
   return (
     <main className={styles.main}>
-      Input
-      <input
-        type='number'
-        min='0'
-        max='1000'
-        step='0.1'
-        value={value}
-        onChange={handleChange}
-        onKeyUp={handleKeyUp}
-      />
-      <button
-        onClick={() => submitWeight()}
-      >
-        ADD
-      </button>
+      <div className={styles.weight}>
+        <input
+          type='number'
+          min='0'
+          max='1000'
+          step='0.1'
+          value={value}
+          onChange={handleChange}
+          onKeyUp={handleKeyUp}
+        />
+      </div>
+      <div className={styles.time}>
+        <div>
+          {getDate(now)}
+        </div>
+        <div>
+          {getTime(now)}
+        </div>
+      </div>
+      <div className={styles.buttons}>
+        <button onClick={() => console.log('OPTIONS')}>
+          ...
+        </button>
+      </div>
     </main>
   );
 }

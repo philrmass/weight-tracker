@@ -1,3 +1,18 @@
 .main {
-  font-size: 4em;
+  padding: var(--space0) var(--space1);
+  display: grid;
+  grid-template-columns: 2fr 4fr 1fr;
+}
+
+.weight {
+  display: flex;
+  align-items: center;
+}
+
+.time {
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
 }

@@ -1,7 +1,8 @@
 # Tasks
+- Save weights in default state
 - Update UI to display measurements
-- Add remove button to measurements
-- Save weight in local storage
+- Add remove button to measurements, test remove
+- Save weights in local storage
 - Add weights actions (IMPORT, EXPORT)
 - Load data from localStorage (change to 'at')
 - Add three dots on Input to open Options menu for import/export

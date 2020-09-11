@@ -4,7 +4,6 @@ export const REMOVE_WEIGHT = 'REMOVE_WEIGHT';
 export function addWeight(weight) {
   const at = Date.now();
 
-  console.log('ACTION_ADD', weight);
   return {
     type: ADD_WEIGHT,
     at,

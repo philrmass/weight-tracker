@@ -3,26 +3,61 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import styles from '../styles/Weights.module.css';
+import { getDate, getTime } from '../utilities/times';
+import { removeWeight } from '../redux/weights/actions';
 
-function Weights({ weights }) {
+function Weights({
+  weights,
+  removeWeight,
+}) {
+  function buildWeight(value) {
+    return (
+      <li
+        key={value.at}
+        className={styles.item}
+      >
+        <div className={styles.weight}>
+          {value.weight}
+        </div>
+        <div className={styles.time}>
+          <div>
+            {getDate(value.at)}
+          </div>
+          <div>
+            {getTime(value.at)}
+          </div>
+        </div>
+        <div className={styles.buttons}>
+          <button onClick={() => removeWeight(value.at)}>
+            x
+          </button>
+        </div>
+      </li>
+    );
+  }
+
   return (
     <main className={styles.main}>
-      <div>
-        {JSON.stringify(weights, null, 2)}
-      </div>
-      <div>
-        {'Weights\n'.repeat(80)}
-      </div>
+      <section className={styles.data}>
+        <ul className={styles.weights}>
+          {weights.map((value) => buildWeight(value))}
+        </ul>
+      </section>
     </main>
   );
 }
 
 Weights.propTypes = {
   weights: PropTypes.arrayOf(PropTypes.object).isRequired,
+  removeWeight: PropTypes.func.isRequired,
 };
 
 const mapState = (state) => ({
   weights: state.weights.all,
 });
 
-export default connect(mapState)(Weights);
+const mapDispatch = {
+  removeWeight,
+};
+
+export default connect(mapState, mapDispatch)(Weights);
