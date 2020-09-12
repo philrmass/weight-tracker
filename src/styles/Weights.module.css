@@ -2,7 +2,8 @@
 }
 
 .item {
-  padding: var(--space0) var(--space1);
+  padding: var(--size-0) var(--size-1);
+  border: 1px solid var(--bg-alt);
   display: grid;
   grid-template-columns: 2fr 4fr 1fr;
 }
@@ -13,49 +14,10 @@
 }
 
 .time {
+  color: var(--color-normal-light);
 }
 
 .buttons {
   display: flex;
   align-items: center;
 }
-
-
-/*
- //??? remove once used
-.box {
-  height: 100%;
-  padding: 8px;
-  background: #e0e0e0;
-  overflow-x: hidden;
-  overflow-y: scroll;
-}
-
-.value {
-  display: grid;
-  grid-template-columns: 1fr 2fr 0.5fr;
-  align-items: center;
-  padding: 4px;
-  margin: 2px;
-  background: #ffffff;
-  color: #202020;
-}
-
-.weight {
-  color: #101010;
-  font-size: 1.4em;
-}
-
-.time {
-  color: #505050;
-}
-
-.deleteButton {
-  padding: 1px;
-  border: 1px solid var(--button-border);
-  border-radius: var(--button-border-radius);
-  background: var(--button-bg);
-  color: var(--button-color);
-  font-size: var(--button-text-size);
-}
-*/

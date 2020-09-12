@@ -1,7 +1,6 @@
 # Tasks
-- Save weights in default state
 - Update UI to display measurements
-- Add remove button to measurements, test remove
+- Update time in display once per minute
 - Save weights in local storage
 - Add weights actions (IMPORT, EXPORT)
 - Load data from localStorage (change to 'at')

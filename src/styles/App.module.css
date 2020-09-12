@@ -4,7 +4,6 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: #aaa;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -12,13 +11,11 @@
 
 .input {
   flex: 0 0 auto;
-  background: #f48686;
 }
 
 .weights {
   height: 0px;
   flex: 2 1 auto;
-  background: #f4c986;
   overflow: hidden;
 }
 
@@ -29,15 +26,16 @@
 }
 
 .week {
-  background: #c8f486;
+  background: var(--bg-accent);
+  color: var(--color-accent);
 }
 
 .month {
-  background: #86f4c9;
+  background: var(--bg-accent);
+  color: var(--color-accent);
 }
 
 .graph {
   height: 0px;
   flex: 3 1 auto;
-  background: #86c9f4;
 }

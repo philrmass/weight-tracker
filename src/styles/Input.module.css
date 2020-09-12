@@ -1,5 +1,7 @@
 .main {
-  padding: var(--space0) var(--space1);
+  padding: var(--size-0) var(--size-1);
+  background: var(--bg-accent);
+  color: var(--color-accent);
   display: grid;
   grid-template-columns: 2fr 4fr 1fr;
 }
@@ -15,4 +17,5 @@
 .buttons {
   display: flex;
   align-items: center;
+  color: var(--color-normal);
 }
