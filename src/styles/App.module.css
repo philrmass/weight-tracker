@@ -16,7 +16,8 @@
 .weights {
   height: 0px;
   flex: 2 1 auto;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .averages {

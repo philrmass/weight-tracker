@@ -8,11 +8,12 @@
   --bg-normal: #ffffff;
   --bg-alt: #a8a88a;
   --bg-accent: #201060;
-  --bg-button: #ddd;
-  --bg-hover: #248;
+  --bg-button-hover: #f0f0f0;
   --color-normal: #202020;
   --color-normal-light: #505050;
   --color-accent: #d8d8d8;
+  --color-button: #787878;
+  --color-button-hover: #484848;
   --border: #a4a4a4;
 }
 
@@ -42,14 +43,12 @@ button {
   height: var(--size-button);
   padding: var(--size-0);
   border-radius: 50%;
+  /*
   background: var(--bg-button);
+  */
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-button:hover {
-  background: var(--bg-hover);
 }
 
 input {

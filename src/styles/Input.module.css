@@ -19,3 +19,12 @@
   align-items: center;
   color: var(--color-normal);
 }
+
+.buttons button {
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+}
+
+.buttons button:hover {
+  background: #ffffff30;
+}

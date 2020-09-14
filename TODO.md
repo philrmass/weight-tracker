@@ -1,10 +1,13 @@
 # Tasks
-- Update UI to display measurements
-- Update time in display once per minute
+- Calculate week display summary
+- Create week display
+- Calculate month display summary
+- Create month display
 - Save weights in local storage
-- Add weights actions (IMPORT, EXPORT)
 - Load data from localStorage (change to 'at')
-- Add three dots on Input to open Options menu for import/export
+- Add weights actions (IMPORT, EXPORT)
+- Update time in display once per minute
 - add react router
 - figure out routes (/, /daily, /weekly, /monthly, /graph), trigger with long press
+- Add three dots on Input to open Options menu for import/export
 - Switch layout if wide, graph to the right
