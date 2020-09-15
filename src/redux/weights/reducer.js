@@ -1,3 +1,5 @@
+import { calculateWeeks, calculateMonths } from '../../utilities/averages';
+
 import {
   ADD_WEIGHT,
   REMOVE_WEIGHT,
@@ -65,6 +67,8 @@ const tempData = [
 
 const defaultState = {
   all: tempData,
+  weeks: [],
+  months: [],
 };
 
 export default function weightsReducer(state = defaultState, action) {
@@ -74,16 +78,25 @@ export default function weightsReducer(state = defaultState, action) {
         at: action.at,
         weight: action.weight,
       };
+      const all = [value, ...state.all];
+      const weeks = calculateWeeks(all);
+      const months= calculateMonths(all);
       return {
         ...state,
-        all: [value, ...state.all],
+        all,
+        weeks,
+        months,
       };
     }
     case REMOVE_WEIGHT: {
       const all = state.all.filter((value) => value.at !== action.at);
+      const weeks = calculateWeeks(all);
+      const months= calculateMonths(all);
       return {
         ...state,
         all,
+        weeks,
+        months,
       };
     }
     default:

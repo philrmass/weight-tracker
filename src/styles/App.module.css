@@ -16,6 +16,8 @@
 .weights {
   height: 0px;
   flex: 2 1 auto;
+  padding: var(--size-1);
+  background: var(--bg-alt);
   overflow-x: hidden;
   overflow-y: auto;
 }

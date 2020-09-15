@@ -4,6 +4,7 @@
 .item {
   padding: var(--size-0) var(--size-1);
   border: 1px solid var(--bg-alt);
+  background: var(--bg-normal);
   display: grid;
   grid-template-columns: 2fr 4fr 1fr;
 }
