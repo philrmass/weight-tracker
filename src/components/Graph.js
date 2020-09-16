@@ -5,7 +5,9 @@ import styles from '../styles/Graph.module.css';
 function Graph() {
   return (
     <main className={styles.main}>
-      Graph
+      <div className={styles.graph}>
+        Graph
+      </div>
     </main>
   );
 }
