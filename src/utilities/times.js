@@ -10,6 +10,21 @@ export function getDate(at) {
   return date.toLocaleString('en-us', dayOptions);
 }
 
+export function getWeek(at) {
+  /*
+  const dayOptions = {
+    weekday: 'short',
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  };
+
+  const date = new Date(at);
+  return date.toLocaleString('en-us', dayOptions);
+  */
+  return 'yo';
+}
+
 export function getTime(at) {
   const timeOptions = {
     hour: 'numeric',

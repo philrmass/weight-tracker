@@ -5,10 +5,9 @@ export function calculateWeeks(all) {
 
 function getWeekStart(at) {
   const date = new Date(at);
-  console.log('DATE', date, 'DAY', date.getDay());
-  //const monthStart = new Date(date.getFullYear(), date.getMonth());
-  //return monthStart.getTime();
-  return at;
+  date.setDate(date.getDate() - date.getDay());
+  const start = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  return start.getTime();
 }
 
 export function calculateMonths(all) {
@@ -18,8 +17,8 @@ export function calculateMonths(all) {
 
 function getMonthStart(at) {
   const date = new Date(at);
-  const monthStart = new Date(date.getFullYear(), date.getMonth());
-  return monthStart.getTime();
+  const start = new Date(date.getFullYear(), date.getMonth());
+  return start.getTime();
 }
 
 function getByTerm(all, getStart) {
@@ -39,7 +38,7 @@ function getTerms(byTerm) {
     const average = computeAverage(items);
     const stdDev = computeStdDev(items, average);
     return {
-      at,
+      at: Number(at),
       items,
       average,
       stdDev,

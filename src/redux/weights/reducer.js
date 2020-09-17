@@ -10,8 +10,8 @@ import {
 
 const defaultState = {
   all: data,
-  weeks: [],
-  months: [],
+  weeks: calculateWeeks(data),
+  months: calculateMonths(data),
 };
 
 export default function weightsReducer(state = defaultState, action) {

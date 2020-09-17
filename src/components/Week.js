@@ -3,9 +3,13 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import styles from '../styles/Week.module.css';
+import { getWeek } from '../utilities/times';
 
 function Week({ weeks }) {
   const week = weeks[0];
+  const date = new Date(week.at);
+  console.log('WEEK', week);
+  console.log(' _', date);
 
   if (!week) {
     return null;
@@ -13,7 +17,7 @@ function Week({ weeks }) {
 
   return (
     <main className={styles.main}>
-      {JSON.stringify(week)}
+      {getWeek(week.at)}
     </main>
   );
 }
