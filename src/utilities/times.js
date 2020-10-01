@@ -11,18 +11,15 @@ export function getDate(at) {
 }
 
 export function getWeek(at) {
-  /*
   const dayOptions = {
-    weekday: 'short',
     day: 'numeric',
     month: 'short',
-    year: 'numeric',
   };
 
   const date = new Date(at);
-  return date.toLocaleString('en-us', dayOptions);
-  */
-  return 'yo';
+  const dateStr = date.toLocaleString('en-us', dayOptions);
+
+  return `Week of ${dateStr}`;
 }
 
 export function getTime(at) {
