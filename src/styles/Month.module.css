@@ -1,2 +1,10 @@
 .main {
+  height: 100%;
+  padding: var(--size-1) var(--size-2);
+  border-left: 1px solid var(--bg-alt);
+}
+
+.average {
+  padding-top: var(--size-0);
+  font-weight: bold;
 }

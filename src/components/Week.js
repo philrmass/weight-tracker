@@ -6,18 +6,14 @@ import styles from '../styles/Week.module.css';
 import { getWeek } from '../utilities/times';
 
 function Week({ weeks }) {
-  const week = weeks[0];
-  const date = new Date(week.at);
-  console.log('WEEK', week);
-  console.log(' _', date);
-
-  if (!week) {
-    return null;
-  }
+  const week = weeks[0] ?? {};
 
   return (
     <main className={styles.main}>
-      {getWeek(week.at)}
+      <div>{getWeek(week.at)}</div>
+      <div className={styles.average}>
+        {week.average.toFixed(1)}
+      </div>
     </main>
   );
 }

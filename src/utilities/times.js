@@ -22,6 +22,16 @@ export function getWeek(at) {
   return `Week of ${dateStr}`;
 }
 
+export function getMonth(at) {
+  const dayOptions = {
+    month: 'short',
+    year: 'numeric',
+  };
+
+  const date = new Date(at);
+  return date.toLocaleString('en-us', dayOptions);
+}
+
 export function getTime(at) {
   const timeOptions = {
     hour: 'numeric',

@@ -1,5 +1,10 @@
 .main {
-  padding: var(--size-1);
-  background: #807810;
-  border: 1px solid yellow;
+  height: 100%;
+  padding: var(--size-1) var(--size-2);
+  border-right: 1px solid var(--bg-alt);
+}
+
+.average {
+  padding-top: var(--size-0);
+  font-weight: bold;
 }
