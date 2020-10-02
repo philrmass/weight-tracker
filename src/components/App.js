@@ -1,13 +1,18 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
+import { getWeek, getMonth } from '../utilities/times';
+import styles from '../styles/App.module.css';
+import Average from './Average';
 import Graph from './Graph';
 import Input from './Input';
-import Month from './Month';
-import Week from './Week';
 import Weights from './Weights';
-import styles from '../styles/App.module.css';
 
-function App() {
+function App({
+  weeks,
+  months,
+}) {
   return (
     <main className={styles.main}>
       <div className={styles.input}>
@@ -18,10 +23,19 @@ function App() {
       </div>
       <div className={styles.averages}>
         <div className={styles.week}>
-          <Week />
+          <Average
+            data={weeks[0]}
+            getDateString={getWeek}
+            handleClick={() => console.log('week click')}
+          />
         </div>
+        <div className={styles.spacer}></div>
         <div className={styles.month}>
-          <Month />
+          <Average
+            data={months[0]}
+            getDateString={getMonth}
+            handleClick={() => console.log('month click')}
+          />
         </div>
       </div>
       <div className={styles.graph}>
@@ -31,4 +45,14 @@ function App() {
   );
 }
 
-export default App;
+App.propTypes = {
+  weeks: PropTypes.arrayOf(PropTypes.object).isRequired,
+  months: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
+
+const mapState = (state) => ({
+  weeks: state.weights.weeks,
+  months: state.weights.months,
+});
+
+export default connect(mapState)(App);

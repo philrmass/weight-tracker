@@ -24,7 +24,7 @@ export function getWeek(at) {
 
 export function getMonth(at) {
   const dayOptions = {
-    month: 'short',
+    month: 'long',
     year: 'numeric',
   };
 

@@ -1,0 +1,22 @@
+.main {
+  padding: var(--size-1) var(--size-2);
+}
+
+.top {
+  color: var(--color-accent-light);
+  display: flex;
+  justify-content: center;
+}
+
+.average {
+  margin-left: var(--size-1);
+  color: var(--color-accent);
+  font-weight: bold;
+}
+
+.measurements {
+  padding-top: var(--size-0);
+  color: var(--color-accent-light);
+  display: flex;
+  justify-content: center;
+}

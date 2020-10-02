@@ -11,12 +11,13 @@
 
 .input {
   flex: 0 0 auto;
+  border-bottom: solid var(--bg-alt) var(--size-1);
 }
 
 .weights {
   height: 0px;
   flex: 2 1 auto;
-  padding: var(--size-1);
+  padding: 0 var(--size-1);
   background: var(--bg-alt);
   overflow-x: hidden;
   overflow-y: auto;
@@ -25,12 +26,18 @@
 .averages {
   flex: 0 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr auto 1fr;
+  border-top: solid var(--bg-alt) var(--size-1);
 }
 
 .week {
   background: var(--bg-accent);
   color: var(--color-accent);
+}
+
+.spacer {
+  width: 2px;
+  background: var(--bg-alt);
 }
 
 .month {
