@@ -8,7 +8,6 @@ function Average({
   getDateString,
   handleClick,
 }) {
-  console.log('DATA', data);
   return (
     <div
       className={styles.main}

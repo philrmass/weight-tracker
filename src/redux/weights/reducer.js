@@ -1,7 +1,10 @@
 import { calculateWeeks, calculateMonths } from '../../utilities/averages';
+import { importData } from '../../utilities/data';
+import { getObject, setObject } from '../../utilities/storage';
 //??? remove once in local storage
-import { data } from './temp';
-data.sort((a, b) => b.at - a.at);
+import { testData } from './temp';
+const fromLocal = getObject('weightTrackerAll', []);
+const myAll = importData(fromLocal, testData);
 
 import {
   ADD_WEIGHT,
@@ -9,9 +12,9 @@ import {
 } from './actions';
 
 const defaultState = {
-  all: data,
-  weeks: calculateWeeks(data),
-  months: calculateMonths(data),
+  all: myAll,
+  weeks: calculateWeeks(myAll),
+  months: calculateMonths(myAll),
 };
 
 export default function weightsReducer(state = defaultState, action) {
@@ -26,6 +29,7 @@ export default function weightsReducer(state = defaultState, action) {
       const months= calculateMonths(all);
       console.log('Ms', months);
       console.log('WKs', weeks);
+      setObject('weightTrackerAll', all);
       return {
         ...state,
         all,

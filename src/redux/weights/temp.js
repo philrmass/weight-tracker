@@ -1,4 +1,4 @@
-export const data = [
+export const testData = [
   {'at':1562517298082,'weight':213},
   {'at':1562632433871,'weight':212.2},
   {'at':1562677231864,'weight':210.6},

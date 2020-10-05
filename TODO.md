@@ -1,8 +1,11 @@
 # Tasks
-- Save weights in local storage, on new value or import
-- Load data from localStorage (convert to 'at')
+- Add import action, user select file, parse json & import, test with testData
+  - <input type='file' ref={this.fileInput} onChange={this.handleFileChange}/>
+  - this.fileInput.current.click();
 - Add menu for import/export, open with ...
-- Import data from a file (support 'at' or 'time'), removing duplicates
+  - const file = this.fileInput.current.files[0];
+  - this.loadImage(file.name, file);
+- JSON parse and load file
 - deploy to ghpages & start using
 
 - add graph with touch input (use library)
