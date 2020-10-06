@@ -28,3 +28,7 @@
 .buttons button:hover {
   background: #ffffff30;
 }
+
+.fileInput {
+  display: none;
+}

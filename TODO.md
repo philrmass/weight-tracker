@@ -1,11 +1,6 @@
 # Tasks
-- Add import action, user select file, parse json & import, test with testData
-  - <input type='file' ref={this.fileInput} onChange={this.handleFileChange}/>
-  - this.fileInput.current.click();
+- import file with an action, test import combination
 - Add menu for import/export, open with ...
-  - const file = this.fileInput.current.files[0];
-  - this.loadImage(file.name, file);
-- JSON parse and load file
 - deploy to ghpages & start using
 
 - add graph with touch input (use library)
