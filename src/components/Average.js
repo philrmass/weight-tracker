@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import styles from '../styles/Average.module.css';
 
 function Average({
-  data,
+  data = { at: 0, weight: 0, items: [], average: 0 },
   getDateString,
   handleClick,
 }) {
@@ -29,7 +29,7 @@ function Average({
 }
 
 Average.propTypes = {
-  data: PropTypes.object.isRequired,
+  data: PropTypes.object,
   getDateString: PropTypes.func.isRequired,
   handleClick: PropTypes.func.isRequired,
 };

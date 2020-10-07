@@ -5,19 +5,18 @@ import PropTypes from 'prop-types';
 import styles from '../styles/Input.module.css';
 import { loadData } from '../utilities/files';
 import { getDate, getTime } from '../utilities/times';
-import { addWeight } from '../redux/weights/actions';
+import { addWeight, importWeights } from '../redux/weights/actions';
 
-function Input({ addWeight }) {
+function Input({
+  addWeight,
+  importWeights,
+}) {
   const now = Date.now();
 
-  //??? restore
-  const [value, setValue] = useState('200.0');
-  //const [value, setValue] = useState('');
+  const [value, setValue] = useState('200.0'); //??? restore ''
 
   async function importFile() {
-    const data = await loadData();
-    //??? call import action
-    console.log('DATA', data);
+    importWeights(await loadData());
   }
 
   function handleChange(e) {
@@ -76,10 +75,12 @@ function Input({ addWeight }) {
 
 Input.propTypes = {
   addWeight: PropTypes.func.isRequired,
+  importWeights: PropTypes.func.isRequired,
 };
 
 const mapDispatch = {
   addWeight,
+  importWeights,
 };
 
 export default connect(null, mapDispatch)(Input);

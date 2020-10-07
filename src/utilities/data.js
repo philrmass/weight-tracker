@@ -9,7 +9,7 @@ export function importData(existing, imported) {
     return (item?.at !== last?.at);
   });
   const duplicates = combined.length - uniques.length;
-  console.log(`Imported ${cleaned.length} values, removed ${duplicates} duplicates`);
+  console.log(`Import\n had ${existing.length}\n add ${cleaned.length}\n dup ${duplicates}\n end ${uniques.length}`);
 
   return uniques;
 }
