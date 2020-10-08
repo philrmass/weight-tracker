@@ -1,11 +1,15 @@
 # Tasks
-- import file with an action, test import combination
+- add weight graph lines
+- add time graph lines
+
 - Add menu for import/export, open with ...
+- Add export with text summary
+- Add import text summary
+
 - deploy to ghpages & start using
 
-- add graph with touch input (use library)
+- add touch inputs, library?
 - add x-scale changing and scrolling
-- auto-adjust y scale?
 
 - add react router
 - add routes (/, /weekly, /monthly, /graph), trigger with click, x to close
