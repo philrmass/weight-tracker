@@ -15,7 +15,7 @@ function Graph({
 }) {
   const wrap = useRef(null);
   const canvas = useRef(null);
-  const [atMin, setAtMin] = useState(items[0]?.at - getDays(84));
+  const [atMin, setAtMin] = useState(items[0]?.at - getDays(284));
   const [atMax, setAtMax] = useState(items[0]?.at);
 
   window.onresize = () => {
@@ -32,14 +32,21 @@ function Graph({
     render(ctx, items, atMin, atMax);
   }, [items, atMin, atMax]);
 
-  /*
   //??? remove after testing
+  /*
+  */
   const [days, setDays] = useState(1);
   useEffect(() => {
     setAtMin(items[0]?.at - getDays(days));
-    setTimeout(() => setDays(days + 1), 100);
+    setAtMax(items[0]?.at - getDays(days / 3));
+    setTimeout(() => {
+      if (days > 425) {
+        setDays(0);
+      } else {
+        setDays(days + 1);
+      }
+    }, 100);
   }, [days]);
-  */
 
   return (
     <main className={styles.main}>

@@ -10,8 +10,8 @@ export function printSummary(ctx, lim) {
 
 export function printItem(scl, item) {
   const date = new Date(item.at).toLocaleDateString();
-  const x = scl.x(item).toFixed(1);
-  const y = scl.y(item).toFixed(1);
+  const x = scl.x(item.at).toFixed(1);
+  const y = scl.y(item.weight).toFixed(1);
   console.log(`${date} ${item.weight} (${x}, ${y})`);
 }
 
@@ -25,6 +25,7 @@ export function render(ctx, all, atMin, atMax) {
   const scl = getScale(ctx, lim);
 
   renderWeights(ctx, scl, items);
+  renderWeightLines(ctx, scl, lim);
 }
 
 function getScale(ctx, lim) {
@@ -32,8 +33,8 @@ function getScale(ctx, lim) {
   const h = ctx.canvas.height;
 
   return {
-    x: (item) => w * ((item.at - lim.atMin) / (lim.atMax - lim.atMin)),
-    y: (item) => h - h * ((item.weight - lim.weightMin) / (lim.weightMax - lim.weightMin)),
+    x: (at) => w * ((at - lim.atMin) / (lim.atMax - lim.atMin)),
+    y: (weight) => h - h * ((weight - lim.weightMin) / (lim.weightMax - lim.weightMin)),
   };
 }
 
@@ -68,18 +69,49 @@ function calcLimits(items, atMin, atMax) {
 }
 
 function renderWeights(ctx, scl, items) {
-  setWeightLine(ctx);
+  ctx.lineWidth = 1;
+  ctx.strokeStyle = '#ff2105';
   ctx.beginPath();
-  ctx.moveTo(scl.x(items[0]), scl.y(items[0]));
+  ctx.moveTo(scl.x(items[0].at), scl.y(items[0].weight));
 
   for (const item of items) {
-    ctx.lineTo(scl.x(item), scl.y(item));
+    ctx.lineTo(scl.x(item.at), scl.y(item.weight));
   }
 
   ctx.stroke();
 }
 
-function setWeightLine(ctx) {
+function renderWeightLines(ctx, scl, lim) {
+  const div = 5;
+  const min5 = Math.ceil(lim.weightMin / 5);
+  const max5 = Math.floor(lim.weightMax / 5);
+
   ctx.lineWidth = 1;
-  ctx.strokeStyle = '#ff2105';
+  ctx.strokeStyle = '#9090ff';
+  ctx.beginPath();
+  for (let i = min5; i <= max5; i++) {
+    const weight = div * i;
+    const y = scl.y(weight);
+
+    ctx.moveTo(0, y);
+    ctx.lineTo(ctx.canvas.width, y);
+  }
+  ctx.stroke();
+
+  const min = Math.ceil(lim.weightMin);
+  const max = Math.floor(lim.weightMax);
+
+  ctx.lineWidth = 0.5;
+  ctx.strokeStyle = '#a8a8a8';
+  ctx.beginPath();
+  for (let i = min; i <= max; i++) {
+    const y = scl.y(i);
+    const not5 = i % 5 !== 0;
+
+    if (not5) {
+      ctx.moveTo(0, y);
+      ctx.lineTo(ctx.canvas.width, y);
+    }
+  }
+  ctx.stroke();
 }
