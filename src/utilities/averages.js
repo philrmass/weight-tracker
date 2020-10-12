@@ -1,24 +1,13 @@
+import { getWeekStart, getMonthStart } from './times';
+
 export function calculateWeeks(all) {
   const byWeek = getByTerm(all, getWeekStart);
   return getTerms(byWeek);
 }
 
-function getWeekStart(at) {
-  const date = new Date(at);
-  date.setDate(date.getDate() - date.getDay());
-  const start = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-  return start.getTime();
-}
-
 export function calculateMonths(all) {
   const byMonth = getByTerm(all, getMonthStart);
   return getTerms(byMonth);
-}
-
-function getMonthStart(at) {
-  const date = new Date(at);
-  const start = new Date(date.getFullYear(), date.getMonth());
-  return start.getTime();
 }
 
 function getByTerm(all, getStart) {

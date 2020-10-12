@@ -1,5 +1,4 @@
 # Tasks
-- add weight graph lines
 - add time graph lines
 
 - Add menu for import/export, open with ...
