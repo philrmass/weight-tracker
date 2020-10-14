@@ -1,0 +1,22 @@
+.main {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background: var(--bg-overlay);
+}
+
+.modal {
+  padding: 8px;
+  margin: 8px;
+  background: white;
+  border-radius: 2px;
+}
+
+.content {
+  padding: 8px;
+}

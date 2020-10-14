@@ -3,21 +3,16 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import styles from '../styles/Input.module.css';
-import { loadData } from '../utilities/files';
 import { getDate, getTime } from '../utilities/times';
-import { addWeight, importWeights } from '../redux/weights/actions';
+import { addWeight, setOptionsOpen } from '../redux/weights/actions';
 
 function Input({
   addWeight,
-  importWeights,
+  setOptionsOpen,
 }) {
   const now = Date.now();
 
   const [value, setValue] = useState('200.0'); //??? restore ''
-
-  async function importFile() {
-    importWeights(await loadData());
-  }
 
   function handleChange(e) {
     setValue(e.target.value);
@@ -65,7 +60,7 @@ function Input({
         </div>
       </div>
       <div className={styles.buttons}>
-        <button onClick={importFile}>
+        <button onClick={() => setOptionsOpen(true)}>
           ...
         </button>
       </div>
@@ -75,12 +70,12 @@ function Input({
 
 Input.propTypes = {
   addWeight: PropTypes.func.isRequired,
-  importWeights: PropTypes.func.isRequired,
+  setOptionsOpen: PropTypes.func.isRequired,
 };
 
 const mapDispatch = {
   addWeight,
-  importWeights,
+  setOptionsOpen,
 };
 
 export default connect(null, mapDispatch)(Input);

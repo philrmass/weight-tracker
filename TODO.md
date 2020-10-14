@@ -1,9 +1,7 @@
 # Tasks
-- add time graph lines
-
-- Add menu for import/export, open with ...
+- Add gray background for modal, add close button, add import/export options
 - Add export with text summary
-- Add import text summary
+- Add import with text summary
 
 - deploy to ghpages & start using
 

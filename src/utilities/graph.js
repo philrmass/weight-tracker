@@ -80,12 +80,10 @@ function renderTimeLines(ctx, scl, lim) {
   const dayMs = 1000 * 60 * 60 * 24;
   const daysWide = (lim.atMax - lim.atMin) / dayMs;
 
-  //??? change colors to gray and blue
-  //??? figure out why mweeks/month disppear
-  if (daysWide < 75) {
+  if (daysWide < 60) {
     renderDayLines(ctx, scl, lim, 0);
     renderWeekLines(ctx, scl, lim, 1);
-  } else if (daysWide < 200) {
+  } else if (daysWide < 250) {
     renderWeekLines(ctx, scl, lim, 0);
     renderMonthLines(ctx, scl, lim, 1);
   } else {
@@ -94,13 +92,13 @@ function renderTimeLines(ctx, scl, lim) {
   }
 }
 
-function renderDayLines(ctx, scl, lim) {
+function renderDayLines(ctx, scl, lim, type) {
   const dayMs = 1000 * 60 * 60 * 24;
   const dayMin = getDayStart(lim.atMin) + dayMs;
-  const dayMax = getDayStart(lim.atMax);
+  const dayMax = getDayStart(lim.atMax) + dayMs;
 
-  ctx.lineWidth = 0.5;
-  ctx.strokeStyle = '#a8a8a8';
+  setLine(ctx, type);
+
   ctx.beginPath();
   for (let i = dayMin; i <= dayMax; i+= dayMs) {
     const x = scl.x(i);
@@ -111,13 +109,13 @@ function renderDayLines(ctx, scl, lim) {
   ctx.stroke();
 }
 
-function renderWeekLines(ctx, scl, lim) {
+function renderWeekLines(ctx, scl, lim, type) {
   const weekMs = 1000 * 60 * 60 * 24 * 7;
   const weekMin = getWeekStart(lim.atMin) + weekMs;
-  const weekMax = getWeekStart(lim.atMax);
+  const weekMax = getWeekStart(lim.atMax) + weekMs;
 
-  ctx.lineWidth = 1;
-  ctx.strokeStyle = '#9090ff';
+  setLine(ctx, type);
+
   ctx.beginPath();
   for (let i = weekMin; i <= weekMax; i+= weekMs) {
     const x = scl.x(i);
@@ -128,11 +126,11 @@ function renderWeekLines(ctx, scl, lim) {
   ctx.stroke();
 }
 
-function renderMonthLines(ctx, scl, lim) {
+function renderMonthLines(ctx, scl, lim, type) {
   const monthMax = getMonthStart(lim.atMax);
 
-  ctx.lineWidth = 1;
-  ctx.strokeStyle = '#60d060';
+  setLine(ctx, type);
+
   ctx.beginPath();
   let offset = 1;
   let i = getMonthStart(lim.atMin, offset);
@@ -148,11 +146,11 @@ function renderMonthLines(ctx, scl, lim) {
   ctx.stroke();
 }
 
-function renderYearLines(ctx, scl, lim) {
+function renderYearLines(ctx, scl, lim, type) {
   const yearMax = getYearStart(lim.atMax);
 
-  ctx.lineWidth = 2;
-  ctx.strokeStyle = '#ff8060';
+  setLine(ctx, type);
+
   ctx.beginPath();
   let offset = 1;
   let i = getYearStart(lim.atMin, offset);
@@ -173,8 +171,8 @@ function renderWeightLines(ctx, scl, lim) {
   const min5 = Math.ceil(lim.weightMin / 5);
   const max5 = Math.floor(lim.weightMax / 5);
 
-  ctx.lineWidth = 1;
-  ctx.strokeStyle = '#9090ff';
+  setLine(ctx, 1);
+
   ctx.beginPath();
   for (let i = min5; i <= max5; i++) {
     const weight = div * i;
@@ -188,8 +186,8 @@ function renderWeightLines(ctx, scl, lim) {
   const min = Math.ceil(lim.weightMin);
   const max = Math.floor(lim.weightMax);
 
-  ctx.lineWidth = 0.5;
-  ctx.strokeStyle = '#a8a8a8';
+  setLine(ctx, 0);
+
   ctx.beginPath();
   for (let i = min; i <= max; i++) {
     const y = scl.y(i);
@@ -204,8 +202,8 @@ function renderWeightLines(ctx, scl, lim) {
 }
 
 function renderWeights(ctx, scl, items) {
-  ctx.lineWidth = 1;
-  ctx.strokeStyle = '#ff2105';
+  setLine(ctx, 2);
+
   ctx.beginPath();
   ctx.moveTo(scl.x(items[0].at), scl.y(items[0].weight));
 
@@ -214,4 +212,21 @@ function renderWeights(ctx, scl, items) {
   }
 
   ctx.stroke();
+}
+
+function setLine(ctx, type) {
+  switch(type) {
+    case 0:
+      ctx.lineWidth = 0.5;
+      ctx.strokeStyle = '#a8a8a8';
+      break;
+    case 1:
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = '#9090ff';
+      break;
+    case 2:
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = '#ff2105';
+      break;
+  }
 }

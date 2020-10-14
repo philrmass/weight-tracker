@@ -6,6 +6,7 @@ import {
   ADD_WEIGHT,
   REMOVE_WEIGHT,
   IMPORT_WEIGHTS,
+  SET_OPTIONS_OPEN,
 } from './actions';
 
 const all = getObject('weightTrackerAll', []);
@@ -13,6 +14,7 @@ const defaultState = {
   all,
   weeks: calculateWeeks(all),
   months: calculateMonths(all),
+  isOptionsOpen: false,
 };
 
 export default function weightsReducer(state = defaultState, action) {
@@ -57,6 +59,11 @@ export default function weightsReducer(state = defaultState, action) {
         months,
       };
     }
+    case SET_OPTIONS_OPEN:
+      return {
+        ...state,
+        isOptionsOpen: action.value,
+      };
     default:
       return state;
   }
