@@ -2,9 +2,7 @@ import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-//import { loadData } from '../utilities/files';
 import { getWeek, getMonth } from '../utilities/times';
-import { importWeights, setOptionsOpen } from '../redux/weights/actions';
 import styles from '../styles/App.module.css';
 import Average from './Average';
 import Graph from './Graph';
@@ -17,18 +15,7 @@ function App({
   weeks,
   months,
   isOptionsOpen,
-  importWeights,
-  setOptionsOpen,
 }) {
-  console.log('OPT', isOptionsOpen, typeof importWeights, typeof setOptionsOpen);
-  //??? move to App
-  //??? add Modal around options
-  /*
-  async function importFile() {
-    importWeights(await loadData());
-  }
-  */
-
   return (
     <Fragment>
       <main className={styles.main}>
@@ -70,8 +57,6 @@ App.propTypes = {
   weeks: PropTypes.arrayOf(PropTypes.object).isRequired,
   months: PropTypes.arrayOf(PropTypes.object).isRequired,
   isOptionsOpen: PropTypes.bool.isRequired,
-  importWeights: PropTypes.func.isRequired,
-  setOptionsOpen: PropTypes.func.isRequired,
 };
 
 const mapState = (state) => ({
@@ -80,9 +65,4 @@ const mapState = (state) => ({
   isOptionsOpen: state.weights.isOptionsOpen,
 });
 
-const mapDispatch = {
-  importWeights,
-  setOptionsOpen,
-};
-
-export default connect(mapState, mapDispatch)(App);
+export default connect(mapState)(App);

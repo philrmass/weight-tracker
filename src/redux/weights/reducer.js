@@ -14,7 +14,7 @@ const defaultState = {
   all,
   weeks: calculateWeeks(all),
   months: calculateMonths(all),
-  isOptionsOpen: false,
+  isOptionsOpen: true,
 };
 
 export default function weightsReducer(state = defaultState, action) {

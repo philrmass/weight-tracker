@@ -1,20 +1,22 @@
 .main {
   position: fixed;
   top: 0;
+  bottom: 0;
   left: 0;
+  right: 0;
+  padding-top: var(--size-3);
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: start;
   align-items: center;
-  height: 100vh;
-  width: 100vw;
-  background: var(--bg-overlay);
+  background: var(--bg-disabled);
 }
 
 .modal {
-  padding: 8px;
-  margin: 8px;
-  background: white;
-  border-radius: 2px;
+  padding: var(--size-0);
+  margin: var(--size-0);
+  background: var(--bg-normal);
+  border-radius: var(--border-radius);
 }
 
 .content {
