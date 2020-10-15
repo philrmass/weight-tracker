@@ -12,7 +12,7 @@ function Input({
 }) {
   const now = Date.now();
 
-  const [value, setValue] = useState('200.0'); //??? restore ''
+  const [value, setValue] = useState('');
 
   function handleChange(e) {
     setValue(e.target.value);
@@ -30,12 +30,6 @@ function Input({
       addWeight(Number(weight));
     }
     setValue('');
-    //??? remove
-    if (weight > 0) {
-      const change = Math.round(30 * Math.random() - 15) / 10;
-      const value = Math.round(10 * (weight + change)) / 10;
-      setValue(`${value}`);
-    }
   }
 
   return (

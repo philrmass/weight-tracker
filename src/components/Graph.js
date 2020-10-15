@@ -26,32 +26,16 @@ function Graph({
   };
 
   useEffect(() => {
+    setAtMin(items[0]?.at - getDays(56));
+    setAtMax(items[0]?.at);
+  }, [items.length]);
+
+  useEffect(() => {
     const ctx = canvas.current.getContext('2d');
     ctx.canvas.width = wrap.current.clientWidth;
     ctx.canvas.height = wrap.current.clientHeight;
     render(ctx, items, atMin, atMax);
   }, [items, atMin, atMax]);
-
-  //??? remove after testing
-  /*
-  const [days, setDays] = useState(1);
-  useEffect(() => {
-    setAtMin(items[0]?.at - getDays(days));
-    setAtMax(items[0]?.at - getDays(0));
-    setTimeout(() => {
-      if (days > 425) {
-        setDays(0);
-      } else {
-        setDays(days + 1);
-      }
-    }, 100);
-  }, [days]);
-  */
-  //??? remove after testing
-  useEffect(() => {
-    setAtMin(items[0]?.at - getDays(56));
-    setAtMax(items[0]?.at);
-  }, []);
 
   return (
     <main className={styles.main}>

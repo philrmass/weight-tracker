@@ -16,8 +16,15 @@ const defaultState = {
   weeks: calculateWeeks(all),
   months: calculateMonths(all),
   message: '',
-  isOptionsOpen: true,
+  isOptionsOpen: false,
 };
+
+function getImportMessage(stats) {
+  return `Added ${stats.added} measurements\n` +
+    ` to ${stats.existing} existing measurements,\n` +
+    ` removed ${stats.duplicates} duplicates\n` +
+    ` for a total of ${stats.all}`;
+}
 
 export default function weightsReducer(state = defaultState, action) {
   switch (action.type) {
@@ -50,11 +57,10 @@ export default function weightsReducer(state = defaultState, action) {
       };
     }
     case IMPORT_WEIGHTS: {
-      const all = importData(state.all, action.items);
-      const message = 'Import';
+      const { all, stats } = importData(state.all, action.items);
       const weeks = calculateWeeks(all);
       const months= calculateMonths(all);
-      //??? add message
+      const message = getImportMessage(stats);
       setObject('weightTrackerAll', all);
       return {
         ...state,

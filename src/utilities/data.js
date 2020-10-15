@@ -1,17 +1,23 @@
 export function importData(existing, imported) {
-  const cleaned = cleanData(imported);
-  const combined = [...existing, ...cleaned];
+  const added = cleanData(imported);
+  const combined = [...existing, ...added];
 
   combined.sort((a, b) => b.at - a.at);
 
-  const uniques = combined.filter((item, index) => {
+  const all = combined.filter((item, index) => {
     const last = combined[index - 1];
     return (item?.at !== last?.at);
   });
-  const duplicates = combined.length - uniques.length;
-  console.log(`Import\n had ${existing.length}\n add ${cleaned.length}\n dup ${duplicates}\n end ${uniques.length}`);
 
-  return uniques;
+  return {
+    all,
+    stats: {
+      existing: existing.length,
+      added: added.length, 
+      duplicates: combined.length - all.length,
+      all: all.length,
+    },
+  };
 }
 
 export function cleanData(input) {
