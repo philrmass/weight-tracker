@@ -1,12 +1,5 @@
 # Tasks
-- style X close button
-- add layout to options
-- Move modal to the top
-- Add gray background for modal
-- add message for import/export
-- Add export with text summary
 - Add import with text summary
-
 - deploy to ghpages & start using
 
 - add touch inputs, library?

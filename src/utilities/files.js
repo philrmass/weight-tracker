@@ -1,14 +1,17 @@
 export function saveData(filePath, data) {
-  const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = filePath;
-  link.click();
+  return new Promise((resolve) => {
+    const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filePath;
+    link.click();
 
-  setTimeout(function() {
-    URL.revokeObjectURL(url);
-  }, 0);
+    setTimeout(function() {
+      URL.revokeObjectURL(url);
+      resolve();
+    }, 0);
+  });
 }
 
 export function loadData() {

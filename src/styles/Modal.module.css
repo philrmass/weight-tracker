@@ -13,6 +13,7 @@
 }
 
 .modal {
+  min-width: 60%;
   padding: var(--size-0);
   margin: var(--size-0);
   background: var(--bg-normal);

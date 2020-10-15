@@ -4,6 +4,7 @@
 .top {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
 }
 
 .top button {
@@ -30,5 +31,24 @@
 .controls button:hover {
   width: auto;
   border-color: var(--color-button-hover);
+  background: var(--bg-button-hover);
+  color: var(--color-button-hover);
 }
 
+.data {
+  display: flex;
+}
+
+.data button {
+  margin: var(--size-0);
+}
+
+.message {
+  height: 6rem;
+  padding: var(--size-1);
+  margin: var(--size-0);
+  border: 1px solid var(--color-button);
+  border-radius: var(--border-radius);
+  background: var(--bg-alt);
+  white-space: pre;
+}

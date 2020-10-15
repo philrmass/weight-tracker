@@ -6,6 +6,7 @@ import {
   ADD_WEIGHT,
   REMOVE_WEIGHT,
   IMPORT_WEIGHTS,
+  EXPORT_WEIGHTS,
   SET_OPTIONS_OPEN,
 } from './actions';
 
@@ -14,6 +15,7 @@ const defaultState = {
   all,
   weeks: calculateWeeks(all),
   months: calculateMonths(all),
+  message: '',
   isOptionsOpen: true,
 };
 
@@ -49,20 +51,31 @@ export default function weightsReducer(state = defaultState, action) {
     }
     case IMPORT_WEIGHTS: {
       const all = importData(state.all, action.items);
+      const message = 'Import';
       const weeks = calculateWeeks(all);
       const months= calculateMonths(all);
+      //??? add message
       setObject('weightTrackerAll', all);
       return {
         ...state,
         all,
         weeks,
         months,
+        message,
+      };
+    }
+    case EXPORT_WEIGHTS: {
+      const message = `Exported ${action.count} measurements`;
+      return {
+        ...state,
+        message,
       };
     }
     case SET_OPTIONS_OPEN:
       return {
         ...state,
         isOptionsOpen: action.value,
+        message: '',
       };
     default:
       return state;
