@@ -2,6 +2,7 @@
   "name": "weight-tracker",
   "version": "1.0.0",
   "description": "An app to to track your daily weight",
+  "homepage": "https://philrmass.github.io/weight-tracker",
   "main": "index.js",
   "dependencies": {
     "react": "^16.13.1",
@@ -20,13 +21,17 @@
     "eslint": "^7.7.0",
     "eslint-loader": "^4.0.2",
     "eslint-plugin-react": "^7.20.6",
+    "gh-pages": "^3.1.0",
     "style-loader": "^1.2.1",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
   },
   "scripts": {
+    "build": "webpack --mode production",
+    "deploy": "gh-pages -d dist",
     "lint": "eslint src/** src/**/**",
+    "predeploy": "npm run build",
     "start": "webpack-dev-server --config ./webpack.config.js --mode development",
     "test": "jest"
   },
@@ -39,7 +44,6 @@
   "bugs": {
     "url": "https://github.com/philrmass/weight-tracker/issues"
   },
-  "homepage": "https://github.com/philrmass/weight-tracker#readme",
   "babel": {
     "plugins": [
       "@babel/plugin-transform-runtime"
