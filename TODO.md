@@ -1,4 +1,5 @@
 # Tasks
+- make a PWA
 - add goal, graph line, and +/- to averages
 - Update time in display once per minute
 

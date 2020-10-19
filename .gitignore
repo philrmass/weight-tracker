@@ -1,5 +1,9 @@
 node_modules/
 dist/*
 !dist/index.html
+!dist/favicon.ico
+!dist/logo192.png
+!dist/logo512.png
+!dist/manifest.json
 *.swp
 src/old
