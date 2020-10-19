@@ -6,6 +6,7 @@ import './styles/normalize.css';
 import './styles/index.css';
 import store from './redux/store';
 import App from './components/App';
+import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <Provider store={store}>
@@ -13,3 +14,5 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('app'),
 );
+
+serviceWorker.register();
