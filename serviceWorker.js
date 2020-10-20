@@ -3,12 +3,12 @@ function isDev() {
 }
 
 function filePaths(files) {
-  const base = isDev() ? '/' : '/what-next/';
+  const base = isDev() ? '/' : '/weight-tracker/';
   return files.map((file) => `${base}${file}`);
 }
 
 function getCacheName() {
-  return 'what-next-cache';
+  return 'weight-tracker-cache';
 }
 
 function getCacheFiles() {
@@ -18,7 +18,6 @@ function getCacheFiles() {
     'logo192.png',
     'logo512.png',
     'logoApple.png',
-    'logoMaskable.png',
     'manifest.json',
   ];
   return filePaths(cacheFiles);
