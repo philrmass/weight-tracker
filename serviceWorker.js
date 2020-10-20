@@ -18,6 +18,7 @@ function getCacheFiles() {
     'logo192.png',
     'logo512.png',
     'logoApple.png',
+    'logoMaskable.png',
     'manifest.json',
   ];
   return filePaths(cacheFiles);
