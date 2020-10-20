@@ -4,6 +4,8 @@ dist/*
 !dist/favicon.ico
 !dist/logo192.png
 !dist/logo512.png
+!dist/logoApple.png
 !dist/manifest.json
+!dist/serviceWorker.js
 *.swp
 src/old
