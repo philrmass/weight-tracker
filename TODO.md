@@ -1,5 +1,5 @@
 # Tasks
-- make a PWA
+- make a maskable icon
 - add goal, graph line, and +/- to averages
 - Update time in display once per minute
 
