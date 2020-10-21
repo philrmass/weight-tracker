@@ -12,6 +12,7 @@ import Options from './Options';
 import Weights from './Weights';
 
 function App({
+  version,
   weeks,
   months,
   isOptionsOpen,
@@ -45,6 +46,9 @@ function App({
         <div className={styles.graph}>
           <Graph />
         </div>
+        <div className={styles.version}>
+          {`v ${version}`}
+        </div>
       </main>
       <Modal isOpen={isOptionsOpen}>
         <Options />
@@ -54,6 +58,7 @@ function App({
 }
 
 App.propTypes = {
+  version: PropTypes.string.isRequired,
   weeks: PropTypes.arrayOf(PropTypes.object).isRequired,
   months: PropTypes.arrayOf(PropTypes.object).isRequired,
   isOptionsOpen: PropTypes.bool.isRequired,

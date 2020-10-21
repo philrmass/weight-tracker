@@ -8,21 +8,32 @@ function Average({
   getDateString,
   handleClick,
 }) {
+  function buildGoalDiff() {
+    if (data.average !== 0) {
+      return null;
+    }
+
+    return (
+      <div className={styles.diff}>
+        {'+ 0.0'}
+      </div>
+    );
+  }
+
   return (
     <div
       className={styles.main}
       onClick={handleClick}
     >
-      <div className={styles.top}>
-        <div>{getDateString(data.at)}</div>
-        <div className={styles.average}>
-          {data.average.toFixed(1)}
-        </div>
+      <div className={styles.date}>
+        {getDateString(data.at)}
+      </div>
+      <div className={styles.average}>
+        {data.average.toFixed(1)}
+        {buildGoalDiff()}
       </div>
       <div className={styles.measurements}>
-        <div>
-          {`${data.items.length} measurements`}
-        </div>
+        {`${data.items.length} measurements`}
       </div>
     </div>
   );

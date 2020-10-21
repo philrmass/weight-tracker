@@ -8,13 +8,15 @@ import './styles/index.css';
 import store from './redux/store';
 import App from './components/App';
 
+const version = '0.3.0';
+
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <App version={version} />
   </Provider>,
   document.getElementById('app'),
 );
 
 registerServiceWorker();
 
-console.log('Weight Tracker 0.1.1');
+console.log(`Weight Tracker ${version}`);

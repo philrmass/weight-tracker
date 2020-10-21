@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import styles from '../styles/Input.module.css';
+import { useInterval } from '../utilities/hooks';
 import { getDate, getTime } from '../utilities/times';
 import { addWeight, setOptionsOpen } from '../redux/weights/actions';
 
@@ -10,9 +11,12 @@ function Input({
   addWeight,
   setOptionsOpen,
 }) {
-  const now = Date.now();
+  const [now, setNow] = useState(Date.now());
 
   const [value, setValue] = useState('');
+  useInterval(() => {
+    setNow(Date.now());
+  }, 10000);
 
   function handleChange(e) {
     setValue(e.target.value);

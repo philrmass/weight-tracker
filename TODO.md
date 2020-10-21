@@ -1,16 +1,14 @@
 # Tasks
-- rearrange averages boxes
-- make weights text larger
-- Update time in display once per minute
-- make a real maskable icon
-- add goal, graph line, and +/- to averages
-- Keep skinny main layout on wide pages
+- keep skinny main layout on wide pages
+- add goal (date, weight), graph line, and +/- to averages
 
+- add touch scrolling
+- add touch scaling
 - add touch inputs, library?
-- add horizontal scrolling and scaling
 
 - add react router
 - add routes (/, /weekly, /monthly, /graph), trigger with click, x to close
-- Create full-screen week averages display
-- Create full-screen month averages display
-- Create full-screen graph display
+- create full-screen week averages display
+- create full-screen month averages display
+- create full-screen graph display
+- add up/down arrow icons instead of +/-

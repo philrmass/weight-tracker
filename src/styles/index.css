@@ -5,6 +5,9 @@
   --size-3: 32px;
   --size-button: 32px;
   --border-radius: 2px;
+  --text-normal: 16px;
+  --text-large: 22px;
+  --text-small: 12px;
   --bg-normal: #ffffff;
   --bg-alt: #d8d8ca;
   --bg-accent: #201060;
@@ -13,7 +16,7 @@
   --color-normal: #202020;
   --color-normal-light: #505050;
   --color-accent: #d8d8d8;
-  --color-accent-light: #a8a8a8;
+  --color-accent-light: #b8b8b8;
   --color-button: #787878;
   --color-button-hover: #484848;
   --border: #a4a4a4;
@@ -37,6 +40,7 @@ body {
   padding: 0;
   background: var(--bg-normal);
   color: var(--color-normal);
+  font-size: var(--text-normal);
   font-family: "Helvetica", sans-serif;
 }
 

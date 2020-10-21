@@ -52,3 +52,11 @@
   background: var(--bg-alt);
   display: flex;
 }
+
+.version {
+  position: fixed;
+  left: var(--size-2);
+  bottom: var(--size-1);
+  font-size: var(--text-small);
+}
+
