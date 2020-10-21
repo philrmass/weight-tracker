@@ -17,4 +17,4 @@ ReactDOM.render(
 
 registerServiceWorker();
 
-console.log('Weight Tracker 0.1.0');
+console.log('Weight Tracker 0.1.1');
