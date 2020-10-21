@@ -20,6 +20,7 @@ function getServiceWorkerUrl() {
 export function registerServiceWorker() {
   if (navigator.serviceWorker) {
     const url = getServiceWorkerUrl();
+    console.log('SW-URL', url);
     navigator.serviceWorker.register(url).then((reg) => {
       reg.onupdatefound = () => {
         const sw = reg.installing;
