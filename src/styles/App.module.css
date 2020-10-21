@@ -4,6 +4,12 @@
   bottom: 0;
   left: 0;
   right: 0;
+}
+
+.content {
+  height: 100%;
+  max-width: 650px;
+  margin: auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -59,4 +65,3 @@
   bottom: var(--size-1);
   font-size: var(--text-small);
 }
-

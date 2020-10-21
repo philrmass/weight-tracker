@@ -20,34 +20,36 @@ function App({
   return (
     <Fragment>
       <main className={styles.main}>
-        <div className={styles.input}>
-          <Input />
-        </div>
-        <div className={styles.weights}>
-          <Weights />
-        </div>
-        <div className={styles.averages}>
-          <div className={styles.week}>
-            <Average
-              data={weeks[0]}
-              getDateString={getWeek}
-              handleClick={() => console.log('week click')}
-            />
+        <div className={styles.content}>
+          <div className={styles.input}>
+            <Input />
           </div>
-          <div className={styles.spacer}></div>
-          <div className={styles.month}>
-            <Average
-              data={months[0]}
-              getDateString={getMonth}
-              handleClick={() => console.log('month click')}
-            />
+          <div className={styles.weights}>
+            <Weights />
           </div>
-        </div>
-        <div className={styles.graph}>
-          <Graph />
-        </div>
-        <div className={styles.version}>
-          {`v ${version}`}
+          <div className={styles.averages}>
+            <div className={styles.week}>
+              <Average
+                data={weeks[0]}
+                getDateString={getWeek}
+                handleClick={() => console.log('week click')}
+              />
+            </div>
+            <div className={styles.spacer}></div>
+            <div className={styles.month}>
+              <Average
+                data={months[0]}
+                getDateString={getMonth}
+                handleClick={() => console.log('month click')}
+              />
+            </div>
+          </div>
+          <div className={styles.graph}>
+            <Graph />
+          </div>
+          <div className={styles.version}>
+            {`v ${version}`}
+          </div>
         </div>
       </main>
       <Modal isOpen={isOptionsOpen}>

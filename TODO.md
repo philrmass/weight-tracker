@@ -1,8 +1,7 @@
 # Tasks
-- keep skinny main layout on wide pages
+- add touch scrolling
 - add goal (date, weight), graph line, and +/- to averages
 
-- add touch scrolling
 - add touch scaling
 - add touch inputs, library?
 
