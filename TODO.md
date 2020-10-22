@@ -1,4 +1,4 @@
-# Tasks
+Tasks
 - add touch scrolling
 - add goal (date, weight), graph line, and +/- to averages
 
@@ -11,3 +11,5 @@
 - create full-screen month averages display
 - create full-screen graph display
 - add up/down arrow icons instead of +/-
+- add three dot button icon
+- add x button icon
