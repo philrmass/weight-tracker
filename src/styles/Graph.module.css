@@ -20,6 +20,7 @@
 }
 
 .log {
+  display: none;
   max-height: 200px;
   position: fixed;
   top: var(--size-2);

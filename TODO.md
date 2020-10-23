@@ -1,9 +1,11 @@
 Tasks
-- develop utilities/graph/adjustRange
-- test adjustRange with useInterval
-- use adjustRange in handleMove, mock scale with 1.0
-- inc version, hide yellow box, deploy scrolling
-- add touch scaling
+- rename in utilities/graph, add green line
+- rename in Graph.js, move fcns to utilities
+  - limits, atLimits [atMin, atMax]
+  - view, atView [atStart, atEnd]
+  - range, atRange = size
+- implement getScaleX with centerX
+- add touch scaling around a centerRatio (scale each side separately)
 
 - add goal (date, weight), graph line, and +/- to averages
 

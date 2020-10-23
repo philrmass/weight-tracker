@@ -5,23 +5,7 @@ import {
   getYearStart,
 } from './times';
 
-export function printSummary(ctx, lim) {
-  const start = new Date(lim.atMin).toLocaleDateString();
-  const end = new Date(lim.atMax).toLocaleDateString();
-  console.log(
-    `RENDER (${ctx.canvas.width}, ${ctx.canvas.height})\n` +
-    `  [${start} - ${end}]\n` +
-    `  [${lim.weightMin} - ${lim.weightMax}]`,
-  );
-}
-
-export function printItem(scl, item) {
-  const date = new Date(item.at).toLocaleDateString();
-  const x = scl.x(item.at).toFixed(1);
-  const y = scl.y(item.weight).toFixed(1);
-  console.log(`${date} ${item.weight} (${x}, ${y})`);
-}
-
+//??? (ctx, itmes, atView), items -> viewItems, lim -> view
 export function render(ctx, all, range) {
   if (all.length === 0) {
     return;
@@ -36,6 +20,7 @@ export function render(ctx, all, range) {
   renderWeights(ctx, scl, items);
 }
 
+//??? calcCoord()
 function getScale(ctx, lim) {
   const w = ctx.canvas.width;
   const h = ctx.canvas.height;
@@ -46,11 +31,12 @@ function getScale(ctx, lim) {
   };
 }
 
-function selectItems(all, [atMin, atMax]) {
+//??? selectViewItems(items, [atStart, atEnd])
+function selectItems(all, [atStart, atMax]) {
   const items = all.slice(0);
   const indexRange = items.length - 1;
   const indexMin = items.findIndex((item) => item.at <= atMax);
-  const indexMax = indexRange - items.reverse().findIndex((item) => item.at >= atMin);
+  const indexMax = indexRange - items.reverse().findIndex((item) => item.at >= atStart);
 
   const first = indexMin >= 1 ? indexMin - 1 : 0;
   const last = indexMax < indexRange ? indexMax + 1 : indexRange;
@@ -58,6 +44,7 @@ function selectItems(all, [atMin, atMax]) {
   return all.slice(first, last + 1);
 }
 
+//??? calcView(viewItems, atStart, atEnd)
 function calcLimits(items, [atMin, atMax]) {
   const space = 0.05;
   const wMax = items.reduce((max, item) => item.weight > max ? item.weight : max, 0);
@@ -68,6 +55,7 @@ function calcLimits(items, [atMin, atMax]) {
   const weightMin = wMin - wSpace;
   const weightMax = wMax + wSpace;
 
+  //??? rename wherever used Min -> Start, Max -> End
   return {
     atMin,
     atMax,
@@ -97,7 +85,7 @@ function renderDayLines(ctx, scl, lim, type) {
   const dayMin = getDayStart(lim.atMin) + dayMs;
   const dayMax = getDayStart(lim.atMax) + dayMs;
 
-  setLine(ctx, type);
+  setLineType(ctx, type);
 
   ctx.beginPath();
   for (let i = dayMin; i <= dayMax; i+= dayMs) {
@@ -114,7 +102,7 @@ function renderWeekLines(ctx, scl, lim, type) {
   const weekMin = getWeekStart(lim.atMin) + weekMs;
   const weekMax = getWeekStart(lim.atMax) + weekMs;
 
-  setLine(ctx, type);
+  setLineType(ctx, type);
 
   ctx.beginPath();
   for (let i = weekMin; i <= weekMax; i+= weekMs) {
@@ -129,7 +117,7 @@ function renderWeekLines(ctx, scl, lim, type) {
 function renderMonthLines(ctx, scl, lim, type) {
   const monthMax = getMonthStart(lim.atMax);
 
-  setLine(ctx, type);
+  setLineType(ctx, type);
 
   ctx.beginPath();
   let offset = 1;
@@ -149,7 +137,7 @@ function renderMonthLines(ctx, scl, lim, type) {
 function renderYearLines(ctx, scl, lim, type) {
   const yearMax = getYearStart(lim.atMax);
 
-  setLine(ctx, type);
+  setLineType(ctx, type);
 
   ctx.beginPath();
   let offset = 1;
@@ -171,7 +159,7 @@ function renderWeightLines(ctx, scl, lim) {
   const min5 = Math.ceil(lim.weightMin / 5);
   const max5 = Math.floor(lim.weightMax / 5);
 
-  setLine(ctx, 1);
+  setLineType(ctx, 1);
 
   ctx.beginPath();
   for (let i = min5; i <= max5; i++) {
@@ -186,7 +174,7 @@ function renderWeightLines(ctx, scl, lim) {
   const min = Math.ceil(lim.weightMin);
   const max = Math.floor(lim.weightMax);
 
-  setLine(ctx, 0);
+  setLineType(ctx, 0);
 
   ctx.beginPath();
   for (let i = min; i <= max; i++) {
@@ -202,7 +190,7 @@ function renderWeightLines(ctx, scl, lim) {
 }
 
 function renderWeights(ctx, scl, items) {
-  setLine(ctx, 2);
+  setLineType(ctx, 2);
 
   ctx.beginPath();
   ctx.moveTo(scl.x(items[0].at), scl.y(items[0].weight));
@@ -214,7 +202,8 @@ function renderWeights(ctx, scl, items) {
   ctx.stroke();
 }
 
-function setLine(ctx, type) {
+//??? add green line as type 2, move weight to type 3
+function setLineType(ctx, type) {
   switch(type) {
     case 0:
       ctx.lineWidth = 0.5;

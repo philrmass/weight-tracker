@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 
 import styles from '../styles/Graph.module.css';
 import { render } from '../utilities/graph';
+//import { useInterval } from '../utilities/hooks';
 
+//??? calcAtVew(), move to utils/graph
 function calcRange(items, range) {
   const atMin = items[0]?.at - range;
   const atMax = items[0]?.at;
@@ -12,9 +14,38 @@ function calcRange(items, range) {
   return [atMin, atMax];
 }
 
+//??? move to utils/times
 function getDays(count) {
   const oneDay = 1000 * 60 * 60 * 24;
   return count * oneDay;
+}
+
+//??? getAtLimits(), move to utils/graph
+function getLimits(items, rangeMin) {
+  const max = items[0]?.at;
+  const min = items[items.length - 1]?.at;
+  const range = max - min;
+
+  if (range < rangeMin) {
+    return [max - rangeMin, max];
+  }
+  return [min, max];
+}
+
+//??? adjustAtView
+function adjustRange(range, limits, moveRatio, _scaleRatio) {
+  const [start, end] = range;
+  const [min, max] = limits;
+  const view = end - start;
+  const move = moveRatio * view;
+
+  if (start + move < min) {
+    return [min, min + view];
+  }
+  if (end + move > max) {
+    return [max - view, max];
+  }
+  return [start + move, end + move];
 }
 
 function getTouches(e) {
@@ -32,18 +63,6 @@ function getMoveX(lasts, nows) {
   const dx = getAverage(diffs);
 
   return (dx / w);
-}
-
-function getScaleX(_lasts, nows) {
-  const _w = nows[0].w;
-  //??? remove touches from now that don't match lasts
-  //??? if length < 2, return 1.0
-  //??? get x max index, get x min index
-  //??? calc max to min of nows size
-  //??? calc max to min of lasts size
-  //??? clc ratio of size
-
-  return 1.0;
 }
 
 function getDiffs(lasts, nows) {
@@ -65,15 +84,28 @@ function getAverage(diffs) {
   return 0;
 }
 
+function getScaleX(_lasts, nows) {
+  const _w = nows[0].w;
+  //??? remove touches from now that don't match lasts
+  //??? if length < 2, return 1.0
+  //??? get x max index, get x min index
+  //??? calc max to min of nows size
+  //??? calc max to min of lasts size
+  //??? clc ratio of size
+
+  return 1.0;
+}
+
 function Graph({
   items,
 }) {
   const wrap = useRef(null);
   const canvas = useRef(null);
+  //??? range -> atView
   const [range, setRange] = useState(calcRange(items, getDays(56)));
   const [touches, setTouches] = useState([]);
   //??? remove after testing
-  const [text, setText] = useState('');
+  //const [text, setText] = useState('');
 
   window.onresize = () => {
     const ctx = canvas.current.getContext('2d');
@@ -82,9 +114,12 @@ function Graph({
     render(ctx, items, range);
   };
 
+  //??? remove after testing
+  /*
   function log(value) {
     setText((t) => `${value}\n${t}`);
   }
+  */
 
   function handleStart(e) {
     setTouches(getTouches(e));
@@ -96,10 +131,8 @@ function Graph({
     const scaleX = getScaleX(touches, nows);
     setTouches(nows);
 
-    log(`mx ${moveX.toFixed(4)} ${scaleX.toFixed(4)}`);
-    //??? make min less than items min if (max - min) < 90 days
-    //??? range = adjustRange(range, min, max, move, scale); // in utils
-    //??? setRange(range);
+    const limits = getLimits(items, getDays(90));
+    setRange(adjustRange(range, limits, -moveX, scaleX));
   }
 
   useEffect(() => {
@@ -113,7 +146,13 @@ function Graph({
     render(ctx, items, range);
   }, [items, range]);
 
-  //??? test moveX with useInterval
+  //??? remove after testing
+  /*
+  useInterval(() => {
+    const move = -0.003;
+    const limits = getLimits(items, getDays(90));
+    setRange(adjustRange(range, limits, move, 1.0));
+  }, 100);
 
   function buildLog() {
     return (
@@ -122,6 +161,7 @@ function Graph({
       </div>
     );
   }
+  */
 
   return (
     <main className={styles.main}>
@@ -133,7 +173,7 @@ function Graph({
       >
         <canvas className={styles.canvas} ref={canvas}></canvas>
       </div>
-      {buildLog()}
+      {/*buildLog()*/}
     </main>
   );
 }
