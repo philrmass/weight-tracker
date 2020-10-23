@@ -22,7 +22,7 @@ module.exports = {
     'comma-dangle': ['warn', 'always-multiline'],
     'indent': ['warn', 2, { 'SwitchCase': 1 }],
     'linebreak-style': ['error', 'unix'],
-    'no-unused-vars': 'warn',
+    'no-unused-vars': ['warn', { 'argsIgnorePattern': '^_', 'varsIgnorePattern': '^_' }],
     'quotes': ['error', 'single'],
     'semi': ['error', 'always'],
   },

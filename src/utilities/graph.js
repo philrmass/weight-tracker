@@ -22,13 +22,13 @@ export function printItem(scl, item) {
   console.log(`${date} ${item.weight} (${x}, ${y})`);
 }
 
-export function render(ctx, all, atMin, atMax) {
+export function render(ctx, all, range) {
   if (all.length === 0) {
     return;
   }
 
-  const items = selectItems(all, atMin, atMax);
-  const lim = calcLimits(items, atMin, atMax);
+  const items = selectItems(all, range);
+  const lim = calcLimits(items, range);
   const scl = getScale(ctx, lim);
 
   renderTimeLines(ctx, scl, lim);
@@ -46,7 +46,7 @@ function getScale(ctx, lim) {
   };
 }
 
-function selectItems(all, atMin, atMax) {
+function selectItems(all, [atMin, atMax]) {
   const items = all.slice(0);
   const indexRange = items.length - 1;
   const indexMin = items.findIndex((item) => item.at <= atMax);
@@ -58,7 +58,7 @@ function selectItems(all, atMin, atMax) {
   return all.slice(first, last + 1);
 }
 
-function calcLimits(items, atMin, atMax) {
+function calcLimits(items, [atMin, atMax]) {
   const space = 0.05;
   const wMax = items.reduce((max, item) => item.weight > max ? item.weight : max, 0);
   const wMin = items.reduce((min, item) => item.weight < min ? item.weight : min, wMax);

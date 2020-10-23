@@ -1,9 +1,11 @@
 Tasks
-- add touch scrolling
-- add goal (date, weight), graph line, and +/- to averages
-
+- develop utilities/graph/adjustRange
+- test adjustRange with useInterval
+- use adjustRange in handleMove, mock scale with 1.0
+- inc version, hide yellow box, deploy scrolling
 - add touch scaling
-- add touch inputs, library?
+
+- add goal (date, weight), graph line, and +/- to averages
 
 - add react router
 - add routes (/, /weekly, /monthly, /graph), trigger with click, x to close
