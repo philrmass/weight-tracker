@@ -5,23 +5,19 @@ import PropTypes from 'prop-types';
 import styles from '../styles/Graph.module.css';
 import { render } from '../utilities/graph';
 //import { useInterval } from '../utilities/hooks';
+import { getDays } from '../utilities/times';
 
-//??? calcAtVew(), move to utils/graph
-function calcRange(items, range) {
-  const atMin = items[0]?.at - range;
-  const atMax = items[0]?.at;
+//??? move to graph utils
+function calcAtView(items, atRange) {
+  const atStart = items[0]?.at - atRange;
+  const atEnd = items[0]?.at;
 
-  return [atMin, atMax];
+  return [atStart, atEnd];
 }
 
-//??? move to utils/times
-function getDays(count) {
-  const oneDay = 1000 * 60 * 60 * 24;
-  return count * oneDay;
-}
-
+//??? move to graph utils
 //??? getAtLimits(), move to utils/graph
-function getLimits(items, rangeMin) {
+function getAtLimits(items, rangeMin) {
   const max = items[0]?.at;
   const min = items[items.length - 1]?.at;
   const range = max - min;
@@ -102,7 +98,7 @@ function Graph({
   const wrap = useRef(null);
   const canvas = useRef(null);
   //??? range -> atView
-  const [range, setRange] = useState(calcRange(items, getDays(56)));
+  const [range, setRange] = useState(calcAtView(items, getDays(56)));
   const [touches, setTouches] = useState([]);
   //??? remove after testing
   //const [text, setText] = useState('');
@@ -131,12 +127,12 @@ function Graph({
     const scaleX = getScaleX(touches, nows);
     setTouches(nows);
 
-    const limits = getLimits(items, getDays(90));
-    setRange(adjustRange(range, limits, -moveX, scaleX));
+    const atLimits = getAtLimits(items, getDays(90));
+    setRange(adjustRange(range, atLimits, -moveX, scaleX));
   }
 
   useEffect(() => {
-    setRange(calcRange(items, getDays(56)));
+    setRange(calcAtView(items, getDays(56)));
   }, [items.length]);
 
   useEffect(() => {
@@ -150,8 +146,8 @@ function Graph({
   /*
   useInterval(() => {
     const move = -0.003;
-    const limits = getLimits(items, getDays(90));
-    setRange(adjustRange(range, limits, move, 1.0));
+    const atLimits = getAtLimits(items, getDays(90));
+    setRange(adjustRange(range, atLimits, move, 1.0));
   }, 100);
 
   function buildLog() {

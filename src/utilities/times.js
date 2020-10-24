@@ -66,3 +66,8 @@ export function getTime(at) {
   const date = new Date(at);
   return date.toLocaleString('en-us', timeOptions);
 }
+
+export function getDays(count) {
+  const oneDay = 1000 * 60 * 60 * 24;
+  return count * oneDay;
+}
