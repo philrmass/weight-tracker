@@ -1,10 +1,6 @@
 Tasks
-- rename in Graph.js, move fcns to utilities
-  - limits, atLimits [atMin, atMax]
-  - view, atView [atStart, atEnd]
-  - range, atRange = size
-- implement getScaleX with centerX
 - add touch scaling around a centerRatio (scale each side separately)
+- implement getScaleX with centerX
 
 - extend window for defining the weight view
 - add goal (date, weight), graph line, and +/- to averages

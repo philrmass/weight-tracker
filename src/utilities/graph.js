@@ -5,6 +5,37 @@ import {
   getYearStart,
 } from './times';
 
+export function calcAtView(items, atRange) {
+  const atStart = items[0]?.at - atRange;
+  const atEnd = items[0]?.at;
+
+  return [atStart, atEnd];
+}
+
+export function getAtLimits(items, rangeMin) {
+  const max = items[0]?.at;
+  const min = items[items.length - 1]?.at;
+  const range = max - min;
+
+  if (range < rangeMin) {
+    return [max - rangeMin, max];
+  }
+  return [min, max];
+}
+
+export function adjustAtView([start, end], [min, max], moveRatio, _scaleRatio, _centerRatio) {
+  const view = end - start;
+  const move = moveRatio * view;
+
+  if (start + move < min) {
+    return [min, min + view];
+  }
+  if (end + move > max) {
+    return [max - view, max];
+  }
+  return [start + move, end + move];
+}
+
 export function render(ctx, items, atView) {
   if (items.length === 0) {
     return;
