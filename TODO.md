@@ -1,5 +1,4 @@
 Tasks
-- rename in utilities/graph, add green line
 - rename in Graph.js, move fcns to utilities
   - limits, atLimits [atMin, atMax]
   - view, atView [atStart, atEnd]
@@ -7,6 +6,7 @@ Tasks
 - implement getScaleX with centerX
 - add touch scaling around a centerRatio (scale each side separately)
 
+- extend window for defining the weight view
 - add goal (date, weight), graph line, and +/- to averages
 
 - add react router

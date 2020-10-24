@@ -5,91 +5,86 @@ import {
   getYearStart,
 } from './times';
 
-//??? (ctx, itmes, atView), items -> viewItems, lim -> view
-export function render(ctx, all, range) {
-  if (all.length === 0) {
+export function render(ctx, items, atView) {
+  if (items.length === 0) {
     return;
   }
 
-  const items = selectItems(all, range);
-  const lim = calcLimits(items, range);
-  const scl = getScale(ctx, lim);
+  const viewItems = selectViewItems(items, atView);
+  const view = calcView(viewItems, atView);
+  const coord = calcCoord(ctx, view);
 
-  renderTimeLines(ctx, scl, lim);
-  renderWeightLines(ctx, scl, lim);
-  renderWeights(ctx, scl, items);
+  renderTimeLines(ctx, coord, view);
+  renderWeightLines(ctx, coord, view);
+  renderWeights(ctx, coord, viewItems);
 }
 
-//??? calcCoord()
-function getScale(ctx, lim) {
-  const w = ctx.canvas.width;
-  const h = ctx.canvas.height;
-
-  return {
-    x: (at) => w * ((at - lim.atMin) / (lim.atMax - lim.atMin)),
-    y: (weight) => h - h * ((weight - lim.weightMin) / (lim.weightMax - lim.weightMin)),
-  };
-}
-
-//??? selectViewItems(items, [atStart, atEnd])
-function selectItems(all, [atStart, atMax]) {
-  const items = all.slice(0);
+function selectViewItems(items, [atStart, atEnd]) {
   const indexRange = items.length - 1;
-  const indexMin = items.findIndex((item) => item.at <= atMax);
-  const indexMax = indexRange - items.reverse().findIndex((item) => item.at >= atStart);
+  const indexMin = items.findIndex((item) => item.at <= atEnd);
+  const indexMax = indexRange - items.slice(0).reverse().findIndex((item) => item.at >= atStart);
 
   const first = indexMin >= 1 ? indexMin - 1 : 0;
   const last = indexMax < indexRange ? indexMax + 1 : indexRange;
 
-  return all.slice(first, last + 1);
+  return items.slice(first, last + 1);
 }
 
-//??? calcView(viewItems, atStart, atEnd)
-function calcLimits(items, [atMin, atMax]) {
+//??? use all items, add/sub X days from limits, slice at limits
+function calcView(items, [atStart, atEnd]) {
   const space = 0.05;
   const wMax = items.reduce((max, item) => item.weight > max ? item.weight : max, 0);
   const wMin = items.reduce((min, item) => item.weight < min ? item.weight : min, wMax);
   const wRange = wMax - wMin;
 
   const wSpace = space * wRange;
-  const weightMin = wMin - wSpace;
-  const weightMax = wMax + wSpace;
+  const weightStart = wMin - wSpace;
+  const weightEnd = wMax + wSpace;
 
-  //??? rename wherever used Min -> Start, Max -> End
   return {
-    atMin,
-    atMax,
-    weightMin,
-    weightMax,
+    atStart,
+    atEnd,
+    weightStart,
+    weightEnd,
   };
 }
 
-function renderTimeLines(ctx, scl, lim) {
+function calcCoord(ctx, view) {
+  const w = ctx.canvas.width;
+  const h = ctx.canvas.height;
+
+  return {
+    x: (at) => w * ((at - view.atStart) / (view.atEnd - view.atStart)),
+    y: (weight) => h - h * ((weight - view.weightStart) / (view.weightEnd - view.weightStart)),
+  };
+}
+
+function renderTimeLines(ctx, coord, view) {
   const dayMs = 1000 * 60 * 60 * 24;
-  const daysWide = (lim.atMax - lim.atMin) / dayMs;
+  const daysWide = (view.atEnd - view.atStart) / dayMs;
 
   if (daysWide < 60) {
-    renderDayLines(ctx, scl, lim, 0);
-    renderWeekLines(ctx, scl, lim, 1);
+    renderDayLines(ctx, coord, view, 0);
+    renderWeekLines(ctx, coord, view, 1);
   } else if (daysWide < 250) {
-    renderWeekLines(ctx, scl, lim, 0);
-    renderMonthLines(ctx, scl, lim, 1);
+    renderWeekLines(ctx, coord, view, 0);
+    renderMonthLines(ctx, coord, view, 1);
   } else {
-    renderMonthLines(ctx, scl, lim, 0);
-    renderYearLines(ctx, scl, lim, 1);
+    renderMonthLines(ctx, coord, view, 0);
+    renderYearLines(ctx, coord, view, 1);
   }
 }
 
-function renderDayLines(ctx, scl, lim, type) {
+function renderDayLines(ctx, coord, view, type) {
   const dayMs = 1000 * 60 * 60 * 24;
-  const dayMin = getDayStart(lim.atMin) + dayMs;
-  const dayMax = getDayStart(lim.atMax) + dayMs;
+  const dayMin = getDayStart(view.atStart) + dayMs;
+  const dayMax = getDayStart(view.atEnd) + dayMs;
 
   setLineType(ctx, type);
 
   ctx.beginPath();
   for (let i = dayMin; i <= dayMax; i+= dayMs) {
-    const x = scl.x(i);
+    const x = coord.x(i);
 
     ctx.moveTo(x, 0);
     ctx.lineTo(x, ctx.canvas.height);
@@ -97,16 +92,16 @@ function renderDayLines(ctx, scl, lim, type) {
   ctx.stroke();
 }
 
-function renderWeekLines(ctx, scl, lim, type) {
+function renderWeekLines(ctx, coord, view, type) {
   const weekMs = 1000 * 60 * 60 * 24 * 7;
-  const weekMin = getWeekStart(lim.atMin) + weekMs;
-  const weekMax = getWeekStart(lim.atMax) + weekMs;
+  const weekMin = getWeekStart(view.atStart) + weekMs;
+  const weekMax = getWeekStart(view.atEnd) + weekMs;
 
   setLineType(ctx, type);
 
   ctx.beginPath();
   for (let i = weekMin; i <= weekMax; i+= weekMs) {
-    const x = scl.x(i);
+    const x = coord.x(i);
 
     ctx.moveTo(x, 0);
     ctx.lineTo(x, ctx.canvas.height);
@@ -114,71 +109,71 @@ function renderWeekLines(ctx, scl, lim, type) {
   ctx.stroke();
 }
 
-function renderMonthLines(ctx, scl, lim, type) {
-  const monthMax = getMonthStart(lim.atMax);
+function renderMonthLines(ctx, coord, view, type) {
+  const monthMax = getMonthStart(view.atEnd);
 
   setLineType(ctx, type);
 
   ctx.beginPath();
   let offset = 1;
-  let i = getMonthStart(lim.atMin, offset);
+  let i = getMonthStart(view.atStart, offset);
   while (i <= monthMax) {
-    const x = scl.x(i);
+    const x = coord.x(i);
 
     ctx.moveTo(x, 0);
     ctx.lineTo(x, ctx.canvas.height);
 
     offset++;
-    i = getMonthStart(lim.atMin, offset);
+    i = getMonthStart(view.atStart, offset);
   }
   ctx.stroke();
 }
 
-function renderYearLines(ctx, scl, lim, type) {
-  const yearMax = getYearStart(lim.atMax);
+function renderYearLines(ctx, coord, view, type) {
+  const yearMax = getYearStart(view.atEnd);
 
   setLineType(ctx, type);
 
   ctx.beginPath();
   let offset = 1;
-  let i = getYearStart(lim.atMin, offset);
+  let i = getYearStart(view.atStart, offset);
   while (i <= yearMax) {
-    const x = scl.x(i);
+    const x = coord.x(i);
 
     ctx.moveTo(x, 0);
     ctx.lineTo(x, ctx.canvas.height);
 
     offset++;
-    i = getYearStart(lim.atMin, offset);
+    i = getYearStart(view.atStart, offset);
   }
   ctx.stroke();
 }
 
-function renderWeightLines(ctx, scl, lim) {
+function renderWeightLines(ctx, coord, view) {
   const div = 5;
-  const min5 = Math.ceil(lim.weightMin / 5);
-  const max5 = Math.floor(lim.weightMax / 5);
+  const min5 = Math.ceil(view.weightStart / 5);
+  const max5 = Math.floor(view.weightEnd / 5);
 
   setLineType(ctx, 1);
 
   ctx.beginPath();
   for (let i = min5; i <= max5; i++) {
     const weight = div * i;
-    const y = scl.y(weight);
+    const y = coord.y(weight);
 
     ctx.moveTo(0, y);
     ctx.lineTo(ctx.canvas.width, y);
   }
   ctx.stroke();
 
-  const min = Math.ceil(lim.weightMin);
-  const max = Math.floor(lim.weightMax);
+  const min = Math.ceil(view.weightStart);
+  const max = Math.floor(view.weightEnd);
 
   setLineType(ctx, 0);
 
   ctx.beginPath();
   for (let i = min; i <= max; i++) {
-    const y = scl.y(i);
+    const y = coord.y(i);
     const not5 = i % 5 !== 0;
 
     if (not5) {
@@ -189,20 +184,19 @@ function renderWeightLines(ctx, scl, lim) {
   ctx.stroke();
 }
 
-function renderWeights(ctx, scl, items) {
-  setLineType(ctx, 2);
+function renderWeights(ctx, coord, items) {
+  setLineType(ctx, 3);
 
   ctx.beginPath();
-  ctx.moveTo(scl.x(items[0].at), scl.y(items[0].weight));
+  ctx.moveTo(coord.x(items[0].at), coord.y(items[0].weight));
 
   for (const item of items) {
-    ctx.lineTo(scl.x(item.at), scl.y(item.weight));
+    ctx.lineTo(coord.x(item.at), coord.y(item.weight));
   }
 
   ctx.stroke();
 }
 
-//??? add green line as type 2, move weight to type 3
 function setLineType(ctx, type) {
   switch(type) {
     case 0:
@@ -214,6 +208,10 @@ function setLineType(ctx, type) {
       ctx.strokeStyle = '#9090ff';
       break;
     case 2:
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = '#12c025';
+      break;
+    case 3:
       ctx.lineWidth = 1;
       ctx.strokeStyle = '#ff2105';
       break;
