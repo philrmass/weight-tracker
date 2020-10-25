@@ -9,7 +9,7 @@ import {
   adjustAtView,
   render,
 } from '../utilities/graph';
-import { useInterval } from '../utilities/hooks';
+//import { useInterval } from '../utilities/hooks';
 import { getDays } from '../utilities/times';
 
 function getTouches(e) {
@@ -110,11 +110,15 @@ function Graph({
   }, [items, atView]);
 
   //??? remove after testing
+  /*
   useInterval(() => {
     const move = -0.003;
+    const scale = 1.005;
+    const center = 0.50;
     const atLimits = getAtLimits(items, getDays(90));
-    setAtView(adjustAtView(atView, atLimits, move, 0.97, 0.5));
+    setAtView(adjustAtView(atView, atLimits, move, scale, center));
   }, 100);
+  */
 
   //??? remove after testing
   /*

@@ -23,17 +23,37 @@ export function getAtLimits(items, rangeMin) {
   return [min, max];
 }
 
-export function adjustAtView([start, end], [min, max], moveRatio, _scaleRatio, _centerRatio) {
-  const view = end - start;
-  const move = moveRatio * view;
+export function adjustAtView(view, limits, moveRatio, scaleRatio, centerRatio) {
+  const moved = applyAtMove(view, limits, moveRatio);
+  return applyScale(moved, limits, scaleRatio, centerRatio);
+}
+
+function applyAtMove([start, end], [min, max], moveRatio) {
+  const range = end - start;
+  const move = moveRatio * range;
 
   if (start + move < min) {
-    return [min, min + view];
+    return [min, min + range];
   }
   if (end + move > max) {
-    return [max - view, max];
+    return [max - range, max];
   }
   return [start + move, end + move];
+}
+
+function applyScale([start, end], [min, max], scaleRatio, centerRatio) {
+  const range = end - start;
+  const center = start + centerRatio * range;
+  const left = center - start;
+  const right = end - center;
+
+  const scaledStart = center - left / scaleRatio;
+  const scaledEnd = center + right / scaleRatio;
+
+  const limitedStart = scaledStart < min ? min : scaledStart;
+  const limitedEnd = scaledEnd > max ? max : scaledEnd;
+
+  return [limitedStart, limitedEnd];
 }
 
 export function render(ctx, items, atView) {
@@ -52,6 +72,7 @@ export function render(ctx, items, atView) {
 
 function selectViewItems(items, [atStart, atEnd]) {
   const indexRange = items.length - 1;
+  //??? move this index search into a function
   const indexMin = items.findIndex((item) => item.at <= atEnd);
   const indexMax = indexRange - items.slice(0).reverse().findIndex((item) => item.at >= atStart);
 

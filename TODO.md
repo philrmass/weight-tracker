@@ -1,8 +1,7 @@
 Tasks
-- add touch scaling around a centerRatio (scale each side separately)
-- implement getScaleX with centerX
+- implement touch getScaleX with centerX
 
-- extend window for defining the weight view
+- extend the window for defining the weight view
 - add goal (date, weight), graph line, and +/- to averages
 
 - add react router
@@ -13,3 +12,4 @@ Tasks
 - add up/down arrow icons instead of +/-
 - add three dot button icon
 - add x button icon
+- add labels to graph
