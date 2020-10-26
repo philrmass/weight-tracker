@@ -101,7 +101,8 @@ function Graph({
   }
 
   function handleMove(e) {
-    e.preventDefault();
+    //e.preventDefault();
+    e.stopPropagation();
     const nows = getTouches(e);
     const moveX = getMoveX(touches, nows);
     const [scaleX, centerX] = getScaleX(touches, nows);

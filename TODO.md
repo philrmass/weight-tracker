@@ -1,5 +1,5 @@
 Tasks
-- implement touch getScaleX with centerX
+- clean up Graph.js
 - extend the window for defining the weight view
 
 - add goal (date, weight), graph line, and +/- to averages
