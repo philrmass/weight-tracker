@@ -48,15 +48,27 @@ function getAverage(diffs) {
   return 0;
 }
 
-function getScaleX(_lasts, nows) {
-  const _w = nows[0].w;
-  //??? remove touches from now that don't match lasts
-  //??? if length < 2, return 1.0
-  //??? get x max index, get x min index
-  //??? calc max to min of nows size
-  //??? calc max to min of lasts size
-  //??? clc ratio of size
+function getScaleX(lasts, nows) {
+  const w = nows[0].w;
+  const lastIds = lasts.map((last) => last.id);
+  const matched = nows.filter((now) => lastIds.includes(now.id));
 
+  if (matched.length >= 2) {
+    const nowMax = matched.reduce((max, item) => item.x > max.x ? item : max, matched[0]);
+    const nowMin = matched.reduce((min, item) => item.x < min.x ? item : min, matched[0]);
+    const nowDist = nowMax.x - nowMin.x;
+
+    const lastMax = lasts.find((last) => last.id === nowMax.id);
+    const lastMin = lasts.find((last) => last.id === nowMin.id);
+    const lastDist = lastMax.x - lastMin.x;
+
+    if (lastDist > 0) {
+      const scale = nowDist / lastDist;
+      const nowCenter = (nowMin.x + nowMax.x) / 2;
+
+      return [scale, nowCenter / w];
+    }
+  }
   return [1.0, 0.5];
 }
 
