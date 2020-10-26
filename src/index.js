@@ -8,7 +8,7 @@ import './styles/index.css';
 import store from './redux/store';
 import App from './components/App';
 
-const version = '0.8.2';
+const version = '0.8.3';
 
 ReactDOM.render(
   <Provider store={store}>
