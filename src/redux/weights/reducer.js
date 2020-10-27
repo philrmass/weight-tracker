@@ -16,7 +16,7 @@ const defaultState = {
   weeks: calculateWeeks(all),
   months: calculateMonths(all),
   message: '',
-  isOptionsOpen: false,
+  isOptionsOpen: true,
 };
 
 function getImportMessage(stats) {

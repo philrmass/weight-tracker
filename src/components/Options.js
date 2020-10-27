@@ -28,28 +28,74 @@ function Options({
     exportWeights(items.length);
   }
 
+  //??? start weight, start date
+  //??? goal weight, goal date
+  /*
+  value={value}
+  onChange={handleChange}
+  onKeyUp={handleKeyUp}
+
+  value={dateToEdit(activeEvent.date)}
+  onChange={(e) => handleDateChange(e.target.value)}
+  */
   return (
     <main className={styles.main}>
-      <div className={styles.top}>
+      <section className={styles.top}>
         <button
           onClick={() => setOptionsOpen(false)}
         >
           x 
         </button>
-      </div>
-      <div className={styles.controls}>
-        <div className={styles.data}>
-          <button onClick={importFile}>
-            Import
-          </button>
-          <button onClick={exportFile}>
-            Export
-          </button>
-        </div>
-        <div className={styles.message}>
-          {message}
-        </div>
-      </div>
+      </section>
+      <section className={styles.controls}>
+        <section className={styles.goal}>
+          <div className={styles.title}>Goal</div>
+          <div className={styles.label}>From</div>
+          <div className={styles.goalControls}>
+            <input
+              type='number'
+              min='0'
+              max='1000'
+              step='0.1'
+              value={201.6}
+              onChange={() => {}}
+            />
+            <input
+              type='date'
+              className={styles.dateInput}
+            />
+          </div>
+          <div className={styles.label}>To</div>
+          <div className={styles.goalControls}>
+            <input
+              type='number'
+              min='0'
+              max='1000'
+              step='0.1'
+              value={201.6}
+              onChange={() => {}}
+            />
+            <input
+              type='date'
+              className={styles.dateInput}
+            />
+          </div>
+        </section>
+        <section className={styles.data}>
+          <div className={styles.title}>Data</div>
+          <div className={styles.dataControls}>
+            <button onClick={importFile}>
+              Import
+            </button>
+            <button onClick={exportFile}>
+              Export
+            </button>
+          </div>
+          <div className={styles.message}>
+            {message}
+          </div>
+        </section>
+      </section>
     </main>
   );
 }

@@ -1,10 +1,17 @@
 .main {
+  position: relative;
 }
 
 .top {
+  position: absolute;
+  right: 0;
+  top: 0;
+  /*
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  background: #fde;
+  */
 }
 
 .top button {
@@ -16,6 +23,15 @@
   border-color: var(--color-button-hover);
   background: var(--bg-button-hover);
   color: var(--color-button-hover);
+}
+
+.title {
+  padding-top: var(--size-2);
+  padding-bottom: var(--size-1);
+  /*
+  padding-bottom: var(--size-1) 0;
+  */
+  font-weight: bold;
 }
 
 .controls {
@@ -35,7 +51,28 @@
   color: var(--color-button-hover);
 }
 
+.goal {
+}
+
+.goalControls {
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+
+.label {
+  /*
+  padding-top: var(--size-1);
+  */
+  padding-left: var(--size-1);
+  font-size: var(--text-small);
+  color: var(--color-normal-light);
+  font-weight: bold;
+}
+
 .data {
+}
+
+.dataControls {
   display: flex;
 }
 
