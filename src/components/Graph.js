@@ -9,7 +9,6 @@ import {
   adjustAtView,
   render,
 } from '../utilities/graph';
-//import { useInterval } from '../utilities/hooks';
 import { getDays } from '../utilities/times';
 
 function getTouches(e) {
@@ -79,8 +78,6 @@ function Graph({
   const canvas = useRef(null);
   const [atView, setAtView] = useState(calcAtView(items, getDays(56)));
   const [touches, setTouches] = useState([]);
-  //??? remove after testing
-  //const [text, setText] = useState('');
 
   window.onresize = () => {
     const ctx = canvas.current.getContext('2d');
@@ -89,20 +86,11 @@ function Graph({
     render(ctx, items, atView);
   };
 
-  //??? remove after testing
-  /*
-  function log(value) {
-    setText((t) => `${value}\n${t}`);
-  }
-  */
-
   function handleStart(e) {
     setTouches(getTouches(e));
   }
 
   function handleMove(e) {
-    //e.preventDefault();
-    e.stopPropagation();
     const nows = getTouches(e);
     const moveX = getMoveX(touches, nows);
     const [scaleX, centerX] = getScaleX(touches, nows);
@@ -123,28 +111,6 @@ function Graph({
     render(ctx, items, atView);
   }, [items, atView]);
 
-  //??? remove after testing
-  /*
-  useInterval(() => {
-    const move = -0.003;
-    const scale = 1.005;
-    const center = 0.50;
-    const atLimits = getAtLimits(items, getDays(90));
-    setAtView(adjustAtView(atView, atLimits, move, scale, center));
-  }, 100);
-  */
-
-  //??? remove after testing
-  /*
-  function buildLog() {
-    return (
-      <div className={styles.log}>
-        {text}
-      </div>
-    );
-  }
-  */
-
   return (
     <main className={styles.main}>
       <div
@@ -155,7 +121,6 @@ function Graph({
       >
         <canvas className={styles.canvas} ref={canvas}></canvas>
       </div>
-      {/*buildLog()*/}
     </main>
   );
 }

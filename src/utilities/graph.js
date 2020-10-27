@@ -61,8 +61,8 @@ export function render(ctx, items, atView) {
     return;
   }
 
+  const view = calcView(items, atView);
   const viewItems = selectViewItems(items, atView);
-  const view = calcView(viewItems, atView);
   const coord = calcCoord(ctx, view);
 
   renderTimeLines(ctx, coord, view);
@@ -71,24 +71,22 @@ export function render(ctx, items, atView) {
 }
 
 function selectViewItems(items, [atStart, atEnd]) {
-  const indexRange = items.length - 1;
-  //??? move this index search into a function
+  const indexLast = items.length - 1;
   const indexMin = items.findIndex((item) => item.at <= atEnd);
-  const indexMax = indexRange - items.slice(0).reverse().findIndex((item) => item.at >= atStart);
+  const indexMax = indexLast - items.slice(0).reverse().findIndex((item) => item.at >= atStart);
 
   const first = indexMin >= 1 ? indexMin - 1 : 0;
-  const last = indexMax < indexRange ? indexMax + 1 : indexRange;
+  const last = indexMax < indexLast ? indexMax + 1 : indexLast;
 
   return items.slice(first, last + 1);
 }
 
-//??? use all items, add/sub X days from limits, slice at limits
 function calcView(items, [atStart, atEnd]) {
-  const space = 0.05;
   const wMax = items.reduce((max, item) => item.weight > max ? item.weight : max, 0);
   const wMin = items.reduce((min, item) => item.weight < min ? item.weight : min, wMax);
   const wRange = wMax - wMin;
 
+  const space = 0.05;
   const wSpace = space * wRange;
   const weightStart = wMin - wSpace;
   const weightEnd = wMax + wSpace;

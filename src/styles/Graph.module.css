@@ -19,19 +19,3 @@
   flex-grow: 1;
   background: var(--bg-normal);
 }
-
-.log {
-  display: none;
-  max-height: 200px;
-  position: fixed;
-  top: var(--size-2);
-  left: var(--size-2);
-  right: var(--size-2);
-  padding: var(--size-1);
-  background: #ffffc0f0;
-  border: 2px solid #808020;
-  font-size: 14px;
-  white-space: pre;
-  overflow-x: hidden;
-  overflow-y: scroll;
-}
