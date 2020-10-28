@@ -17,7 +17,7 @@ function Weights({
         className={styles.item}
       >
         <div className={styles.weight}>
-          {value.weight}
+          {value.weight.toFixed(1)}
         </div>
         <div className={styles.time}>
           <div>

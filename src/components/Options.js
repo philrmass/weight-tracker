@@ -28,16 +28,88 @@ function Options({
     exportWeights(items.length);
   }
 
-  //??? start weight, start date
-  //??? goal weight, goal date
-  /*
-  value={value}
-  onChange={handleChange}
-  onKeyUp={handleKeyUp}
+  //??? ADD REMOVE GOAL to weights actions/reducer
+  // { at/weight Start/End }
+  //??? add goal to Options
+  //??? [goalOpen, setGoalOpen] = useState(false)
+  //??? [goalLbs, setGoalLbs] = useState(false)
+  //??? [goalMonths, setGoalMonths] = useState(false)
+  //??? if (goalOpen) "grid layout"
+  // Lose [] lbs
+  // In [6] months
+  // <Save>
+  //??? if (goal)
+  // Reach 200.0 lbs by
+  // Septermber 20, 2021
+  // <Reset> <Clear>
+  //??? 
+  // 'There is no goal set'
+  // <Set>
+  function buildGoal() {
+    /*
+    value={value}
+    onChange={handleChange}
+    onKeyUp={handleKeyUp}
 
-  value={dateToEdit(activeEvent.date)}
-  onChange={(e) => handleDateChange(e.target.value)}
-  */
+    value={dateToEdit(activeEvent.date)}
+    onChange={(e) => handleDateChange(e.target.value)}
+    */
+    return (
+      <section className={styles.goal}>
+        <div className={styles.title}>Goal</div>
+        <div className={styles.label}>From</div>
+        <div className={styles.goalControls}>
+          <input
+            type='number'
+            min='0'
+            max='1000'
+            step='0.1'
+            value={201.6}
+            onChange={() => {}}
+          />
+          <input
+            type='date'
+            className={styles.dateInput}
+          />
+        </div>
+        <div className={styles.label}>To</div>
+        <div className={styles.goalControls}>
+          <input
+            type='number'
+            min='0'
+            max='1000'
+            step='0.1'
+            value={201.6}
+            onChange={() => {}}
+          />
+          <input
+            type='date'
+            className={styles.dateInput}
+          />
+        </div>
+      </section>
+    );
+  }
+
+  function buildData() {
+    return (
+      <section className={styles.data}>
+        <div className={styles.title}>Data</div>
+        <div className={styles.dataControls}>
+          <button onClick={importFile}>
+            Import
+          </button>
+          <button onClick={exportFile}>
+            Export
+          </button>
+        </div>
+        <div className={styles.message}>
+          {message}
+        </div>
+      </section>
+    );
+  }
+
   return (
     <main className={styles.main}>
       <section className={styles.top}>
@@ -48,53 +120,8 @@ function Options({
         </button>
       </section>
       <section className={styles.controls}>
-        <section className={styles.goal}>
-          <div className={styles.title}>Goal</div>
-          <div className={styles.label}>From</div>
-          <div className={styles.goalControls}>
-            <input
-              type='number'
-              min='0'
-              max='1000'
-              step='0.1'
-              value={201.6}
-              onChange={() => {}}
-            />
-            <input
-              type='date'
-              className={styles.dateInput}
-            />
-          </div>
-          <div className={styles.label}>To</div>
-          <div className={styles.goalControls}>
-            <input
-              type='number'
-              min='0'
-              max='1000'
-              step='0.1'
-              value={201.6}
-              onChange={() => {}}
-            />
-            <input
-              type='date'
-              className={styles.dateInput}
-            />
-          </div>
-        </section>
-        <section className={styles.data}>
-          <div className={styles.title}>Data</div>
-          <div className={styles.dataControls}>
-            <button onClick={importFile}>
-              Import
-            </button>
-            <button onClick={exportFile}>
-              Export
-            </button>
-          </div>
-          <div className={styles.message}>
-            {message}
-          </div>
-        </section>
+        {buildGoal()}
+        {buildData()}
       </section>
     </main>
   );
