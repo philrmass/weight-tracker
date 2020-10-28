@@ -1,18 +1,33 @@
-import React from 'react';
+import React, { useState }  from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { loadData, saveData } from '../utilities/files';
-import { importWeights, exportWeights, setOptionsOpen } from '../redux/weights/actions';
+import {
+  setGoal,
+  importWeights,
+  exportWeights,
+  setOptionsOpen,
+} from '../redux/weights/actions';
 import styles from '../styles/Options.module.css';
 
 function Options({
   items,
+  goal,
   message,
+  setGoal,
   importWeights,
   exportWeights,
   setOptionsOpen,
 }) {
+  const [goalOpen, setGoalOpen] = useState(false);
+  const [goalLbs, setGoalLbs] = useState(10);
+  const [goalMonths, setGoalMonths] = useState(6);
+
+  function saveGoal() {
+    console.log('SAVE');
+  }
+
   async function importFile() {
     importWeights(await loadData());
   }
@@ -28,24 +43,15 @@ function Options({
     exportWeights(items.length);
   }
 
-  //??? ADD REMOVE GOAL to weights actions/reducer
-  // { at/weight Start/End }
-  //??? add goal to Options
-  //??? [goalOpen, setGoalOpen] = useState(false)
-  //??? [goalLbs, setGoalLbs] = useState(false)
-  //??? [goalMonths, setGoalMonths] = useState(false)
-  //??? if (goalOpen) "grid layout"
-  // Lose [] lbs
-  // In [6] months
-  // <Save>
-  //??? if (goal)
-  // Reach 200.0 lbs by
-  // Septermber 20, 2021
-  // <Reset> <Clear>
-  //??? 
-  // 'There is no goal set'
-  // <Set>
   function buildGoal() {
+    return (
+      <section className={styles.goal}>
+        <div className={styles.title}>Goal</div>
+        {buildGoalContent()}
+      </section>
+    );
+  }
+
     /*
     value={value}
     onChange={handleChange}
@@ -53,10 +59,7 @@ function Options({
 
     value={dateToEdit(activeEvent.date)}
     onChange={(e) => handleDateChange(e.target.value)}
-    */
     return (
-      <section className={styles.goal}>
-        <div className={styles.title}>Goal</div>
         <div className={styles.label}>From</div>
         <div className={styles.goalControls}>
           <input
@@ -87,15 +90,73 @@ function Options({
             className={styles.dateInput}
           />
         </div>
-      </section>
+    );
+  */
+
+  function buildGoalContent() {
+    if (goalOpen) {
+      return (
+        <div>
+          <div className={styles.goalInputs}>
+            OPEN GOAL
+          </div>
+          <div className={styles.buttons}>
+            <button onClick={saveGoal}>
+              Set
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    if (goal) {
+      return (
+        <div>
+          <div className={styles.goalMessage}>
+            OPEN GOAL
+          </div>
+          <div className={styles.buttons}>
+            <button onClick={() => console.log('RESET')}>
+              Reset
+            </button>
+            <button onClick={() => console.log('CLEAR')}>
+              Clear
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div>NO GOAL
+        <div className={styles.buttons}>
+          <div className={styles.buttons}>
+            <button onClick={() => setGoalOpen(true)}>
+              Set
+            </button>
+          </div>
+        </div>
+      </div>
     );
   }
+  // { at/weight Start/End }
+  //??? if (goalOpen) "grid layout"
+  // Lose [] lbs
+  // In [6] months
+  // <Save>
+  //??? if (goal)
+  // Reach 200.0 lbs by
+  // Septermber 20, 2021
+  // <Reset> <Clear>
+  //??? 
+  // 'There is no goal set'
+  // <Set>
 
   function buildData() {
     return (
-      <section className={styles.data}>
+      <section>
         <div className={styles.title}>Data</div>
-        <div className={styles.dataControls}>
+        <div className={styles.buttons}>
           <button onClick={importFile}>
             Import
           </button>
@@ -112,7 +173,7 @@ function Options({
 
   return (
     <main className={styles.main}>
-      <section className={styles.top}>
+      <section className={styles.close}>
         <button
           onClick={() => setOptionsOpen(false)}
         >
@@ -129,7 +190,9 @@ function Options({
 
 Options.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
+  goal: PropTypes.object,
   message: PropTypes.string.isRequired,
+  setGoal: PropTypes.func.isRequired,
   importWeights: PropTypes.func.isRequired,
   exportWeights: PropTypes.func.isRequired,
   setOptionsOpen: PropTypes.func.isRequired,
@@ -137,10 +200,12 @@ Options.propTypes = {
 
 const mapState = (state) => ({
   items: state.weights.all,
+  goal: state.weights.goal,
   message: state.weights.message,
 });
 
 const mapDispatch = {
+  setGoal,
   importWeights,
   exportWeights,
   setOptionsOpen,

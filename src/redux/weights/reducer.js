@@ -5,6 +5,7 @@ import { getObject, setObject } from '../../utilities/storage';
 import {
   ADD_WEIGHT,
   REMOVE_WEIGHT,
+  SET_GOAL,
   IMPORT_WEIGHTS,
   EXPORT_WEIGHTS,
   SET_OPTIONS_OPEN,
@@ -15,6 +16,7 @@ const defaultState = {
   all,
   weeks: calculateWeeks(all),
   months: calculateMonths(all),
+  goal: null,
   message: '',
   isOptionsOpen: true,
 };
@@ -56,6 +58,11 @@ export default function weightsReducer(state = defaultState, action) {
         months,
       };
     }
+    case SET_GOAL:
+      return {
+        ...state,
+        goal: action.goal,
+      };
     case IMPORT_WEIGHTS: {
       const { all, stats } = importData(state.all, action.items);
       const weeks = calculateWeeks(all);

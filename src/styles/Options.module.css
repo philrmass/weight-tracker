@@ -2,36 +2,10 @@
   position: relative;
 }
 
-.top {
+.close{
   position: absolute;
   right: 0;
   top: 0;
-  /*
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  background: #fde;
-  */
-}
-
-.top button {
-  border: 1px solid var(--color-button);
-  color: var(--color-button);
-}
-
-.top button:hover {
-  border-color: var(--color-button-hover);
-  background: var(--bg-button-hover);
-  color: var(--color-button-hover);
-}
-
-.title {
-  padding-top: var(--size-2);
-  padding-bottom: var(--size-1);
-  /*
-  padding-bottom: var(--size-1) 0;
-  */
-  font-weight: bold;
 }
 
 .controls {
@@ -40,45 +14,35 @@
 
 .controls button {
   width: auto;
-  border: 1px solid var(--color-button);
+  padding: var(--size-0) var(--size-1);
   border-radius: var(--border-radius);
+  margin: var(--size-0);
 }
 
-.controls button:hover {
-  width: auto;
-  border-color: var(--color-button-hover);
-  background: var(--bg-button-hover);
-  color: var(--color-button-hover);
-}
-
-.goal {
-}
-
-.goalControls {
-  display: grid;
-  grid-template-columns: auto auto auto;
-}
-
-.label {
-  /*
-  padding-top: var(--size-1);
-  */
-  padding-left: var(--size-1);
-  font-size: var(--text-small);
-  color: var(--color-normal-light);
+.title {
+  padding-top: var(--size-2);
+  padding-bottom: var(--size-0);
   font-weight: bold;
 }
 
-.data {
-}
-
-.dataControls {
+.buttons {
   display: flex;
 }
 
-.data button {
-  margin: var(--size-0);
+.goalMessage {
+  padding: var(--size-1);
+  background: #cf8;
 }
+
+.goalInputs {
+  padding: var(--size-1);
+  background: #fc8;
+}
+
+/*
+  display: grid;
+  grid-template-columns: auto auto auto;
+*/
 
 .message {
   height: 6rem;

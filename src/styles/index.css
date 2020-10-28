@@ -17,8 +17,8 @@
   --color-normal-light: #505050;
   --color-accent: #d8d8d8;
   --color-accent-light: #b8b8b8;
-  --color-button: #787878;
-  --color-button-hover: #484848;
+  --color-button: #484848;
+  --color-button-hover: #202020;
   --border: #a4a4a4;
 }
 
@@ -48,10 +48,18 @@ button {
   width: var(--size-button);
   height: var(--size-button);
   padding: var(--size-0);
+  border: 1px solid var(--color-button);
   border-radius: 50%;
+  color: var(--color-button);
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+button:hover {
+  border-color: var(--color-button-hover);
+  background: var(--bg-button-hover);
+  color: var(--color-button-hover);
 }
 
 input {
