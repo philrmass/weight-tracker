@@ -53,3 +53,7 @@ function computeStdDev(items, average) {
 function toTenths(value) {
   return Math.round(value * 10) / 10;
 }
+
+export function getWeightAverage(items, days) {
+  return items[0].weight - days;
+}

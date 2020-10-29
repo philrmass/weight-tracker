@@ -71,3 +71,8 @@ export function getDays(count) {
   const oneDay = 1000 * 60 * 60 * 24;
   return count * oneDay;
 }
+
+//???
+export function getMonthsFrom(count, at) {
+  return at + count;
+}

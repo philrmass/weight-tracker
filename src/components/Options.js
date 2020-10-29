@@ -2,7 +2,9 @@ import React, { useState }  from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import { getWeightAverage } from '../utilities/averages';
 import { loadData, saveData } from '../utilities/files';
+import { getDate, getMonthsFrom } from '../utilities/times';
 import {
   setGoal,
   importWeights,
@@ -20,12 +22,31 @@ function Options({
   exportWeights,
   setOptionsOpen,
 }) {
+  const defaultLbs = 10;
+  const defaultMonths = 6;
   const [goalOpen, setGoalOpen] = useState(false);
-  const [goalLbs, setGoalLbs] = useState(10);
-  const [goalMonths, setGoalMonths] = useState(6);
+  const [goalLbs, setGoalLbs] = useState(defaultLbs);
+  const [goalMonths, setGoalMonths] = useState(defaultMonths);
 
   function saveGoal() {
-    console.log('SAVE');
+    const atStart = Date.now();
+    const atEnd = getMonthsFrom(goalMonths, atStart);
+    const weightStart = getWeightAverage(items, 30);
+    const weightEnd = weightStart - goalLbs;
+
+    resetGoal();
+    setGoal({
+      atStart,
+      atEnd,
+      weightStart,
+      weightEnd,
+    });
+  }
+
+  function resetGoal(isOpen = false) {
+    setGoalOpen(isOpen);
+    setGoalLbs(defaultLbs);
+    setGoalMonths(defaultMonths);
   }
 
   async function importFile() {
@@ -45,64 +66,46 @@ function Options({
 
   function buildGoal() {
     return (
-      <section className={styles.goal}>
+      <section>
         <div className={styles.title}>Goal</div>
-        {buildGoalContent()}
+        <div className={styles.section}>
+          {buildGoalContent()}
+        </div>
       </section>
     );
   }
-
-    /*
-    value={value}
-    onChange={handleChange}
-    onKeyUp={handleKeyUp}
-
-    value={dateToEdit(activeEvent.date)}
-    onChange={(e) => handleDateChange(e.target.value)}
-    return (
-        <div className={styles.label}>From</div>
-        <div className={styles.goalControls}>
-          <input
-            type='number'
-            min='0'
-            max='1000'
-            step='0.1'
-            value={201.6}
-            onChange={() => {}}
-          />
-          <input
-            type='date'
-            className={styles.dateInput}
-          />
-        </div>
-        <div className={styles.label}>To</div>
-        <div className={styles.goalControls}>
-          <input
-            type='number'
-            min='0'
-            max='1000'
-            step='0.1'
-            value={201.6}
-            onChange={() => {}}
-          />
-          <input
-            type='date'
-            className={styles.dateInput}
-          />
-        </div>
-    );
-  */
 
   function buildGoalContent() {
     if (goalOpen) {
       return (
         <div>
           <div className={styles.goalInputs}>
-            OPEN GOAL
+            <div>Lose</div>
+            <input
+              type='number'
+              min='0'
+              max='1000'
+              step='0.1'
+              value={goalLbs}
+              onChange={(e) => setGoalLbs(e.target.value)}
+            />
+            <div>lbs</div>
+            <div>In</div>
+            <input
+              type='number'
+              min='1'
+              max='100'
+              value={goalMonths}
+              onChange={(e) => setGoalMonths(e.target.value)}
+            />
+            <div>months</div>
           </div>
           <div className={styles.buttons}>
             <button onClick={saveGoal}>
-              Set
+              Save
+            </button>
+            <button onClick={resetGoal}>
+              Cancel
             </button>
           </div>
         </div>
@@ -110,13 +113,15 @@ function Options({
     }
 
     if (goal) {
+      const date = getDate(goal.atEnd);
+
       return (
         <div>
           <div className={styles.goalMessage}>
-            OPEN GOAL
+            {`Reach ${goal.weightEnd} lbs by\n${date}`}
           </div>
           <div className={styles.buttons}>
-            <button onClick={() => console.log('RESET')}>
+            <button onClick={() => resetGoal(true)}>
               Reset
             </button>
             <button onClick={() => console.log('CLEAR')}>
@@ -128,7 +133,10 @@ function Options({
     }
 
     return (
-      <div>NO GOAL
+      <div>
+        <div className={styles.goalMessage}>
+          No goal has been set
+        </div>
         <div className={styles.buttons}>
           <div className={styles.buttons}>
             <button onClick={() => setGoalOpen(true)}>
@@ -139,33 +147,23 @@ function Options({
       </div>
     );
   }
-  // { at/weight Start/End }
-  //??? if (goalOpen) "grid layout"
-  // Lose [] lbs
-  // In [6] months
-  // <Save>
-  //??? if (goal)
-  // Reach 200.0 lbs by
-  // Septermber 20, 2021
-  // <Reset> <Clear>
-  //??? 
-  // 'There is no goal set'
-  // <Set>
 
   function buildData() {
     return (
       <section>
         <div className={styles.title}>Data</div>
-        <div className={styles.buttons}>
-          <button onClick={importFile}>
-            Import
-          </button>
-          <button onClick={exportFile}>
-            Export
-          </button>
-        </div>
-        <div className={styles.message}>
-          {message}
+        <div className={styles.section}>
+          <div className={styles.buttons}>
+            <button onClick={importFile}>
+              Import
+            </button>
+            <button onClick={exportFile}>
+              Export
+            </button>
+          </div>
+          <div className={styles.message}>
+            {message}
+          </div>
         </div>
       </section>
     );

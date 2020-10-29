@@ -1,5 +1,10 @@
 Tasks
-- add goal (date, weight), graph line, and +/- to averages
+- add goal data
+-  getMonthsFrom
+-  getWeightAverages
+-  save in local storage
+-  add goal graph line
+-  add to average (+/- average)
 
 - add react router
 - add routes (/, /weekly, /monthly, /graph), trigger with click, x to close
