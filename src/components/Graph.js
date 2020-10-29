@@ -73,6 +73,7 @@ function getScaleX(lasts, nows) {
 
 function Graph({
   items,
+  goal,
 }) {
   const wrap = useRef(null);
   const canvas = useRef(null);
@@ -83,7 +84,7 @@ function Graph({
     const ctx = canvas.current.getContext('2d');
     ctx.canvas.width = wrap.current.clientWidth;
     ctx.canvas.height = wrap.current.clientHeight;
-    render(ctx, items, atView);
+    render(ctx, items, goal, atView);
   };
 
   function handleStart(e) {
@@ -108,8 +109,8 @@ function Graph({
     const ctx = canvas.current.getContext('2d');
     ctx.canvas.width = wrap.current.clientWidth;
     ctx.canvas.height = wrap.current.clientHeight;
-    render(ctx, items, atView);
-  }, [items, atView]);
+    render(ctx, items, goal, atView);
+  }, [items, goal, atView]);
 
   return (
     <main className={styles.main}>
@@ -125,12 +126,14 @@ function Graph({
   );
 }
 
-const mapState = (state) => ({
-  items: state.weights.all,
-});
-
 Graph.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
+  goal: PropTypes.object,
 };
+
+const mapState = (state) => ({
+  items: state.weights.all,
+  goal: state.weights.goal,
+});
 
 export default connect(mapState)(Graph);

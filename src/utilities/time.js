@@ -4,9 +4,9 @@ export function getDayStart(at) {
   return start.getTime();
 }
 
-export function getWeekStart(at) {
+export function getWeekStart(at, offset = 0) {
   const date = new Date(at);
-  date.setDate(date.getDate() - date.getDay());
+  date.setDate(date.getDate() - date.getDay() + offset * 7);
   const start = new Date(date.getFullYear(), date.getMonth(), date.getDate());
   return start.getTime();
 }

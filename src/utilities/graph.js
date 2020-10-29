@@ -56,7 +56,7 @@ function applyScale([start, end], [min, max], scaleRatio, centerRatio) {
   return [limitedStart, limitedEnd];
 }
 
-export function render(ctx, items, atView) {
+export function render(ctx, items, goal, atView) {
   if (items.length === 0) {
     return;
   }
@@ -67,6 +67,7 @@ export function render(ctx, items, atView) {
 
   renderTimeLines(ctx, coord, view);
   renderWeightLines(ctx, coord, view);
+  renderGoal(ctx, coord, goal);
   renderWeights(ctx, coord, viewItems);
 }
 
@@ -231,6 +232,15 @@ function renderWeightLines(ctx, coord, view) {
       ctx.lineTo(ctx.canvas.width, y);
     }
   }
+  ctx.stroke();
+}
+
+function renderGoal(ctx, coord, goal) {
+  setLineType(ctx, 2);
+
+  ctx.beginPath();
+  ctx.moveTo(coord.x(goal.atStart), coord.y(goal.weightStart));
+  ctx.lineTo(coord.x(goal.atEnd), coord.y(goal.weightEnd));
   ctx.stroke();
 }
 

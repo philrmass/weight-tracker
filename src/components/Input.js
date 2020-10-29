@@ -6,6 +6,7 @@ import styles from '../styles/Input.module.css';
 import { useInterval } from '../utilities/hooks';
 import { getDate, getTime } from '../utilities/time';
 import { addWeight, setOptionsOpen } from '../redux/weights/actions';
+import Icon from './Icon';
 
 function Input({
   addWeight,
@@ -59,7 +60,7 @@ function Input({
       </div>
       <div className={styles.buttons}>
         <button onClick={() => setOptionsOpen(true)}>
-          ...
+          <Icon />
         </button>
       </div>
     </main>

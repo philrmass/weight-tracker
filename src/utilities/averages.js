@@ -2,12 +2,12 @@ import { getWeekStart, getMonthStart } from './time';
 
 export function calculateWeeks(all) {
   const byWeek = getByTerm(all, getWeekStart);
-  return getTerms(byWeek);
+  return getTerms(byWeek, getWeekStart);
 }
 
 export function calculateMonths(all) {
   const byMonth = getByTerm(all, getMonthStart);
-  return getTerms(byMonth);
+  return getTerms(byMonth, getMonthStart);
 }
 
 function getByTerm(all, getStart) {
@@ -22,12 +22,16 @@ function getByTerm(all, getStart) {
   }, {}); 
 }
 
-function getTerms(byTerm) {
+function getTerms(byTerm, getStart) {
   return Object.entries(byTerm).map(([at, items]) => {
     const average = computeAverage(items);
     const stdDev = computeStdDev(items, average);
+    const atStart = Number(at);
+    const atEnd = getStart(atStart, 1);
+
     return {
-      at: Number(at),
+      atStart,
+      atEnd,
       items,
       average,
       stdDev,
@@ -65,4 +69,22 @@ export function getWeightAverage(items, days) {
 
   const selected = items.slice(0, indexMin);
   return computeAverage(selected);
+}
+
+export function getRangeGoal(atStart, atEnd, goal) {
+  if (atStart <= goal.atEnd && atEnd >= goal.atStart) {
+    const weightStart = getGoalWeightAt(atStart, goal);
+    const weightEnd = getGoalWeightAt(atEnd, goal);
+
+    return (weightStart + weightEnd) / 2;
+  }
+}
+
+function getGoalWeightAt(at, goal) {
+  const atAmt = at - goal.atStart;
+  const atRange = goal.atEnd - goal.atStart;
+  const scale = atAmt / atRange;
+  const weightRange = goal.weightEnd - goal.weightStart;
+
+  return goal.weightStart + scale * weightRange;
 }

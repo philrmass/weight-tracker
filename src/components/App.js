@@ -15,6 +15,7 @@ function App({
   version,
   weeks,
   months,
+  goal,
   isOptionsOpen,
 }) {
   return (
@@ -31,6 +32,7 @@ function App({
             <div className={styles.week}>
               <Average
                 data={weeks[0]}
+                goal={goal}
                 getDateString={getWeek}
                 handleClick={() => console.log('week click')}
               />
@@ -39,6 +41,7 @@ function App({
             <div className={styles.month}>
               <Average
                 data={months[0]}
+                goal={goal}
                 getDateString={getMonth}
                 handleClick={() => console.log('month click')}
               />
@@ -63,12 +66,14 @@ App.propTypes = {
   version: PropTypes.string.isRequired,
   weeks: PropTypes.arrayOf(PropTypes.object).isRequired,
   months: PropTypes.arrayOf(PropTypes.object).isRequired,
+  goal: PropTypes.object,
   isOptionsOpen: PropTypes.bool.isRequired,
 };
 
 const mapState = (state) => ({
   weeks: state.weights.weeks,
   months: state.weights.months,
+  goal: state.weights.goal,
   isOptionsOpen: state.weights.isOptionsOpen,
 });
 
