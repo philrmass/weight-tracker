@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { getWeek, getMonth } from '../utilities/times';
+import { getWeek, getMonth } from '../utilities/time';
 import styles from '../styles/App.module.css';
 import Average from './Average';
 import Graph from './Graph';

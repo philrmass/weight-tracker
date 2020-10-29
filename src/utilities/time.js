@@ -72,7 +72,9 @@ export function getDays(count) {
   return count * oneDay;
 }
 
-//???
 export function getMonthsFrom(count, at) {
-  return at + count;
+  const start = new Date(at);
+  start.setMonth(start.getMonth() + count);
+
+  return start.getTime();
 }

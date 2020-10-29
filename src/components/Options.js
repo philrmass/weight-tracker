@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import { getWeightAverage } from '../utilities/averages';
 import { loadData, saveData } from '../utilities/files';
-import { getDate, getMonthsFrom } from '../utilities/times';
+import { getDate, getMonthsFrom } from '../utilities/time';
 import {
   setGoal,
   importWeights,

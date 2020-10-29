@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { getDate, getTime } from '../utilities/times';
+import { getDate, getTime } from '../utilities/time';
 import { removeWeight } from '../redux/weights/actions';
 import styles from '../styles/Weights.module.css';
 

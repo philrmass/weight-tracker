@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import styles from '../styles/Input.module.css';
 import { useInterval } from '../utilities/hooks';
-import { getDate, getTime } from '../utilities/times';
+import { getDate, getTime } from '../utilities/time';
 import { addWeight, setOptionsOpen } from '../redux/weights/actions';
 
 function Input({

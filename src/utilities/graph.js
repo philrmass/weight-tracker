@@ -3,7 +3,7 @@ import {
   getWeekStart,
   getMonthStart,
   getYearStart,
-} from './times';
+} from './time';
 
 export function calcAtView(items, atRange) {
   const atStart = items[0]?.at - atRange;

@@ -1,4 +1,4 @@
-import { getWeekStart, getMonthStart } from './times';
+import { getWeekStart, getMonthStart } from './time';
 
 export function calculateWeeks(all) {
   const byWeek = getByTerm(all, getWeekStart);

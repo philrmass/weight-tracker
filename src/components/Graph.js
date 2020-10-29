@@ -9,7 +9,7 @@ import {
   adjustAtView,
   render,
 } from '../utilities/graph';
-import { getDays } from '../utilities/times';
+import { getDays } from '../utilities/time';
 
 function getTouches(e) {
   const w = e.target.clientWidth;
