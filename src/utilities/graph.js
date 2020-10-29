@@ -236,12 +236,14 @@ function renderWeightLines(ctx, coord, view) {
 }
 
 function renderGoal(ctx, coord, goal) {
-  setLineType(ctx, 2);
+  if (goal) {
+    setLineType(ctx, 2);
 
-  ctx.beginPath();
-  ctx.moveTo(coord.x(goal.atStart), coord.y(goal.weightStart));
-  ctx.lineTo(coord.x(goal.atEnd), coord.y(goal.weightEnd));
-  ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(coord.x(goal.atStart), coord.y(goal.weightStart));
+    ctx.lineTo(coord.x(goal.atEnd), coord.y(goal.weightEnd));
+    ctx.stroke();
+  }
 }
 
 function renderWeights(ctx, coord, items) {

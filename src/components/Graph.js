@@ -81,10 +81,12 @@ function Graph({
   const [touches, setTouches] = useState([]);
 
   window.onresize = () => {
-    const ctx = canvas.current.getContext('2d');
-    ctx.canvas.width = wrap.current.clientWidth;
-    ctx.canvas.height = wrap.current.clientHeight;
-    render(ctx, items, goal, atView);
+    if (canvas.current) {
+      const ctx = canvas.current.getContext('2d');
+      ctx.canvas.width = wrap.current.clientWidth;
+      ctx.canvas.height = wrap.current.clientHeight;
+      render(ctx, items, goal, atView);
+    }
   };
 
   function handleStart(e) {

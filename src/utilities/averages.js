@@ -72,7 +72,7 @@ export function getWeightAverage(items, days) {
 }
 
 export function getRangeGoal(atStart, atEnd, goal) {
-  if (atStart <= goal.atEnd && atEnd >= goal.atStart) {
+  if (atStart <= goal?.atEnd && atEnd >= goal?.atStart) {
     const weightStart = getGoalWeightAt(atStart, goal);
     const weightEnd = getGoalWeightAt(atEnd, goal);
 
