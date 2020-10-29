@@ -55,5 +55,14 @@ function toTenths(value) {
 }
 
 export function getWeightAverage(items, days) {
-  return items[0].weight - days;
+  if (items.length === 0) {
+    return 0;
+  }
+
+  const oneDay = 1000 * 60 * 60 * 24;
+  const atFirst = items[0].at - days * oneDay;
+  const indexMin = items.findIndex((item) => item.at <= atFirst);
+
+  const selected = items.slice(0, indexMin);
+  return computeAverage(selected);
 }

@@ -1,8 +1,7 @@
 Tasks
 - add goal data
--  getMonthsFrom
 -  getWeightAverages
--  save in local storage
+-  getMonthsFrom
 -  add goal graph line
 -  add to average (+/- average)
 

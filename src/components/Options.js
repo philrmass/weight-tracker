@@ -34,16 +34,21 @@ function Options({
     const weightStart = getWeightAverage(items, 30);
     const weightEnd = weightStart - goalLbs;
 
-    resetGoal();
     setGoal({
       atStart,
       atEnd,
       weightStart,
       weightEnd,
     });
+    resetGoalInterface();
   }
 
-  function resetGoal(isOpen = false) {
+  function clearGoal(isOpen) {
+    setGoal(null);
+    resetGoalInterface(isOpen);
+  }
+
+  function resetGoalInterface(isOpen = false) {
     setGoalOpen(isOpen);
     setGoalLbs(defaultLbs);
     setGoalMonths(defaultMonths);
@@ -104,7 +109,7 @@ function Options({
             <button onClick={saveGoal}>
               Save
             </button>
-            <button onClick={resetGoal}>
+            <button onClick={resetGoalInterface}>
               Cancel
             </button>
           </div>
@@ -121,10 +126,10 @@ function Options({
             {`Reach ${goal.weightEnd} lbs by\n${date}`}
           </div>
           <div className={styles.buttons}>
-            <button onClick={() => resetGoal(true)}>
+            <button onClick={() => clearGoal(true)}>
               Reset
             </button>
-            <button onClick={() => console.log('CLEAR')}>
+            <button onClick={() => clearGoal(false)}>
               Clear
             </button>
           </div>

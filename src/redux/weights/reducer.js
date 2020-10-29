@@ -12,13 +12,14 @@ import {
 } from './actions';
 
 const all = getObject('weightTrackerAll', []);
+const goal = getObject('weightTrackerGoal', null);
 const defaultState = {
   all,
   weeks: calculateWeeks(all),
   months: calculateMonths(all),
-  goal: null,
+  goal,
   message: '',
-  isOptionsOpen: true,
+  isOptionsOpen: false,
 };
 
 function getImportMessage(stats) {
@@ -59,6 +60,7 @@ export default function weightsReducer(state = defaultState, action) {
       };
     }
     case SET_GOAL:
+      setObject('weightTrackerGoal', action.goal);
       return {
         ...state,
         goal: action.goal,
