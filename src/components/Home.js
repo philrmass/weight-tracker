@@ -1,43 +1,17 @@
-import React from 'react';
-import { Switch, Redirect, Route } from 'react-router-dom';
+import React, { Fragment } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-//import { connect } from 'react-redux';
-
-import GraphPage from './GraphPage';
-import Monthly from './Monthly';
-import Weekly from './Weekly';
-
-/*
 import { getWeek, getMonth } from '../utilities/time';
-//import styles from '../styles/App.module.css';
+import styles from '../styles/Home.module.css';
 import Average from './Average';
+import Graph from './Graph';
 import Input from './Input';
 import Modal from './Modal';
 import Options from './Options';
 import Weights from './Weights';
-*/
-import Home from './Home';
 
-function App({ version }) {
-  return (
-    <main>
-      <Switch>
-        <Route path='/' render={() => <Home version={version} />} exact />
-        <Route path='/weekly' component={Weekly} exact />
-        <Route path='/monthly' component={Monthly} exact />
-        <Route path='/graph' component={GraphPage} exact />
-        <Redirect from='*' to='/' />
-      </Switch>
-    </main>
-  );
-}
-
-App.propTypes = {
-  version: PropTypes.string.isRequired,
-};
-
-/*
+function Home({
   version,
   weeks,
   months,
@@ -88,7 +62,7 @@ App.propTypes = {
   );
 }
 
-App.propTypes = {
+Home.propTypes = {
   version: PropTypes.string.isRequired,
   weeks: PropTypes.arrayOf(PropTypes.object).isRequired,
   months: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -102,6 +76,5 @@ const mapState = (state) => ({
   goal: state.weights.goal,
   isOptionsOpen: state.weights.isOptionsOpen,
 });
-*/
 
-export default App;
+export default connect(mapState)(Home);
