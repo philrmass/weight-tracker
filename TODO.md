@@ -9,3 +9,4 @@ Tasks
 - add x button icon
 
 - add labels to graph
+- prompt for monthly backups
