@@ -1,0 +1,9 @@
+.main {
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  right: var(--size-1);
+  top: var(--size-1);
+}

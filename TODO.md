@@ -1,6 +1,5 @@
 Tasks
-- add react router
-- add routes (/, /weekly, /monthly, /graph), trigger with click, x to close
+- test on mobile
 - create full-screen week averages display
 - create full-screen month averages display
 - create full-screen graph display

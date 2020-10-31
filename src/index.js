@@ -9,14 +9,14 @@ import './styles/index.css';
 import store from './redux/store';
 import App from './components/App';
 
-const version = '0.11.0';
+const version = '0.11.2';
 
 ReactDOM.render(
-  <BrowserRouter>
-    <Provider store={store}>
+  <Provider store={store}>
+    <BrowserRouter>
       <App version={version} />
-    </Provider>
-  </BrowserRouter>,
+    </BrowserRouter>
+  </Provider>,
   document.getElementById('app'),
 );
 

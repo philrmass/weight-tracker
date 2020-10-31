@@ -177,9 +177,7 @@ function Options({
   return (
     <main className={styles.main}>
       <section className={styles.close}>
-        <button
-          onClick={() => setOptionsOpen(false)}
-        >
+        <button onClick={() => setOptionsOpen(false)}>
           x 
         </button>
       </section>

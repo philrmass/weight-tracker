@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { getWeek, getMonth } from '../utilities/time';
@@ -18,6 +19,8 @@ function Home({
   goal,
   isOptionsOpen,
 }) {
+  const history = useHistory();
+
   return (
     <Fragment>
       <main className={styles.main}>
@@ -34,7 +37,7 @@ function Home({
                 data={weeks[0]}
                 goal={goal}
                 getDateString={getWeek}
-                handleClick={() => console.log('week click')}
+                handleClick={() => history.push('/weekly')}
               />
             </div>
             <div className={styles.spacer}></div>
@@ -43,11 +46,14 @@ function Home({
                 data={months[0]}
                 goal={goal}
                 getDateString={getMonth}
-                handleClick={() => console.log('month click')}
+                handleClick={() => history.push('/monthly')}
               />
             </div>
           </div>
-          <div className={styles.graph}>
+          <div
+            className={styles.graph}
+            onClick={() => history.push('/graph')}
+          >
             <Graph />
           </div>
           <div className={styles.version}>
