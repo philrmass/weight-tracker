@@ -24,6 +24,7 @@ module.exports = {
     'linebreak-style': ['error', 'unix'],
     'no-unused-vars': ['warn', { 'argsIgnorePattern': '^_', 'varsIgnorePattern': '^_' }],
     'quotes': ['error', 'single'],
+    'react/prop-types': 'warn',
     'semi': ['error', 'always'],
   },
 };

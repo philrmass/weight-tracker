@@ -32,3 +32,31 @@
 .fileInput {
   display: none;
 }
+
+.iconTest {
+  position: fixed;
+  top: 80px;
+  left: 80px;
+  padding: 10px;
+  background: #000;
+}
+
+.iconWrap {
+  height: 100px;
+  width: 100px;
+  background: #888;
+}
+
+.iconTest2 {
+  position: fixed;
+  top: 220px;
+  left: 80px;
+  padding: 10px;
+  background: #000;
+}
+
+.iconWrap2 {
+  height: 50px;
+  width: 50px;
+  background: #888;
+}
