@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { getRangeGoal } from '../utilities/averages';
 import styles from '../styles/Average.module.css';
+import Icon from './Icon';
 
 function Average({
   data = { at: 0, weight: 0, items: [], average: 0 },
@@ -17,12 +18,17 @@ function Average({
     }
 
     const diff = data.average - goalWeight;
-    const sign = diff > 0 ? '+' : '-';
+    const iconName = diff < 0 ? 'arrowUp' : 'arrowDown';
+    //??? use defined colors
+    const iconColor = diff < 0 ? 'red' : 'green';
     const value = Math.abs(diff).toFixed(1);
 
     return (
       <div className={styles.diff}>
-        {`${sign} ${value}`}
+        <div className={styles.icon}>
+          <Icon name={iconName} color={iconColor} />
+        </div>
+        {`${value}`}
       </div>
     );
   }

@@ -1,12 +1,10 @@
 Tasks
-- test on mobile
+- set arrow colors
+- test links on mobile
+
 - create full-screen week averages display
 - create full-screen month averages display
 - create full-screen graph display
-
-- add up/down arrow icons instead of +/-
-- add three dot button icon
-- add x button icon
 
 - add labels to graph
 - prompt for monthly backups

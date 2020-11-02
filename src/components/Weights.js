@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { getDate, getTime } from '../utilities/time';
 import { removeWeight } from '../redux/weights/actions';
 import styles from '../styles/Weights.module.css';
+import Icon from './Icon';
 
 function Weights({
   weights,
@@ -29,7 +30,7 @@ function Weights({
         </div>
         <div className={styles.buttons}>
           <button onClick={() => removeWeight(value.at)}>
-            x
+            <Icon name='close' color='currentColor' />
           </button>
         </div>
       </li>

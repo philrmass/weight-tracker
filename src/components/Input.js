@@ -60,18 +60,8 @@ function Input({
       </div>
       <div className={styles.buttons}>
         <button onClick={() => setOptionsOpen(true)}>
-          <Icon name='circle' />
+          <Icon name='threeDots' color='currentColor' />
         </button>
-      </div>
-      <div className={styles.iconTest}>
-        <div className={styles.iconWrap}>
-          <Icon name='square'/>
-        </div>
-      </div>
-      <div className={styles.iconTest2}>
-        <div className={styles.iconWrap2}>
-          <Icon name='circle'/>
-        </div>
       </div>
     </main>
   );

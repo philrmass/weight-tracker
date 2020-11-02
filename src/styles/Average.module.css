@@ -13,13 +13,20 @@
   padding: 2px;
   color: var(--color-accent);
   font-weight: bold;
+  display: flex;
 }
 
 .diff {
   margin-left: var(--size-1);
-  display: inline-block;
+  display: flex;
 }
 
 .measurements {
   color: var(--color-accent-light);
+}
+
+.icon {
+  width: 1em;
+  height: 1em;
+  margin-right: var(--size-0);
 }
