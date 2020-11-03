@@ -1,9 +1,54 @@
 .main {
-  position: relative;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: var(--size-2);
+  background: var(--bg-alt);
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .close {
   position: absolute;
   right: var(--size-1);
   top: var(--size-1);
+}
+
+.close button {
+  background: var(--bg-normal);
+}
+
+.month {
+  padding: var(--size-1);
+  border: 1px solid var(--bg-alt);
+  background: var(--bg-normal);
+}
+
+.date {
+  color: #08f;
+}
+
+.average {
+  color: #f80;
+}
+
+.diff {
+  height: 50px;
+  display: flex;
+}
+
+.icon {
+  height: 50px;
+  background: #ff0;
+  display: flex;
+}
+
+.count {
+  color: #80f;
+}
+
+.stdDev {
+  color: #f08;
 }

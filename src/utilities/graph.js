@@ -271,7 +271,7 @@ function setLineType(ctx, type) {
       break;
     case 2:
       ctx.lineWidth = 2;
-      ctx.strokeStyle = '#12c025';
+      ctx.strokeStyle = '#12d025';
       break;
     case 3:
       ctx.lineWidth = 1;

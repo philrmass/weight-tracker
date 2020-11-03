@@ -2,6 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 
 import styles from '../styles/Weekly.module.css';
+import Icon from './Icon';
 
 function Weekly() {
   const history = useHistory();
@@ -10,7 +11,7 @@ function Weekly() {
     <main>
       <section className={styles.close}>
         <button onClick={() => history.push('/')}>
-          x 
+          <Icon name='close' color='currentColor' />
         </button>
       </section>
       WEEKLY

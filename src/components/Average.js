@@ -19,7 +19,7 @@ function Average({
 
     const diff = data.average - goalWeight;
     const iconName = diff > 0 ? 'arrowUp' : 'arrowDown';
-    const iconColor = diff > 0 ? '#ff2100' : '#00e021';
+    const iconColor = diff > 0 ? '#ff2105' : '#12d025';
     const value = Math.abs(diff).toFixed(1);
 
     return (
