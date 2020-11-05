@@ -35,7 +35,7 @@ function Icon({
   const style = { fill: color };
 
   return (
-    <div style={style}>
+    <div className={styles.icon} style={style}>
       <svg width='100%' height='100%' viewBox='0 0 60 60'>
         {symbol}
       </svg>

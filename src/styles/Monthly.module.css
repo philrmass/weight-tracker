@@ -1,4 +1,5 @@
 .main {
+  height: 100vh;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -20,35 +21,78 @@
   background: var(--bg-normal);
 }
 
+.months {
+}
+
 .month {
-  padding: var(--size-1);
   border: 1px solid var(--bg-alt);
   background: var(--bg-normal);
 }
 
 .date {
-  color: #08f;
+  padding: var(--size-1);
+  background: var(--bg-accent);
+  color: var(--color-accent);
+  display: flex;
+  justify-content: center;
+}
+
+.data {
+  padding: var(--size-1);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  margin-right: var(--size-2);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.averageBox {
+  display: flex;
+  align-items: center;
 }
 
 .average {
-  color: #f80;
+  font-size: var(--text-large);
+}
+
+.stdDev {
+  padding-left: var(--size-1);
+  color: var(--color-normal-light);
+}
+
+.right {
+  margin-left: var(--size-2);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.goal {
+  height: 1em;
+  display: flex;
+  margin-bottom: var(--size-1);
+}
+
+.goalTitle {
+  color: var(--color-normal-light);
+  padding-right: var(--size-1);
 }
 
 .diff {
-  height: 50px;
   display: flex;
 }
 
 .icon {
-  height: 50px;
-  background: #ff0;
-  display: flex;
+  width: 1em;
+  height: 1em;
+  margin: 0 var(--size-0);
 }
 
 .count {
-  color: #80f;
-}
-
-.stdDev {
-  color: #f08;
 }

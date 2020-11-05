@@ -38,12 +38,10 @@ function Weights({
   }
 
   return (
-    <main className={styles.main}>
-      <section className={styles.data}>
-        <ul className={styles.weights}>
-          {weights.map((value) => buildWeight(value))}
-        </ul>
-      </section>
+    <main>
+      <ul className={styles.weights}>
+        {weights.map((value) => buildWeight(value))}
+      </ul>
     </main>
   );
 }

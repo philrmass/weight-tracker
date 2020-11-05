@@ -12,6 +12,7 @@ import {
   setOptionsOpen,
 } from '../redux/weights/actions';
 import styles from '../styles/Options.module.css';
+import Icon from './Icon';
 
 function Options({
   items,
@@ -178,7 +179,7 @@ function Options({
     <main className={styles.main}>
       <section className={styles.close}>
         <button onClick={() => setOptionsOpen(false)}>
-          x 
+          <Icon name='close' color='currentColor' />
         </button>
       </section>
       <section className={styles.controls}>

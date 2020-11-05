@@ -23,15 +23,23 @@ function Monthly({
         <div className={styles.date}>
           {getMonth(month.atStart)}
         </div>
-        <div className={styles.average}>
-          {month.average.toFixed(1)}
-          {buildGoalDiff(month)}
-        </div>
-        <div className={styles.count}>
-          {`${month.items.length} measurements`}
-        </div>
-        <div className={styles.stdDev}>
-          {month.stdDev.toFixed(1)}
+        <div className={styles.data}>
+          <div className={styles.left}>
+            <div className={styles.averageBox}>
+              <div className={styles.average}>
+                {month.average.toFixed(1)}
+              </div>
+              <div className={styles.stdDev}>
+                {`\u00b1 ${month.stdDev.toFixed(1)}`}
+              </div>
+            </div>
+          </div>
+          <div className={styles.right}>
+            {buildGoalDiff(month)}
+            <div className={styles.count}>
+              {`${month.items.length} measurements`}
+            </div>
+          </div>
         </div>
       </li>
     );
@@ -47,32 +55,37 @@ function Monthly({
     const iconName = diff > 0 ? 'arrowUp' : 'arrowDown';
     const iconColor = diff > 0 ? '#ff2105' : '#12d025';
     const value = Math.abs(diff).toFixed(1);
-    console.log('GW', goalWeight, diff, iconName, iconColor, value);
 
     return (
-      <div className={styles.diff}>
-        <div className={styles.icon}>
-          <Icon name={iconName} color={iconColor} />
+      <div className={styles.goal}>
+        <div className={styles.goalTitle}>
+          Goal
         </div>
-        {`${value}`}
+        <div className={styles.diff}>
+          {goalWeight.toFixed(1)}
+          <div className={styles.icon}>
+            <Icon name={iconName} color={iconColor} />
+          </div>
+          {`${value}`}
+        </div>
       </div>
     );
   }
 
   return (
     <main className={styles.main}>
-      <section className={styles.close}>
-        <button onClick={() => history.push('/')}>
-          <Icon name='close' color='currentColor' />
-        </button>
-      </section>
-      <section className={styles.data}>
-        <ul className={styles.weights}>
-          {months.map((month) => buildMonth(month))}
-        </ul>
-        {/*
-        */}
-      </section>
+      <div>
+        <section className={styles.close}>
+          <button onClick={() => history.push('/')}>
+            <Icon name='close' color='currentColor' />
+          </button>
+        </section>
+        <section>
+          <ul className={styles.months}>
+            {months.map((month) => buildMonth(month))}
+          </ul>
+        </section>
+      </div>
     </main>
   );
 }
