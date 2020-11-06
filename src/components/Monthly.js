@@ -20,26 +20,24 @@ function Monthly({
         key={month.atStart}
         className={styles.month}
       >
-        <div className={styles.date}>
-          {getMonth(month.atStart)}
+        <div className={styles.left}>
+          <div className={styles.date}>
+            {getMonth(month.atStart)}
+          </div>
+          <div className={styles.average}>
+            <div className={styles.averageValue}>
+              {month.average.toFixed(1)}
+            </div>
+            <div className={styles.stdDev}>
+              {`\u00b1 ${month.stdDev.toFixed(1)}`}
+            </div>
+          </div>
         </div>
-        <div className={styles.data}>
-          <div className={styles.left}>
-            <div className={styles.averageBox}>
-              <div className={styles.average}>
-                {month.average.toFixed(1)}
-              </div>
-              <div className={styles.stdDev}>
-                {`\u00b1 ${month.stdDev.toFixed(1)}`}
-              </div>
-            </div>
+        <div className={styles.right}>
+          <div className={styles.count}>
+            {`${month.items.length} measurements`}
           </div>
-          <div className={styles.right}>
-            {buildGoalDiff(month)}
-            <div className={styles.count}>
-              {`${month.items.length} measurements`}
-            </div>
-          </div>
+          {buildGoalDiff(month)}
         </div>
       </li>
     );

@@ -25,38 +25,39 @@
 }
 
 .month {
+  padding: var(--size-1);
   border: 1px solid var(--bg-alt);
   background: var(--bg-normal);
-}
-
-.date {
-  padding: var(--size-1);
-  background: var(--bg-accent);
-  color: var(--color-accent);
-  display: flex;
-  justify-content: center;
-}
-
-.data {
-  padding: var(--size-1);
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
 
 .left {
+  margin-right: var(--size-1);
   display: flex;
-  align-items: center;
-  margin-right: var(--size-2);
-  display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
 }
 
-.averageBox {
+.right {
+  margin-left: var(--size-1);
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.date {
+  margin-bottom: var(--size-1);
 }
 
 .average {
+  display: flex;
+  align-items: center;
+}
+
+.averageValue {
   font-size: var(--text-large);
 }
 
@@ -65,23 +66,20 @@
   color: var(--color-normal-light);
 }
 
-.right {
-  margin-left: var(--size-2);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-}
-
-.goal {
-  height: 1em;
-  display: flex;
+.count {
   margin-bottom: var(--size-1);
 }
 
+.goal {
+  font-size: var(--text-large);
+  display: flex;
+  align-items: center;
+}
+
 .goalTitle {
+  padding-right: var(--size-0);
   color: var(--color-normal-light);
-  padding-right: var(--size-1);
+  font-size: var(--text-normal);
 }
 
 .diff {
@@ -92,7 +90,4 @@
   width: 1em;
   height: 1em;
   margin: 0 var(--size-0);
-}
-
-.count {
 }
