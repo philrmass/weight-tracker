@@ -1,9 +1,24 @@
 .main {
-  position: relative;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border: 20px solid #8cf;
+  overflow-y: scroll;
 }
 
 .close {
   position: absolute;
   right: var(--size-1);
   top: var(--size-1);
+}
+
+.items {
+  height: 1900px;
+  background: #efd;
+}
+
+.bot {
+  background: #def;
 }

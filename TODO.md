@@ -1,8 +1,7 @@
 Tasks
-- fix monthly scroll ends
-- add an averages component, wrap monthly
+- add Averages component (rename item(s)), call in Monthly, split css
 
-- create full-screen week averages display
+- create Weekly using Averages
 - create full-screen graph display
 
 - add labels to graph

@@ -8,13 +8,14 @@ function Weekly() {
   const history = useHistory();
 
   return (
-    <main>
+    <main className={styles.main}>
       <section className={styles.close}>
         <button onClick={() => history.push('/')}>
           <Icon name='close' color='currentColor' />
         </button>
       </section>
-      WEEKLY
+      <section className={styles.items}>
+      </section>
     </main>
   );
 }

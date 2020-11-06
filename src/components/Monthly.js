@@ -14,42 +14,50 @@ function Monthly({
 }) {
   const history = useHistory();
 
-  function buildMonth(month) {
+  function buildContent(items, goal) {
+    return (
+      <ul className={styles.months}>
+        {items.map((item) => buildItem(item, goal))}
+      </ul>
+    );
+  }
+
+  function buildItem(item, goal) {
     return (
       <li
-        key={month.atStart}
-        className={styles.month}
+        key={item.atStart}
+        className={styles.item}
       >
         <div className={styles.top}>
           <div className={styles.date}>
-            {getMonth(month.atStart)}
+            {getMonth(item.atStart)}
           </div>
           <div className={styles.count}>
-            {`${month.items.length} measurements`}
+            {`${item.items.length} measurements`}
           </div>
         </div>
         <div className={styles.bottom}>
           <div className={styles.average}>
             <div className={styles.averageValue}>
-              {month.average.toFixed(1)}
+              {item.average.toFixed(1)}
             </div>
             <div className={styles.stdDev}>
-              {`\u00b1 ${month.stdDev.toFixed(1)}`}
+              {`\u00b1 ${item.stdDev.toFixed(1)}`}
             </div>
           </div>
-          {buildGoalDiff(month)}
+          {buildGoalDiff(item, goal)}
         </div>
       </li>
     );
   }
 
-  function buildGoalDiff(month) {
-    const goalWeight = getRangeGoal(month.atStart, month.atEnd, goal);
+  function buildGoalDiff(item, goal) {
+    const goalWeight = getRangeGoal(item.atStart, item.atEnd, goal);
     if (!goalWeight) {
       return null;
     }
 
-    const diff = month.average - goalWeight;
+    const diff = item.average - goalWeight;
     const iconName = diff > 0 ? 'arrowUp' : 'arrowDown';
     const iconColor = diff > 0 ? '#ff2105' : '#12d025';
     const value = Math.abs(diff).toFixed(1);
@@ -74,18 +82,12 @@ function Monthly({
 
   return (
     <main className={styles.main}>
-      <div>
-        <section className={styles.close}>
-          <button onClick={() => history.push('/')}>
-            <Icon name='close' color='currentColor' />
-          </button>
-        </section>
-        <section>
-          <ul className={styles.months}>
-            {months.map((month) => buildMonth(month))}
-          </ul>
-        </section>
-      </div>
+      <div className={styles.close}>
+        <button onClick={() => history.push('/')}>
+          <Icon name='close' color='currentColor' />
+        </button>
+      </div >
+      {buildContent(months, goal)}
     </main>
   );
 }

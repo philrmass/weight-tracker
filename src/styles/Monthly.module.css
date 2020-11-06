@@ -1,18 +1,16 @@
 .main {
-  height: 100vh;
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  padding: var(--size-2);
-  background: var(--bg-alt);
+  border: var(--size-2) solid var(--bg-alt);
   overflow-x: hidden;
-  overflow-y: auto;
+  overflow-y: scroll;
 }
 
 .close {
-  position: absolute;
+  position: fixed;
   right: var(--size-1);
   top: var(--size-1);
 }
@@ -21,10 +19,10 @@
   background: var(--bg-normal);
 }
 
-.months {
+.items {
 }
 
-.month {
+.item {
   padding: var(--size-1);
   border: 1px solid var(--bg-alt);
   background: var(--bg-normal);
