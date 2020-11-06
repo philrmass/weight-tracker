@@ -20,10 +20,15 @@ function Monthly({
         key={month.atStart}
         className={styles.month}
       >
-        <div className={styles.left}>
+        <div className={styles.top}>
           <div className={styles.date}>
             {getMonth(month.atStart)}
           </div>
+          <div className={styles.count}>
+            {`${month.items.length} measurements`}
+          </div>
+        </div>
+        <div className={styles.bottom}>
           <div className={styles.average}>
             <div className={styles.averageValue}>
               {month.average.toFixed(1)}
@@ -31,11 +36,6 @@ function Monthly({
             <div className={styles.stdDev}>
               {`\u00b1 ${month.stdDev.toFixed(1)}`}
             </div>
-          </div>
-        </div>
-        <div className={styles.right}>
-          <div className={styles.count}>
-            {`${month.items.length} measurements`}
           </div>
           {buildGoalDiff(month)}
         </div>
@@ -56,15 +56,17 @@ function Monthly({
 
     return (
       <div className={styles.goal}>
+        <div className={styles.icon}>
+          <Icon name={iconName} color={iconColor} />
+        </div>
+        <div className={styles.diff}>
+          {`${value}`}
+        </div>
         <div className={styles.goalTitle}>
           Goal
         </div>
-        <div className={styles.diff}>
+        <div className={styles.goalValue}>
           {goalWeight.toFixed(1)}
-          <div className={styles.icon}>
-            <Icon name={iconName} color={iconColor} />
-          </div>
-          {`${value}`}
         </div>
       </div>
     );

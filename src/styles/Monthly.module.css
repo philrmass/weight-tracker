@@ -28,66 +28,69 @@
   padding: var(--size-1);
   border: 1px solid var(--bg-alt);
   background: var(--bg-normal);
+}
+
+.top {
+  margin-bottom: var(--size-1);
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
 
-.left {
+.date {
   margin-right: var(--size-1);
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: center;
+  justify-content: flex-end;
 }
 
-.right {
+.count {
   margin-left: var(--size-1);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
+  color: var(--color-normal-light);
 }
 
-.date {
-  margin-bottom: var(--size-1);
+.bottom {
+  font-size: var(--text-large);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 .average {
   display: flex;
   align-items: center;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: var(--size-1);
 }
 
 .averageValue {
-  font-size: var(--text-large);
+  font-weight: bold;
 }
 
 .stdDev {
-  padding-left: var(--size-1);
+  margin-left: var(--size-1);
   color: var(--color-normal-light);
-}
-
-.count {
-  margin-bottom: var(--size-1);
 }
 
 .goal {
-  font-size: var(--text-large);
-  display: flex;
-  align-items: center;
-}
-
-.goalTitle {
-  padding-right: var(--size-0);
-  color: var(--color-normal-light);
-  font-size: var(--text-normal);
-}
-
-.diff {
   display: flex;
 }
 
 .icon {
   width: 1em;
   height: 1em;
-  margin: 0 var(--size-0);
+  margin-right: var(--size-0);
+}
+
+.diff {
+  display: flex;
+  margin-right: var(--size-1);
+  font-weight: bold;
+}
+
+.goalTitle {
+  color: var(--color-normal-light);
+  margin-right: var(--size-0);
+}
+
+.goalValue {
+  color: var(--color-normal-light);
 }
