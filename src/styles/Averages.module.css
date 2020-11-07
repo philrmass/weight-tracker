@@ -22,7 +22,6 @@
 }
 
 .bottom {
-  font-size: var(--text-large);
   display: grid;
   grid-template-columns: 4fr 5fr;
 }
@@ -33,10 +32,10 @@
   display: flex;
   justify-content: flex-end;
   margin-right: var(--size-1);
+  font-size: var(--text-large);
 }
 
 .averageValue {
-  font-weight: bold;
 }
 
 .stdDev {
@@ -47,6 +46,7 @@
 .goal {
   margin-left: var(--size-1);
   display: flex;
+  align-items: center;
 }
 
 .icon {
@@ -58,7 +58,6 @@
 .diff {
   display: flex;
   margin-right: var(--size-1);
-  font-weight: bold;
 }
 
 .goalTitle {

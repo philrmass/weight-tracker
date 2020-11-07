@@ -9,7 +9,7 @@ import './styles/index.css';
 import store from './redux/store';
 import App from './components/App';
 
-const version = '0.14.0';
+const version = '0.14.1';
 
 ReactDOM.render(
   <Provider store={store}>
