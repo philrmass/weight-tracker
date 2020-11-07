@@ -7,7 +7,7 @@
 .top {
   margin-bottom: var(--size-1);
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 4fr 5fr;
 }
 
 .date {
@@ -24,7 +24,7 @@
 .bottom {
   font-size: var(--text-large);
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 4fr 5fr;
 }
 
 .average {
@@ -45,6 +45,7 @@
 }
 
 .goal {
+  margin-left: var(--size-1);
   display: flex;
 }
 
