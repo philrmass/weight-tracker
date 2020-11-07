@@ -1,10 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
+import { getWeek } from '../utilities/time';
 import styles from '../styles/Weekly.module.css';
+import Averages from './Averages';
 import Icon from './Icon';
 
-function Weekly() {
+function Weekly({
+  weeks,
+  goal,
+}) {
   const history = useHistory();
 
   return (
@@ -14,10 +21,23 @@ function Weekly() {
           <Icon name='close' color='currentColor' />
         </button>
       </section>
-      <section className={styles.items}>
-      </section>
+      <Averages
+        eras={weeks}
+        goal={goal}
+        getDateString={getWeek}
+      />
     </main>
   );
 }
 
-export default Weekly;
+Weekly.propTypes = {
+  weeks: PropTypes.arrayOf(PropTypes.object).isRequired,
+  goal: PropTypes.object,
+};
+
+const mapState = (state) => ({
+  weeks: state.weights.weeks,
+  goal: state.weights.goal,
+});
+
+export default connect(mapState)(Weekly);

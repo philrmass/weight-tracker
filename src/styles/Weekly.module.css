@@ -4,21 +4,17 @@
   bottom: 0;
   left: 0;
   right: 0;
-  border: 20px solid #8cf;
+  border: var(--size-2) solid var(--bg-alt);
+  overflow-x: hidden;
   overflow-y: scroll;
 }
 
 .close {
-  position: absolute;
+  position: fixed;
   right: var(--size-1);
   top: var(--size-1);
 }
 
-.items {
-  height: 1900px;
-  background: #efd;
-}
-
-.bot {
-  background: #def;
+.close button {
+  background: var(--bg-normal);
 }
