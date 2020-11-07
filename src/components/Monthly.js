@@ -16,11 +16,11 @@ function Monthly({
 
   return (
     <main className={styles.main}>
-      <section className={styles.close}>
+      <div className={styles.close}>
         <button onClick={() => history.push('/')}>
           <Icon name='close' color='currentColor' />
         </button>
-      </section>
+      </div>
       <Averages
         eras={months}
         goal={goal}
