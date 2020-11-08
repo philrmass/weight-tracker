@@ -47,14 +47,19 @@ export function getWeek(at, prefix = 'Week of ') {
   return `${prefix}${dateStr}`;
 }
 
-export function getMonth(at) {
+export function getMonth(at, useShort) {
   const dayOptions = {
-    month: 'long',
+    month: useShort ? 'short' : 'long',
     year: 'numeric',
   };
 
   const date = new Date(at);
   return date.toLocaleString('en-us', dayOptions);
+}
+
+export function getYear(at) {
+  const date = new Date(at);
+  return `${date.getFullYear()}`;
 }
 
 export function getTime(at) {

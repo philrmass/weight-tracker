@@ -4,7 +4,8 @@ import {
   getMonthStart,
   getYearStart,
   getWeek,
-  //getMonth,
+  getMonth,
+  getYear,
 } from './time';
 
 export function calcAtView(items, atRange) {
@@ -241,88 +242,58 @@ function renderWeightLines(ctx, coord, view) {
   ctx.stroke();
 }
 
-function renderWeekLabels(ctx, coord, view, type) {
+function renderWeekLabels(ctx, coord, view) {
   const weekMs = 1000 * 60 * 60 * 24 * 7;
   const weekMin = getWeekStart(view.atStart) + weekMs;
   const weekMax = getWeekStart(view.atEnd) + weekMs;
-  const deg90 = 5 * Math.PI / 180;
-  const gap = 5;
 
   setTextStyle(ctx);
 
-  for (let i = weekMin + weekMs; i <= weekMax; i+= 1000 * weekMs) {
-    ctx.rotate(deg90);
-
-    const x = coord.x(i) + gap;
-    const y = 6 * gap;
-
-    ctx.fillText(getWeek(i, ''), x, y);
-
-    ctx.rotate(-deg90);
-  }
-
-    /*
   for (let i = weekMin; i <= weekMax; i+= weekMs) {
     const x = coord.x(i);
 
-    console.log(getWeek(i));
-    ctx.fillText('hello', x, 5 * gap);
-    //ctx.moveTo(x, 0);
-    //ctx.lineTo(x, ctx.canvas.height);
+    renderLabel(ctx, getWeek(i, ''), 90, x);
   }
-  */
 }
 
-function renderMonthLabels(ctx, coord, view, type) {
-  /*
+function renderMonthLabels(ctx, coord, view) {
   const monthMax = getMonthStart(view.atEnd);
 
-  setLineStyle(ctx, type);
+  setTextStyle(ctx);
 
-  ctx.beginPath();
   let offset = 1;
   let i = getMonthStart(view.atStart, offset);
   while (i <= monthMax) {
     const x = coord.x(i);
 
-    ctx.moveTo(x, 0);
-    ctx.lineTo(x, ctx.canvas.height);
+    renderLabel(ctx, getMonth(i, true), 90, x);
 
     offset++;
     i = getMonthStart(view.atStart, offset);
   }
-  ctx.stroke();
-  */
 }
 
 function renderYearLabels(ctx, coord, view) {
-  /*
   const yearMax = getYearStart(view.atEnd);
 
   setTextStyle(ctx);
 
-  ctx.beginPath();
   let offset = 1;
   let i = getYearStart(view.atStart, offset);
   while (i <= yearMax) {
     const x = coord.x(i);
 
-    ctx.moveTo(x, 0);
-    ctx.lineTo(x, ctx.canvas.height);
+    renderLabel(ctx, getYear(i), 90, x);
 
     offset++;
     i = getYearStart(view.atStart, offset);
-    //ctx.fillText(`${weight}`, gap, y - gap);
   }
-  ctx.stroke();
-  */
 }
 
 function renderWeightLabels(ctx, coord, view) {
   const div = 5;
   const min5 = Math.ceil(view.weightStart / 5);
   const max5 = Math.floor(view.weightEnd / 5);
-  const gap = 5;
 
   setTextStyle(ctx);
 
@@ -330,8 +301,19 @@ function renderWeightLabels(ctx, coord, view) {
     const weight = div * i;
     const y = coord.y(weight);
 
-    ctx.fillText(`${weight}`, gap, y - gap);
+    renderLabel(ctx, `${weight}`, 0, 0, y);
   }
+}
+
+function renderLabel(ctx, text, deg = 0, x = 0, y = 0) {
+  const radians = deg * Math.PI / 180;
+  const gap = 5;
+
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.rotate(radians);
+  ctx.fillText(text, 2 * gap, -gap);
+  ctx.restore();
 }
 
 function renderGoal(ctx, coord, goal) {
