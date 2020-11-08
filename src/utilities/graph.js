@@ -3,6 +3,8 @@ import {
   getWeekStart,
   getMonthStart,
   getYearStart,
+  getWeek,
+  //getMonth,
 } from './time';
 
 export function calcAtView(items, atRange) {
@@ -67,6 +69,7 @@ export function render(ctx, items, goal, atView) {
 
   renderTimeLines(ctx, coord, view);
   renderWeightLines(ctx, coord, view);
+  renderWeightLabels(ctx, coord, view);
   renderGoal(ctx, coord, goal);
   renderWeights(ctx, coord, viewItems);
 }
@@ -117,12 +120,15 @@ function renderTimeLines(ctx, coord, view) {
   if (daysWide < 60) {
     renderDayLines(ctx, coord, view, 0);
     renderWeekLines(ctx, coord, view, 1);
+    renderWeekLabels(ctx, coord, view);
   } else if (daysWide < 250) {
     renderWeekLines(ctx, coord, view, 0);
     renderMonthLines(ctx, coord, view, 1);
+    renderMonthLabels(ctx, coord, view);
   } else {
     renderMonthLines(ctx, coord, view, 0);
     renderYearLines(ctx, coord, view, 1);
+    renderYearLabels(ctx, coord, view);
   }
 }
 
@@ -131,7 +137,7 @@ function renderDayLines(ctx, coord, view, type) {
   const dayMin = getDayStart(view.atStart) + dayMs;
   const dayMax = getDayStart(view.atEnd) + dayMs;
 
-  setLineType(ctx, type);
+  setLineStyle(ctx, type);
 
   ctx.beginPath();
   for (let i = dayMin; i <= dayMax; i+= dayMs) {
@@ -148,7 +154,7 @@ function renderWeekLines(ctx, coord, view, type) {
   const weekMin = getWeekStart(view.atStart) + weekMs;
   const weekMax = getWeekStart(view.atEnd) + weekMs;
 
-  setLineType(ctx, type);
+  setLineStyle(ctx, type);
 
   ctx.beginPath();
   for (let i = weekMin; i <= weekMax; i+= weekMs) {
@@ -163,7 +169,7 @@ function renderWeekLines(ctx, coord, view, type) {
 function renderMonthLines(ctx, coord, view, type) {
   const monthMax = getMonthStart(view.atEnd);
 
-  setLineType(ctx, type);
+  setLineStyle(ctx, type);
 
   ctx.beginPath();
   let offset = 1;
@@ -183,7 +189,7 @@ function renderMonthLines(ctx, coord, view, type) {
 function renderYearLines(ctx, coord, view, type) {
   const yearMax = getYearStart(view.atEnd);
 
-  setLineType(ctx, type);
+  setLineStyle(ctx, type);
 
   ctx.beginPath();
   let offset = 1;
@@ -205,7 +211,7 @@ function renderWeightLines(ctx, coord, view) {
   const min5 = Math.ceil(view.weightStart / 5);
   const max5 = Math.floor(view.weightEnd / 5);
 
-  setLineType(ctx, 1);
+  setLineStyle(ctx, 1);
 
   ctx.beginPath();
   for (let i = min5; i <= max5; i++) {
@@ -220,7 +226,7 @@ function renderWeightLines(ctx, coord, view) {
   const min = Math.ceil(view.weightStart);
   const max = Math.floor(view.weightEnd);
 
-  setLineType(ctx, 0);
+  setLineStyle(ctx, 0);
 
   ctx.beginPath();
   for (let i = min; i <= max; i++) {
@@ -235,9 +241,102 @@ function renderWeightLines(ctx, coord, view) {
   ctx.stroke();
 }
 
+function renderWeekLabels(ctx, coord, view, type) {
+  const weekMs = 1000 * 60 * 60 * 24 * 7;
+  const weekMin = getWeekStart(view.atStart) + weekMs;
+  const weekMax = getWeekStart(view.atEnd) + weekMs;
+  const deg90 = 5 * Math.PI / 180;
+  const gap = 5;
+
+  setTextStyle(ctx);
+
+  for (let i = weekMin + weekMs; i <= weekMax; i+= 1000 * weekMs) {
+    ctx.rotate(deg90);
+
+    const x = coord.x(i) + gap;
+    const y = 6 * gap;
+
+    ctx.fillText(getWeek(i, ''), x, y);
+
+    ctx.rotate(-deg90);
+  }
+
+    /*
+  for (let i = weekMin; i <= weekMax; i+= weekMs) {
+    const x = coord.x(i);
+
+    console.log(getWeek(i));
+    ctx.fillText('hello', x, 5 * gap);
+    //ctx.moveTo(x, 0);
+    //ctx.lineTo(x, ctx.canvas.height);
+  }
+  */
+}
+
+function renderMonthLabels(ctx, coord, view, type) {
+  /*
+  const monthMax = getMonthStart(view.atEnd);
+
+  setLineStyle(ctx, type);
+
+  ctx.beginPath();
+  let offset = 1;
+  let i = getMonthStart(view.atStart, offset);
+  while (i <= monthMax) {
+    const x = coord.x(i);
+
+    ctx.moveTo(x, 0);
+    ctx.lineTo(x, ctx.canvas.height);
+
+    offset++;
+    i = getMonthStart(view.atStart, offset);
+  }
+  ctx.stroke();
+  */
+}
+
+function renderYearLabels(ctx, coord, view) {
+  /*
+  const yearMax = getYearStart(view.atEnd);
+
+  setTextStyle(ctx);
+
+  ctx.beginPath();
+  let offset = 1;
+  let i = getYearStart(view.atStart, offset);
+  while (i <= yearMax) {
+    const x = coord.x(i);
+
+    ctx.moveTo(x, 0);
+    ctx.lineTo(x, ctx.canvas.height);
+
+    offset++;
+    i = getYearStart(view.atStart, offset);
+    //ctx.fillText(`${weight}`, gap, y - gap);
+  }
+  ctx.stroke();
+  */
+}
+
+function renderWeightLabels(ctx, coord, view) {
+  const div = 5;
+  const min5 = Math.ceil(view.weightStart / 5);
+  const max5 = Math.floor(view.weightEnd / 5);
+  const gap = 5;
+
+  setTextStyle(ctx);
+
+  for (let i = min5; i <= max5; i++) {
+    const weight = div * i;
+    const y = coord.y(weight);
+
+    ctx.fillText(`${weight}`, gap, y - gap);
+  }
+}
+
 function renderGoal(ctx, coord, goal) {
   if (goal) {
-    setLineType(ctx, 2);
+    setLineStyle(ctx, 2);
 
     ctx.beginPath();
     ctx.moveTo(coord.x(goal.atStart), coord.y(goal.weightStart));
@@ -247,7 +346,7 @@ function renderGoal(ctx, coord, goal) {
 }
 
 function renderWeights(ctx, coord, items) {
-  setLineType(ctx, 3);
+  setLineStyle(ctx, 3);
 
   ctx.beginPath();
   ctx.moveTo(coord.x(items[0].at), coord.y(items[0].weight));
@@ -259,23 +358,33 @@ function renderWeights(ctx, coord, items) {
   ctx.stroke();
 }
 
-function setLineType(ctx, type) {
+const red = '#ff2105';
+const green = '#12d025';
+const blue = '#9090ff';
+const gray = '#a8a8a8';
+
+function setLineStyle(ctx, type) {
   switch(type) {
     case 0:
       ctx.lineWidth = 0.5;
-      ctx.strokeStyle = '#a8a8a8';
+      ctx.strokeStyle = gray;
       break;
     case 1:
       ctx.lineWidth = 1;
-      ctx.strokeStyle = '#9090ff';
+      ctx.strokeStyle = blue;
       break;
     case 2:
       ctx.lineWidth = 2;
-      ctx.strokeStyle = '#12d025';
+      ctx.strokeStyle = green;
       break;
     case 3:
       ctx.lineWidth = 1;
-      ctx.strokeStyle = '#ff2105';
+      ctx.strokeStyle = red;
       break;
   }
+}
+
+function setTextStyle(ctx) {
+  ctx.font = '12px Arial';
+  ctx.fillStyle = blue;
 }

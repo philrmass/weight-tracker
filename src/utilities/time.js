@@ -35,7 +35,7 @@ export function getDate(at) {
   return date.toLocaleString('en-us', dayOptions);
 }
 
-export function getWeek(at) {
+export function getWeek(at, prefix = 'Week of ') {
   const dayOptions = {
     day: 'numeric',
     month: 'short',
@@ -44,7 +44,7 @@ export function getWeek(at) {
   const date = new Date(at);
   const dateStr = date.toLocaleString('en-us', dayOptions);
 
-  return `Week of ${dateStr}`;
+  return `${prefix}${dateStr}`;
 }
 
 export function getMonth(at) {
