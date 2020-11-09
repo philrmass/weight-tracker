@@ -17,7 +17,7 @@ function Monthly({
   return (
     <main className={styles.main}>
       <div className={styles.close}>
-        <button onClick={() => history.push('/')}>
+        <button onClick={() => history.push('/weight-tracker')}>
           <Icon name='close' color='currentColor' />
         </button>
       </div>

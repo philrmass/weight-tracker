@@ -37,7 +37,7 @@ function Home({
                 data={weeks[0]}
                 goal={goal}
                 getDateString={getWeek}
-                handleClick={() => history.push('/weekly')}
+                handleClick={() => history.push('/weight-tracker/weekly')}
               />
             </div>
             <div className={styles.spacer}></div>
@@ -46,13 +46,13 @@ function Home({
                 data={months[0]}
                 goal={goal}
                 getDateString={getMonth}
-                handleClick={() => history.push('/monthly')}
+                handleClick={() => history.push('/weight-tracker/monthly')}
               />
             </div>
           </div>
           <div
             className={styles.graph}
-            onClick={() => history.push('/graph')}
+            onClick={() => history.push('/weight-tracker/graph')}
           >
             <Graph />
           </div>

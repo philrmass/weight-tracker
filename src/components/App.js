@@ -11,11 +11,11 @@ function App({ version }) {
   return (
     <main>
       <Switch>
-        <Route path='/' exact><Home version={version} /></Route>
-        <Route path='/weekly'><Weekly /></Route>
-        <Route path='/monthly'><Monthly /></Route>
-        <Route path='/graph'><GraphPage /></Route>
-        <Redirect from='*' to='/' />
+        <Route path='/weight-tracker' exact><Home version={version} /></Route>
+        <Route path='/weight-tracker/weekly'><Weekly /></Route>
+        <Route path='/weight-tracker/monthly'><Monthly /></Route>
+        <Route path='/weight-tracker/graph'><GraphPage /></Route>
+        <Redirect from='*' to='/weight-tracker' />
       </Switch>
     </main>
   );
