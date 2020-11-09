@@ -32,3 +32,24 @@
 .fileInput {
   display: none;
 }
+
+.save {
+  color: var(--color-normal);
+}
+
+.saveButtons {
+  margin-top: var(--size-2);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.saveButtons button {
+  width: auto;
+  padding: var(--size-0) var(--size-1);
+  border-radius: var(--border-radius);
+  margin-left: var(--size-0);
+}
+
+.saveButtons button:hover {
+  background: var(--bg-button-hover);
+}

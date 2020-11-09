@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { getWeightAverage } from '../utilities/averages';
+import { getDataFilePath } from '../utilities/data';
 import { loadData, saveData } from '../utilities/files';
 import { getDate, getMonthsFrom } from '../utilities/time';
 import {
@@ -60,12 +61,7 @@ function Options({
   }
 
   async function exportFile() {
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = now.getMonth() + 1;
-    const date = now.getDate();
-    const filePath = `weights_${year}_${month}_${date}.json`;
-
+    const filePath = getDataFilePath();
     await saveData(filePath, items);
     exportWeights(items.length);
   }

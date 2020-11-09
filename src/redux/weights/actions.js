@@ -5,9 +5,7 @@ export const IMPORT_WEIGHTS = 'IMPORT_WEIGHTS';
 export const EXPORT_WEIGHTS = 'EXPORT_WEIGHTS';
 export const SET_OPTIONS_OPEN = 'SET_OPTIONS_OPEN';
 
-export function addWeight(weight) {
-  const at = Date.now();
-
+export function addWeight(weight, at = Date.now()) {
   return {
     type: ADD_WEIGHT,
     at,

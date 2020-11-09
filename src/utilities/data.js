@@ -37,3 +37,12 @@ export function cleanData(input) {
     return item.at && item.weight;
   });
 }
+
+export function getDataFilePath(at = Date.now()) {
+  const when = new Date(at);
+  const year = when.getFullYear();
+  const month = `${when.getMonth() + 1}`.padStart(2, '0');
+  const date = `${when.getDate()}`.padStart(2, '0');
+
+  return `weights_${year}_${month}_${date}.json`;
+}

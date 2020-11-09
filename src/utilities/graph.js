@@ -367,6 +367,6 @@ function setLineStyle(ctx, type) {
 }
 
 function setTextStyle(ctx) {
-  ctx.font = '12px Arial';
+  ctx.font = '11px Arial';
   ctx.fillStyle = blue;
 }
