@@ -81,6 +81,7 @@ function Input({
           min='0'
           max='1000'
           step='0.1'
+          className={styles.input}
           value={value}
           onChange={handleChange}
           onKeyUp={handleKeyUp}

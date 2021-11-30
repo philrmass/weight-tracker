@@ -10,3 +10,4 @@ dist/*
 !dist/serviceWorker.js
 *.swp
 src/old
+.DS_Store

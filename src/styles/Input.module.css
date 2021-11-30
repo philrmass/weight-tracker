@@ -9,6 +9,11 @@
 .weight {
   display: flex;
   align-items: center;
+  margin-right: 8px;
+}
+
+.input {
+  max-width: 7em;
 }
 
 .time {

@@ -1,6 +1,7 @@
 import { calculateWeeks, calculateMonths } from '../../utilities/averages';
 import { importData } from '../../utilities/data';
 import { getObject, setObject } from '../../utilities/storage';
+import { demoData } from './demoData.js';
 
 import {
   ADD_WEIGHT,
@@ -11,7 +12,7 @@ import {
   SET_OPTIONS_OPEN,
 } from './actions';
 
-const all = getObject('weightTrackerAll', []);
+const all = getObject('weightTrackerAll', demoData);
 const goal = getObject('weightTrackerGoal', null);
 const defaultState = {
   all,
@@ -36,7 +37,9 @@ export default function weightsReducer(state = defaultState, action) {
         at: action.at,
         weight: action.weight,
       };
-      const all = [value, ...state.all];
+      const isDemoData = state.all[0]?.at === 1637678071575;
+      const existing = isDemoData ? [] : state.all;
+      const all = [value, ...existing];
       const weeks = calculateWeeks(all);
       const months= calculateMonths(all);
       setObject('weightTrackerAll', all);
