@@ -1,8 +1,5 @@
-import React, { Fragment } from 'react';
-import { connect } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import PropTypes from 'prop-types';
-
+import { version } from '../../package.json';
+/*
 import { getWeek, getMonth } from '../utilities/time';
 import styles from '../styles/Home.module.css';
 import Average from './Average';
@@ -11,18 +8,17 @@ import Input from './Input';
 import Modal from './Modal';
 import Options from './Options';
 import Weights from './Weights';
+*/
 
-function Home({
-  version,
-  weeks,
-  months,
-  goal,
-  isOptionsOpen,
+export default function Home({
+  // weeks, months, goal, isOptionsOpen,
 }) {
-  const history = useHistory();
+  console.log('version', version);
 
   return (
-    <Fragment>
+    <div>HOME</div>
+    /*
+    <>
       <main className={styles.main}>
         <div className={styles.content}>
           <div className={styles.input}>
@@ -64,23 +60,111 @@ function Home({
       <Modal isOpen={isOptionsOpen}>
         <Options />
       </Modal>
-    </Fragment>
+    </>
+    */
   );
 }
 
-Home.propTypes = {
-  version: PropTypes.string.isRequired,
-  weeks: PropTypes.arrayOf(PropTypes.object).isRequired,
-  months: PropTypes.arrayOf(PropTypes.object).isRequired,
-  goal: PropTypes.object,
-  isOptionsOpen: PropTypes.bool.isRequired,
+/*
+import { calculateWeeks, calculateMonths } from '../../utilities/averages';
+import { importData } from '../../utilities/data';
+import { getObject, setObject } from '../../utilities/storage';
+import { demoData } from './demoData.js';
+
+import {
+  ADD_WEIGHT,
+  REMOVE_WEIGHT,
+  SET_GOAL,
+  IMPORT_WEIGHTS,
+  EXPORT_WEIGHTS,
+  SET_OPTIONS_OPEN,
+} from './actions';
+
+const all = getObject('weightTrackerAll', demoData);
+const goal = getObject('weightTrackerGoal', null);
+const defaultState = {
+  all,
+  weeks: calculateWeeks(all),
+  months: calculateMonths(all),
+  goal,
+  message: '',
+  isOptionsOpen: false,
 };
 
-const mapState = (state) => ({
-  weeks: state.weights.weeks,
-  months: state.weights.months,
-  goal: state.weights.goal,
-  isOptionsOpen: state.weights.isOptionsOpen,
-});
+function getImportMessage(stats) {
+  return `Added ${stats.added} measurements\n` +
+    ` to ${stats.existing} existing measurements,\n` +
+    ` removed ${stats.duplicates} duplicates\n` +
+    ` for a total of ${stats.all}`;
+}
 
-export default connect(mapState)(Home);
+export default function weightsReducer(state = defaultState, action) {
+  switch (action.type) {
+    case ADD_WEIGHT: {
+      const value = {
+        at: action.at,
+        weight: action.weight,
+      };
+      const isDemoData = state.all[0]?.at === 1637678071575;
+      const existing = isDemoData ? [] : state.all;
+      const all = [value, ...existing];
+      const weeks = calculateWeeks(all);
+      const months= calculateMonths(all);
+      setObject('weightTrackerAll', all);
+      return {
+        ...state,
+        all,
+        weeks,
+        months,
+      };
+    }
+    case REMOVE_WEIGHT: {
+      const all = state.all.filter((value) => value.at !== action.at);
+      const weeks = calculateWeeks(all);
+      const months= calculateMonths(all);
+      setObject('weightTrackerAll', all);
+      return {
+        ...state,
+        all,
+        weeks,
+        months,
+      };
+    }
+    case SET_GOAL:
+      setObject('weightTrackerGoal', action.goal);
+      return {
+        ...state,
+        goal: action.goal,
+      };
+    case IMPORT_WEIGHTS: {
+      const { all, stats } = importData(state.all, action.items);
+      const weeks = calculateWeeks(all);
+      const months= calculateMonths(all);
+      const message = getImportMessage(stats);
+      setObject('weightTrackerAll', all);
+      return {
+        ...state,
+        all,
+        weeks,
+        months,
+        message,
+      };
+    }
+    case EXPORT_WEIGHTS: {
+      const message = `Exported ${action.count} measurements`;
+      return {
+        ...state,
+        message,
+      };
+    }
+    case SET_OPTIONS_OPEN:
+      return {
+        ...state,
+        isOptionsOpen: action.value,
+        message: '',
+      };
+    default:
+      return state;
+  }
+}
+*/

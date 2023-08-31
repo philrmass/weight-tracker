@@ -1,13 +1,6 @@
-node_modules/
-dist/*
-!dist/index.html
-!dist/favicon.ico
-!dist/logo192.png
-!dist/logo512.png
-!dist/logoApple.png
-!dist/logoMaskable.png
-!dist/manifest.json
-!dist/serviceWorker.js
+node_modules
+/build
+/*.log
 *.swp
-src/old
 .DS_Store
+size-plugin.json

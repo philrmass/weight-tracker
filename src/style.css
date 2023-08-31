@@ -1,8 +1,64 @@
-html, body {
-	font: 14px/1.21 'Helvetica Neue', arial, sans-serif;
-	font-weight: 400;
+:root {
+  --size-0: 4px;
+  --size-1: 8px;
+  --size-2: 16px;
+  --size-3: 32px;
+  --size-button: 32px;
+  --border-radius: 2px;
+  --text-normal: 16px;
+  --text-large: 22px;
+  --text-small: 12px;
+  --bg-normal: #fff;
+  --bg-alt: #d8d8ca;
+  --bg-accent: #201060;
+  --bg-button-hover: #f0f0f0;
+  --bg-disabled: #00000080;
+  --color-normal: #202020;
+  --color-normal-light: #505050;
+  --color-accent: #d8d8d8;
+  --color-accent-light: #b8b8b8;
+  --color-button: #484848;
+  --color-button-hover: #202020;
+  --border: #a4a4a4;
 }
 
-h1 {
-	text-align: center;
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg-normal);
+  color: var(--color-normal);
+  font-size: var(--text-normal);
+  font-family: Helvetica, sans-serif;
+}
+
+button {
+  width: var(--size-button);
+  height: var(--size-button);
+  padding: var(--size-0);
+  border: 1px solid var(--color-button);
+  border-radius: 50%;
+  color: var(--color-button);
+}
+
+button:hover {
+  border-color: var(--color-button-hover);
+  background: var(--bg-button-hover);
+  color: var(--color-button-hover);
+}
+
+input {
+  height: var(--size-button);
+  padding: 0 var(--size-1);
+  border-radius: var(--border-radius);
+  background: var(--bg-normal);
+  color: var(--color-normal);
 }
