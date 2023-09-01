@@ -1,16 +1,18 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-
+// ???
+/*
 import { getDate, getTime } from '../utilities/time';
 import { removeWeight } from '../redux/weights/actions';
 import styles from '../styles/Weights.module.css';
 import Icon from './Icon';
+*/
 
-function Weights({
+export default function Weights({
   weights,
   removeWeight,
 }) {
+  console.log('WEIGHTS', weights.length, typeof removeWeight);
+  // ???
+  /*
   function buildWeight(value) {
     return (
       <li
@@ -36,16 +38,21 @@ function Weights({
       </li>
     );
   }
+  */
 
   return (
     <main>
+      WEIGHTS
+      {/*
       <ul className={styles.weights}>
         {weights.map((value) => buildWeight(value))}
       </ul>
+      */}
     </main>
   );
 }
 
+/*
 Weights.propTypes = {
   weights: PropTypes.arrayOf(PropTypes.object).isRequired,
   removeWeight: PropTypes.func.isRequired,
@@ -60,3 +67,4 @@ const mapDispatch = {
 };
 
 export default connect(mapState, mapDispatch)(Weights);
+*/

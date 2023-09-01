@@ -1,0 +1,16 @@
+.main {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: var(--size-1);
+  background: var(--bg-disabled);
+}
+
+.modal {
+  padding: var(--size-2);
+  border-radius: var(--border-radius);
+  background: var(--bg-normal);
+}

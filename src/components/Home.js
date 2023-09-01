@@ -1,32 +1,53 @@
+import { useState } from 'preact/hooks';
+import { useLocalStorage } from 'utilities/hooks';
 import { version } from '../../package.json';
-/*
-import { getWeek, getMonth } from '../utilities/time';
-import styles from '../styles/Home.module.css';
-import Average from './Average';
-import Graph from './Graph';
 import Input from './Input';
 import Modal from './Modal';
-import Options from './Options';
 import Weights from './Weights';
+import styles from './Home.module.css';
+// ???
+/*
+import { getWeek, getMonth } from '../utilities/time';
+import Average from './Average';
+import Graph from './Graph';
+import Options from './Options';
 */
 
 export default function Home({
-  // weeks, months, goal, isOptionsOpen,
+  // weeks, months, goal
 }) {
+  const [weights, setWeights] = useLocalStorage('weightTrackerAll', []);
+  const [menuOpen, setMenuOpen] = useState(false);
   console.log('version', version);
 
+  const addWeight = (value, at) => {
+    console.log('ADD-WEIGHT', value, at);
+    setWeights((w) => w);
+  };
+
+  const removeWeight = (at) => {
+    console.log('REMOVE-WEIGHT', at);
+    setWeights((w) => w);
+  };
+
+  // ???
   return (
-    <div>HOME</div>
-    /*
     <>
       <main className={styles.main}>
-        <div className={styles.content}>
-          <div className={styles.input}>
-            <Input />
-          </div>
-          <div className={styles.weights}>
-            <Weights />
-          </div>
+        <div className={styles.input}>
+          <Input
+            weights={weights}
+            addWeight={addWeight}
+            setMenuOpen={setMenuOpen}
+          />
+        </div>
+        <div className={styles.weights}>
+          <Weights
+            weights={weights}
+            removeWeight={removeWeight}
+          />
+        </div>
+        {/*
           <div className={styles.averages}>
             <div className={styles.week}>
               <Average
@@ -52,16 +73,20 @@ export default function Home({
           >
             <Graph />
           </div>
-          <div className={styles.version}>
-            {`v ${version}`}
-          </div>
+      */}
+        <div className={styles.version}>
+          {`v ${version}`}
         </div>
       </main>
-      <Modal isOpen={isOptionsOpen}>
+      <Modal isOpen={menuOpen}>
+        <div>MENU</div>
+        {/*
         <Options />
+        */}
       </Modal>
+      {/*
+        */}
     </>
-    */
   );
 }
 
@@ -88,7 +113,7 @@ const defaultState = {
   months: calculateMonths(all),
   goal,
   message: '',
-  isOptionsOpen: false,
+  isMenuOpen: false,
 };
 
 function getImportMessage(stats) {
@@ -160,7 +185,7 @@ export default function weightsReducer(state = defaultState, action) {
     case SET_OPTIONS_OPEN:
       return {
         ...state,
-        isOptionsOpen: action.value,
+        isMenuOpen: action.value,
         message: '',
       };
     default:

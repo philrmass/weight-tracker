@@ -1,21 +1,25 @@
+/*
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import styles from '../styles/Input.module.css';
 import { getDataFilePath } from '../utilities/data';
 import { saveData } from '../utilities/files';
 import { useInterval } from '../utilities/hooks';
 import { getDate, getTime, inSameMonth } from '../utilities/time';
-import { addWeight, setOptionsOpen } from '../redux/weights/actions';
+import { addWeight, setMenuOpen } from '../redux/weights/actions';
 import Icon from './Icon';
 import Modal from './Modal';
+*/
+import styles from './Input.module.css';
 
-function Input({
-  items,
+export default function Input({
+  weights,
   addWeight,
-  setOptionsOpen,
+  setMenuOpen,
 }) {
+  console.log('INPUT', weights.length, typeof addWeight, typeof setMenuOpen);
+  /*
   const [now, setNow] = useState(Date.now());
   const [isSaveOpen, setShowOpen] = useState(false);
 
@@ -45,8 +49,8 @@ function Input({
   }
 
   function checkSave(at) {
-    const atLast = items[0]?.at;
-    if (items.length > 10 && !inSameMonth(at, atLast)) {
+    const atLast = weights[0]?.at;
+    if (weights.length > 10 && !inSameMonth(at, atLast)) {
       setShowOpen(true);
     }
   }
@@ -54,7 +58,7 @@ function Input({
   function verifySave() {
     setShowOpen(false);
     const filePath = getDataFilePath();
-    saveData(filePath, items);
+    saveData(filePath, weights);
   }
 
   function buildSaveModal() {
@@ -72,9 +76,12 @@ function Input({
       </div>
     );
   }
+  */
 
   return (
     <main className={styles.main}>
+      INPUT
+      {/*
       <div className={styles.weight}>
         <input
           type='number'
@@ -95,31 +102,39 @@ function Input({
           {getTime(now)}
         </div>
       </div>
+      */}
       <div className={styles.buttons}>
-        <button onClick={() => setOptionsOpen(true)}>
+        <button onClick={() => setMenuOpen(true)}>
+          Menu
+          {/*
           <Icon name='threeDots' color='currentColor' />
+          */}
         </button>
       </div>
+      {/*
       <Modal isOpen={isSaveOpen}>
         {buildSaveModal()}
       </Modal>
+    */}
     </main>
   );
 }
 
+/*
 Input.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.object).isRequired,
+  weights: PropTypes.arrayOf(PropTypes.object).isRequired,
   addWeight: PropTypes.func.isRequired,
-  setOptionsOpen: PropTypes.func.isRequired,
+  setMenuOpen: PropTypes.func.isRequired,
 };
 
 const mapState = (state) => ({
-  items: state.weights.all,
+  weights: state.weights.all,
 });
 
 const mapDispatch = {
   addWeight,
-  setOptionsOpen,
+  setMenuOpen,
 };
 
 export default connect(mapState, mapDispatch)(Input);
+*/

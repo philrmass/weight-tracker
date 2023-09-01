@@ -1,8 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styles from '../styles/Modal.module.css';
+import styles from './Modal.module.css';
 
-function Modal({
+export default function Modal({
   isOpen = false,
   children,
 }) {
@@ -13,17 +11,8 @@ function Modal({
   return (
     <div className={styles.main}>
       <div className={styles.modal}>
-        <div className={styles.content}>
-          { children }
-        </div>
+        { children }
       </div>
     </div>
   );
 }
-
-Modal.propTypes = {
-  isOpen: PropTypes.bool,
-  children: PropTypes.object,
-};
-
-export default Modal;

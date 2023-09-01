@@ -2,10 +2,14 @@
   padding: var(--size-1) var(--size-2);
   background: var(--bg-accent);
   color: var(--color-accent);
+
+  /*
   display: grid;
   grid-template-columns: 2fr 4fr 1fr;
+  */
 }
 
+/*
 .weight {
   display: flex;
   align-items: center;
@@ -19,21 +23,26 @@
 .time {
 }
 
+*/
 .buttons {
   display: flex;
   align-items: center;
+
+  /*
   color: var(--color-normal);
+  */
 }
 
 .buttons button {
   border: 1px solid var(--color-accent);
   color: var(--color-accent);
+
+  /*
+  ??? change to shading, not border
+  */
 }
 
-.buttons button:hover {
-  background: #ffffff30;
-}
-
+/*
 .fileInput {
   display: none;
 }
@@ -58,3 +67,4 @@
 .saveButtons button:hover {
   background: var(--bg-button-hover);
 }
+*/

@@ -1,34 +1,36 @@
 .main {
   position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-
-.content {
-  height: 100%;
-  max-width: 650px;
-  margin: auto;
+  inset: 0;
   display: flex;
   flex-direction: column;
+
+  /*
   justify-content: space-between;
+  */
 }
 
 .input {
-  flex: 0 0 auto;
   border-bottom: solid var(--bg-alt) var(--size-1);
 }
 
+/*
+.input {
+  flex: 0 0 auto;
+}
+*/
+
 .weights {
+  /*
   height: 0px;
   flex: 4 1 auto;
   padding: 0 var(--size-1);
   background: var(--bg-alt);
   overflow-x: hidden;
   overflow-y: auto;
+  */
 }
 
+/*
 .averages {
   flex: 0 0 auto;
   display: grid;
@@ -58,6 +60,7 @@
   background: var(--bg-alt);
   display: flex;
 }
+*/
 
 .version {
   position: fixed;
