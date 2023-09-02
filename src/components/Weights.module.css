@@ -1,3 +1,11 @@
+.weights {
+  background: red;
+  background: var(--bg-normal);
+}
+
+/*
+  padding: 0 var(--size-1);
+
 .item {
   padding: var(--size-0) var(--size-1);
   border: 1px solid var(--bg-alt);
@@ -21,3 +29,4 @@
   justify-content: edn;
   align-items: center;
 }
+*/

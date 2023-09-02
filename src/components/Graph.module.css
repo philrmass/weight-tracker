@@ -1,12 +1,15 @@
 .main {
+  /*
   flex-grow: 1;
   background: var(--bg-normal);
   display: flex;
   flex-direction: column;
   overflow: hidden;
   touch-action: none;
+  */
 }
 
+/*
 .wrap {
   flex-grow: 1;
   display: flex;
@@ -19,3 +22,4 @@
   flex-grow: 1;
   background: var(--bg-normal);
 }
+*/

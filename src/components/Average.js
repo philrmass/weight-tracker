@@ -1,16 +1,21 @@
+// ???
+/*
 import React from 'react';
 import PropTypes from 'prop-types';
 
 import { getRangeGoal } from '../utilities/averages';
-import styles from '../styles/Average.module.css';
 import Icon from './Icon';
+*/
+import styles from './Average.module.css';
 
-function Average({
-  data = { at: 0, weight: 0, items: [], average: 0 },
-  goal,
-  getDateString,
-  handleClick,
+export default function Average({
+  // data = { at: 0, weight: 0, items: [], average: 0 },
+  // goal,
+  // getDateString,
+  onClick,
 }) {
+  console.log('AVERAGE', typeof onClick);
+  /*
   function buildGoalDiff() {
     const goalWeight = getRangeGoal(data.atStart, data.atEnd, goal);
     if (!goalWeight) {
@@ -31,12 +36,15 @@ function Average({
       </div>
     );
   }
+  */
 
   return (
     <div
       className={styles.main}
-      onClick={handleClick}
+      onClick={onClick}
     >
+      AVERAGE
+      {/*
       <div className={styles.date}>
         {getDateString(data.atStart)}
       </div>
@@ -47,15 +55,7 @@ function Average({
       <div className={styles.measurements}>
         {`${data.items.length} measurements`}
       </div>
+      */}
     </div>
   );
 }
-
-Average.propTypes = {
-  data: PropTypes.object,
-  goal: PropTypes.object,
-  getDateString: PropTypes.func.isRequired,
-  handleClick: PropTypes.func.isRequired,
-};
-
-export default Average;

@@ -1,8 +1,9 @@
+import styles from './Graph.module.css';
+/*
 import React, { useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import styles from '../styles/Graph.module.css';
 import {
   calcAtView,
   getAtLimits,
@@ -10,7 +11,10 @@ import {
   render,
 } from '../utilities/graph';
 import { getDays } from '../utilities/time';
+*/
 
+// ??? update to utility
+/*
 function getTouches(e) {
   const w = e.target.clientWidth;
   return Array.from(e.touches).map((touch) => ({
@@ -70,11 +74,10 @@ function getScaleX(lasts, nows) {
   }
   return [1.0, 0.5];
 }
+*/
 
-function Graph({
-  items,
-  goal,
-}) {
+export default function Graph({ weights }) {
+  /*
   const wrap = useRef(null);
   const canvas = useRef(null);
   const [atView, setAtView] = useState(calcAtView(items, getDays(56)));
@@ -113,9 +116,12 @@ function Graph({
     ctx.canvas.height = wrap.current.clientHeight;
     render(ctx, items, goal, atView);
   }, [items, goal, atView]);
+  */
 
   return (
-    <main className={styles.main}>
+    <div className={styles.main}>
+      GRAPH
+      {/*
       <div
         className={styles.wrap}
         ref={wrap}
@@ -124,9 +130,11 @@ function Graph({
       >
         <canvas className={styles.canvas} ref={canvas}></canvas>
       </div>
-    </main>
+      */}
+    </div>
   );
 }
+/*
 
 Graph.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -139,3 +147,4 @@ const mapState = (state) => ({
 });
 
 export default connect(mapState)(Graph);
+*/

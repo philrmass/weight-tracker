@@ -1,7 +1,10 @@
 .main {
+  /*
   position: relative;
+  */
 }
 
+/*
 .close{
   position: absolute;
   right: 0;
@@ -74,3 +77,4 @@
   background: var(--bg-normal);
   white-space: pre;
 }
+*/

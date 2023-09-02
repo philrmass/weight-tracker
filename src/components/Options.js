@@ -1,3 +1,4 @@
+/*
 import React, { useState }  from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -12,10 +13,13 @@ import {
   exportWeights,
   setOptionsOpen,
 } from '../redux/weights/actions';
-import styles from '../styles/Options.module.css';
 import Icon from './Icon';
+*/
+import styles from './Options.module.css';
 
-function Options({
+export default function Options({
+  onClose,
+  /*
   items,
   goal,
   message,
@@ -23,7 +27,9 @@ function Options({
   importWeights,
   exportWeights,
   setOptionsOpen,
+  */
 }) {
+  /*
   const defaultLbs = 10;
   const defaultMonths = 6;
   const [goalOpen, setGoalOpen] = useState(false);
@@ -171,20 +177,28 @@ function Options({
     );
   }
 
+  */
   return (
-    <main className={styles.main}>
-      <section className={styles.close}>
-        <button onClick={() => setOptionsOpen(false)}>
+    <div className={styles.main}>
+      <div className={styles.close}>
+        <button onClick={onClose}>
+          X
+          {/*
           <Icon name='close' color='currentColor' />
+          */}
         </button>
-      </section>
+      </div >
+      OPTIONS
+      {/*
       <section className={styles.controls}>
         {buildGoal()}
         {buildData()}
       </section>
-    </main>
+      */}
+    </div>
   );
 }
+/*
 
 Options.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -210,3 +224,4 @@ const mapDispatch = {
 };
 
 export default connect(mapState, mapDispatch)(Options);
+*/

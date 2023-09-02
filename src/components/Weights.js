@@ -2,9 +2,9 @@
 /*
 import { getDate, getTime } from '../utilities/time';
 import { removeWeight } from '../redux/weights/actions';
-import styles from '../styles/Weights.module.css';
 import Icon from './Icon';
 */
+import styles from './Weights.module.css';
 
 export default function Weights({
   weights,
@@ -41,14 +41,31 @@ export default function Weights({
   */
 
   return (
-    <main>
-      WEIGHTS
+    <ul className={styles.weights}>
+      <li>YO</li>
+      <li>YO</li>
+      <li>YO</li>
+      <li>YO</li>
+      <li>YO</li>
+      <li>YO</li>
+      <li>YO</li>
+      <li>YO</li>
+      <li>YO</li>
+      <li>YO</li>
+      <li>YO</li>
+      <li>YO</li>
+      <li>YO</li>
+      <li>YO</li>
+      <li>YO</li>
+      <li>YO</li>
+      <li>YO</li>
+      <li>YO</li>
+      <li>YO</li>
+      <li>YO</li>
       {/*
-      <ul className={styles.weights}>
         {weights.map((value) => buildWeight(value))}
-      </ul>
-      */}
-    </main>
+        */}
+    </ul>
   );
 }
 
