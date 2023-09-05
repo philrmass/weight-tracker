@@ -8,7 +8,7 @@
   "theme_color": "#888",
   "icons": [
     {
-      "src": "./assets/icon.png",
+      "src": "./assets/iconMaskable.png",
       "type": "image/png",
       "purpose": "maskable",
       "sizes": "512x512"
