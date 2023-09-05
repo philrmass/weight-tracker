@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'preact/hooks';
+import { route } from 'preact-router';
 import { loadJsonFile, saveJsonFile } from 'utilities/file';
 import { useLocalStorage } from 'utilities/hooks';
 import { getIconSvgs } from 'utilities/Icon';
@@ -10,6 +11,7 @@ import Average from './Average';
 import Backup from './Backup';
 import Input from './Input';
 import Graph from './Graph';
+import Message from './Message';
 import Modal from './Modal';
 import Options from './Options';
 import Weights from './Weights';
@@ -28,7 +30,7 @@ function checkBackup(weights, at) {
 }
 
 export default function Home() {
-  const [weights, setWeights] = useLocalStorage('weightTrackerAll', []);
+  const [weights, setWeights] = useLocalStorage('wtWeights', []);
   const [trackingStartAt, setTrackingStartAt] = useLocalStorage('wtStartAt', null);
   const [weeks, setWeeks] = useState(false);
   const [months, setMonths] = useState(false);
@@ -56,15 +58,15 @@ export default function Home() {
     const { all, stats } = importData(weights, data);
 
     setWeights(all);
+    setMenuOpen(false);
     setMessage(getImportMessage(stats));
   };
-  console.log('message', message);
 
   const exportWeights = () => {
     saveJsonFile(getDataFilePath(), weights);
+    setMenuOpen(false);
   };
 
-  // ??? change history.push to route
   return (
     <>
       <main className={styles.main}>
@@ -81,7 +83,7 @@ export default function Home() {
         <div className={styles.averages}>
           <div
             className={styles.week}
-            onClick={() => history.push('/weight-tracker/weekly')}
+            onClick={() => route('/weight-tracker/weekly')}
           >
             <Average
               data={weeks[0]}
@@ -90,7 +92,7 @@ export default function Home() {
           </div>
           <div
             className={styles.month}
-            onClick={() => history.push('/weight-tracker/monthly')}
+            onClick={() => route('/weight-tracker/monthly')}
           >
             <Average
               data={months[0]}
@@ -100,7 +102,7 @@ export default function Home() {
         </div>
         <div
           className={styles.graph}
-          onClick={() => history.push('/weight-tracker/graph')}
+          onClick={() => route('/weight-tracker/graph')}
         >
           <Graph />
           <div className={styles.version}>
@@ -123,7 +125,12 @@ export default function Home() {
           onClose={() => setBackupOpen(false)}
         />
       </Modal>
-      { /* ??? message Modal */ }
+      <Modal isOpen={Boolean(message)}>
+        <Message 
+          message={message}
+          onClose={() => setMessage(null)}
+        />
+      </Modal>
       { getIconSvgs(icons) }
     </>
   );

@@ -23,7 +23,7 @@ export function importData(existing, imported) {
 export function getImportMessage(stats) {
   return `Added ${stats.added} measurements\n` +
     ` to ${stats.existing} existing measurements,\n` +
-    ` removed ${stats.duplicates} duplicates\n` +
+    ` removed ${stats.duplicates} duplicates,\n` +
     ` for a total of ${stats.all}`;
 }
 
