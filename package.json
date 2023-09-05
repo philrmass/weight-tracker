@@ -1,7 +1,6 @@
 {
   "private": true,
   "name": "weight-tracker",
-  "description": "An app to to track your daily weight",
   "version": "1.2.0",
   "license": "MIT",
   "scripts": {
