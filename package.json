@@ -2,10 +2,10 @@
   "private": true,
   "name": "weight-tracker",
   "description": "An app to to track your daily weight",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "license": "MIT",
   "scripts": {
-    "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider preact build",
+    "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider preact build --no-prerender",
     "deploy": "gh-pages -d build",
     "dev": "DEV=true cross-env NODE_OPTIONS=--openssl-legacy-provider preact watch --clear=false",
     "eslint": "eslint 'src/**'",
