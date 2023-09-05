@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'preact/hooks';
 import { route } from 'preact-router';
 import { loadJsonFile, saveJsonFile } from 'utilities/file';
-// import { useLocalStorage } from 'utilities/hooks';
+import { useLocalStorage } from 'utilities/hooks';
 import { getIconSvgs } from 'utilities/Icon';
 import { calculateWeeks, calculateMonths } from '../utilities/averages';
 import { getDataFilePath, getImportMessage, importData } from '../utilities/data';
@@ -30,10 +30,8 @@ function checkBackup(weights, at) {
 }
 
 export default function Home() {
-  //const [weights, setWeights] = useLocalStorage('wtWeights', []);
-  //const [trackingStartAt, setTrackingStartAt] = useLocalStorage('wtStartAt', null);
-  const [weights, setWeights] = useState([]);
-  const [trackingStartAt, setTrackingStartAt] = useState(null);
+  const [weights, setWeights] = useLocalStorage('wtWeights', []);
+  const [trackingStartAt, setTrackingStartAt] = useLocalStorage('wtStartAt', null);
   const [weeks, setWeeks] = useState(false);
   const [months, setMonths] = useState(false);
   const [backupOpen, setBackupOpen] = useState(false);
