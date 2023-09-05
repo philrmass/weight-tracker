@@ -1,17 +1,9 @@
-.weights {
-  background: red;
-  background: var(--bg-normal);
-}
-
-/*
-  padding: 0 var(--size-1);
-
 .item {
+  display: grid;
+  grid-template-columns: 2fr 4fr 1fr;
   padding: var(--size-0) var(--size-1);
   border: 1px solid var(--bg-alt);
   background: var(--bg-normal);
-  display: grid;
-  grid-template-columns: 2fr 4fr 1fr;
 }
 
 .weight {
@@ -26,7 +18,6 @@
 
 .buttons {
   display: flex;
-  justify-content: edn;
+  justify-content: center;
   align-items: center;
 }
-*/

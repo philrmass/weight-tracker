@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'preact/hooks';
+import { loadJsonFile, saveJsonFile } from 'utilities/file';
 import { useLocalStorage } from 'utilities/hooks';
+import { getIconSvgs } from 'utilities/Icon';
 import { calculateWeeks, calculateMonths } from '../utilities/averages';
+import { getDataFilePath, getImportMessage, importData } from '../utilities/data';
 import { getWeek, getMonth, inSameMonth } from '../utilities/time';
 import { version } from '../../package.json';
 import Average from './Average';
@@ -11,10 +14,11 @@ import Modal from './Modal';
 import Options from './Options';
 import Weights from './Weights';
 import styles from './Home.module.css';
-// ??? remove unused utilities
-// import { importData } from '../../utilities/data';
-// import { getObject, setObject } from '../../utilities/storage';
-// import { demoData } from './demoData.js';
+
+const icons = [
+  'cross',
+  'menu',
+];
 
 function checkBackup(weights, at) {
   if (weights.length < 10) {
@@ -25,11 +29,12 @@ function checkBackup(weights, at) {
 
 export default function Home() {
   const [weights, setWeights] = useLocalStorage('weightTrackerAll', []);
-  // ??? add goalStart in storage
+  const [trackingStartAt, setTrackingStartAt] = useLocalStorage('wtStartAt', null);
   const [weeks, setWeeks] = useState(false);
   const [months, setMonths] = useState(false);
   const [backupOpen, setBackupOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [message, setMessage] = useState(null);
 
   useEffect(() => {
     setWeeks(calculateWeeks(weights));
@@ -46,24 +51,17 @@ export default function Home() {
     setWeights((all) => all.filter((val) => val.at !== at));
   };
 
-  const importWeights = () => {
-    /*
-    const { all, stats } = importData(state.all, action.items);
-    const message = getImportMessage(stats);
+  const importWeights = async () => {
+    const data = await loadJsonFile();
+    const { all, stats } = importData(weights, data);
 
-    function getImportMessage(stats) {
-      return `Added ${stats.added} measurements\n` +
-        ` to ${stats.existing} existing measurements,\n` +
-        ` removed ${stats.duplicates} duplicates\n` +
-        ` for a total of ${stats.all}`;
-    }
-    */
+    setWeights(all);
+    setMessage(getImportMessage(stats));
   };
+  console.log('message', message);
 
   const exportWeights = () => {
-    /*
-      const message = `Exported ${action.count} measurements`;
-    */
+    saveJsonFile(getDataFilePath(), weights);
   };
 
   // ??? change history.push to route
@@ -112,6 +110,8 @@ export default function Home() {
       </main>
       <Modal isOpen={menuOpen}>
         <Options
+          trackingStartAt={trackingStartAt}
+          setTrackingStartAt={setTrackingStartAt}
           onImport={importWeights}
           onExport={exportWeights}
           onClose={() => setMenuOpen(false)}
@@ -122,8 +122,9 @@ export default function Home() {
           onExport={exportWeights}
           onClose={() => setBackupOpen(false)}
         />
-        BACKUP
       </Modal>
+      { /* ??? message Modal */ }
+      { getIconSvgs(icons) }
     </>
   );
 }

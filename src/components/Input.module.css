@@ -2,69 +2,22 @@
   padding: var(--size-1) var(--size-2);
   background: var(--bg-accent);
   color: var(--color-accent);
-
-  /*
   display: grid;
   grid-template-columns: 2fr 4fr 1fr;
-  */
 }
 
-/*
 .weight {
   display: flex;
   align-items: center;
-  margin-right: 8px;
+  margin-right: var(--size-1);
 }
 
 .input {
   max-width: 7em;
 }
 
-.time {
-}
-
-*/
 .buttons {
   display: flex;
   align-items: center;
-
-  /*
-  color: var(--color-normal);
-  */
+  justify-content: center;
 }
-
-.buttons button {
-  border: 1px solid var(--color-accent);
-  color: var(--color-accent);
-
-  /*
-  ??? change to shading, not border
-  */
-}
-
-/*
-.fileInput {
-  display: none;
-}
-
-.save {
-  color: var(--color-normal);
-}
-
-.saveButtons {
-  margin-top: var(--size-2);
-  display: flex;
-  justify-content: flex-end;
-}
-
-.saveButtons button {
-  width: auto;
-  padding: var(--size-0) var(--size-1);
-  border-radius: var(--border-radius);
-  margin-left: var(--size-0);
-}
-
-.saveButtons button:hover {
-  background: var(--bg-button-hover);
-}
-*/

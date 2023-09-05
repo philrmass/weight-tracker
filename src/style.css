@@ -3,7 +3,8 @@
   --size-1: 8px;
   --size-2: 16px;
   --size-3: 32px;
-  --size-button: 24px;
+  --size-button: 32px;
+  --size-icon: 24px;
   --border-radius: 2px;
   --text-normal: 16px;
   --text-large: 22px;
@@ -38,13 +39,13 @@ body {
   font-family: Helvetica, sans-serif;
 }
 
-button {
+.button {
   width: var(--size-button);
   height: var(--size-button);
-  padding: var(--size-0);
-  border: 1px solid var(--color-button);
-  border-radius: 50%;
-  color: var(--color-button);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0;
 }
 
 input {
@@ -53,4 +54,9 @@ input {
   border-radius: var(--border-radius);
   background: var(--bg-normal);
   color: var(--color-normal);
+}
+
+.icon {
+  width: var(--size-icon);
+  height: var(--size-icon);
 }

@@ -6,9 +6,10 @@
 }
 
 .weights {
-  border: var(--size-1) solid var(--bg-alt);
   overflow-x: hidden;
   overflow-y: auto;
+  border: var(--size-1) solid var(--bg-alt);
+  background: var(--bg-alt);
 }
 
 .averages {
