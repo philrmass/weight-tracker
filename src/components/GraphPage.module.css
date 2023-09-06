@@ -1,13 +1,17 @@
 .main {
   position: absolute;
+
+  /*
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   border: var(--size-2) solid var(--bg-alt);
   display: flex;
+  */
 }
 
+/*
 .close {
   position: fixed;
   right: var(--size-1);
@@ -17,4 +21,4 @@
 .close button {
   background: var(--bg-normal);
 }
-
+*/

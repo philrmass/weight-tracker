@@ -83,7 +83,7 @@ export default function Home() {
         <div className={styles.averages}>
           <div
             className={styles.week}
-            onClick={() => route('/weight-tracker/weekly')}
+            onClick={() => route('/weekly')}
           >
             <Average
               data={weeks[0]}
@@ -92,7 +92,7 @@ export default function Home() {
           </div>
           <div
             className={styles.month}
-            onClick={() => route('/weight-tracker/monthly')}
+            onClick={() => route('/monthly')}
           >
             <Average
               data={months[0]}
@@ -102,7 +102,7 @@ export default function Home() {
         </div>
         <div
           className={styles.graph}
-          onClick={() => route('/weight-tracker/graph')}
+          onClick={() => route('/graph')}
         >
           <Graph />
           <div className={styles.version}>
