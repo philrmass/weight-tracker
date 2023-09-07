@@ -1,16 +1,12 @@
 .main {
-  background: var(--bg-accent);
-  color: var(--color-accent);
-
-  /*
-  padding: var(--size-1) var(--size-2);
   display: flex;
   flex-direction: column;
   align-items: center;
-  */
+  padding: var(--size-1) var(--size-2);
+  background: var(--bg-accent);
+  color: var(--color-accent);
 }
 
-/*
 .date {
   color: var(--color-accent-light);
 }
@@ -22,18 +18,6 @@
   display: flex;
 }
 
-.diff {
-  margin-left: var(--size-1);
-  display: flex;
-}
-
 .measurements {
   color: var(--color-accent-light);
 }
-
-.icon {
-  width: 1em;
-  height: 1em;
-  margin-right: var(--size-0);
-}
-*/

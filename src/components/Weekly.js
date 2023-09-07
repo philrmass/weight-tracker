@@ -1,20 +1,32 @@
+/*
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import { getWeek } from '../utilities/time';
-import styles from '../styles/Weekly.module.css';
 import Averages from './Averages';
 import Icon from './Icon';
+*/
+import { route } from 'preact-router';
+import styles from './Weekly.module.css';
 
-function Weekly({
+export default function Weekly({
   weeks,
-  goal,
+  trackingStartAt,
 }) {
-  const history = useHistory();
+  console.log('WKS', weeks.length, trackingStartAt);
+  //const history = useHistory();
 
   return (
+    <div className={styles.main}>
+      WEEKLY
+      <button onClick={() => route('/')}>
+        X
+      </button>
+    </div>
+  );
+  /*
     <main className={styles.main}>
       <div className={styles.close}>
         <button onClick={() => history.push('/weight-tracker')}>
@@ -27,17 +39,5 @@ function Weekly({
         getDateString={getWeek}
       />
     </main>
-  );
+    */
 }
-
-Weekly.propTypes = {
-  weeks: PropTypes.arrayOf(PropTypes.object).isRequired,
-  goal: PropTypes.object,
-};
-
-const mapState = (state) => ({
-  weeks: state.weights.weeks,
-  goal: state.weights.goal,
-});
-
-export default connect(mapState)(Weekly);

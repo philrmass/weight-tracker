@@ -1,9 +1,6 @@
-import { useEffect, useState } from 'preact/hooks';
+import { useState } from 'preact/hooks';
 import { route } from 'preact-router';
 import { loadJsonFile, saveJsonFile } from 'utilities/file';
-import { useLocalStorage } from 'utilities/hooks';
-import { getIconSvgs } from 'utilities/Icon';
-import { calculateWeeks, calculateMonths } from '../utilities/averages';
 import { getDataFilePath, getImportMessage, importData } from '../utilities/data';
 import { getWeek, getMonth, inSameMonth } from '../utilities/time';
 import { version } from '../../package.json';
@@ -17,11 +14,6 @@ import Options from './Options';
 import Weights from './Weights';
 import styles from './Home.module.css';
 
-const icons = [
-  'cross',
-  'menu',
-];
-
 function checkBackup(weights, at) {
   if (weights.length < 10) {
     return false;
@@ -29,19 +21,17 @@ function checkBackup(weights, at) {
   return !inSameMonth(weights[0].at, at);
 }
 
-export default function Home() {
-  const [weights, setWeights] = useLocalStorage('wtWeights', []);
-  const [trackingStartAt, setTrackingStartAt] = useLocalStorage('wtStartAt', null);
-  const [weeks, setWeeks] = useState(false);
-  const [months, setMonths] = useState(false);
+export default function Home({
+  months,
+  weeks,
+  trackingStartAt,
+  weights,
+  setTrackingStartAt,
+  setWeights,
+}) {
   const [backupOpen, setBackupOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [message, setMessage] = useState(null);
-
-  useEffect(() => {
-    setWeeks(calculateWeeks(weights));
-    setMonths(calculateMonths(weights));
-  }, [weights]);
 
   const addWeight = (weight, at) => {
     const value = { weight, at };
@@ -131,7 +121,6 @@ export default function Home() {
           onClose={() => setMessage(null)}
         />
       </Modal>
-      { getIconSvgs(icons) }
     </>
   );
 }

@@ -1,9 +1,13 @@
 .era {
+  /*
   padding: var(--size-1);
   border: 1px solid var(--bg-alt);
   background: var(--bg-normal);
+  */
+  border: 1px solid cyan;
 }
 
+/*
 .top {
   margin-bottom: var(--size-1);
   display: grid;
@@ -68,3 +72,12 @@
 .goalValue {
   color: var(--color-normal-light);
 }
+*/
+
+/*
+.icon {
+  width: 1em;
+  height: 1em;
+  margin-right: var(--size-0);
+}
+*/

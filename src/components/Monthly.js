@@ -1,43 +1,28 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import PropTypes from 'prop-types';
-
+import { route } from 'preact-router';
 import { getMonth } from '../utilities/time';
-import styles from '../styles/Monthly.module.css';
 import Averages from './Averages';
-import Icon from './Icon';
+import Icon from 'utilities/Icon';
+import styles from './Monthly.module.css';
 
-function Monthly({
+export default function Monthly({
   months,
-  goal,
+  trackingStartAt,
 }) {
-  const history = useHistory();
-
   return (
-    <main className={styles.main}>
-      <div className={styles.close}>
-        <button onClick={() => history.push('/weight-tracker')}>
-          <Icon name='close' color='currentColor' />
-        </button>
+    <div className={styles.main}>
+      <div
+        className={styles.header}
+        onClick={() => route('/')}
+      >
+        <Icon name="cross" className="icon" />
       </div>
-      <Averages
-        eras={months}
-        goal={goal}
-        getDateString={getMonth}
-      />
-    </main>
+      <div className={styles.averages}>
+        <Averages
+          eras={months}
+          getDateString={getMonth}
+          trackingStartAt={trackingStartAt}
+        />
+      </div>
+    </div>
   );
 }
-
-Monthly.propTypes = {
-  months: PropTypes.arrayOf(PropTypes.object).isRequired,
-  goal: PropTypes.object,
-};
-
-const mapState = (state) => ({
-  months: state.weights.months,
-  goal: state.weights.goal,
-});
-
-export default connect(mapState)(Monthly);
