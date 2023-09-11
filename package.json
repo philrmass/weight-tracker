@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "weight-tracker",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "license": "MIT",
   "scripts": {
     "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider preact build --no-prerender",
@@ -23,12 +23,13 @@
     "stylelint-config-standard": "^34.0.0"
   },
   "dependencies": {
+    "classnames": "^2.3.2",
     "gh-pages": "^6.0.0",
     "history": "^5.3.0",
     "jest": "^29.6.4",
     "preact": "^10.1.0",
     "preact-render-to-string": "^5.1.2",
     "preact-router": "^4.1.2",
-    "utilities": "https://github.com/philrmass/utilities#v0.10.0"
+    "utilities": "https://github.com/philrmass/utilities#v0.11.0"
   }
 }

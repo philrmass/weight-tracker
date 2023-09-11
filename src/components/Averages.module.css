@@ -1,83 +1,56 @@
 .era {
-  /*
   padding: var(--size-1);
-  border: 1px solid var(--bg-alt);
-  background: var(--bg-normal);
-  */
-  border: 1px solid cyan;
 }
 
-/*
-.top {
-  margin-bottom: var(--size-1);
+.era + .era {
+  border-top: 1px solid var(--bg-alt);
+}
+
+.item {
   display: grid;
-  grid-template-columns: 4fr 5fr;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--size-1);
 }
 
-.date {
-  margin-right: var(--size-1);
-  display: flex;
-  justify-content: flex-end;
+.item :nth-child(2n + 1) {
+  text-align: right;
+  padding-right: var(--size-0);
 }
 
 .count {
-  margin-left: var(--size-1);
   color: var(--color-normal-light);
-}
-
-.bottom {
-  display: grid;
-  grid-template-columns: 4fr 5fr;
 }
 
 .average {
   display: flex;
-  align-items: center;
-  display: flex;
   justify-content: flex-end;
-  margin-right: var(--size-1);
+  align-items: center;
+  gap: var(--size-1);
   font-size: var(--text-large);
 }
 
-.averageValue {
-}
-
-.stdDev {
-  margin-left: var(--size-1);
+.stddev {
   color: var(--color-normal-light);
-}
-
-.goal {
-  margin-left: var(--size-1);
-  display: flex;
-  align-items: center;
-}
-
-.icon {
-  width: 1em;
-  height: 1em;
-  margin-right: var(--size-0);
 }
 
 .diff {
-  display: flex;
-  margin-right: var(--size-1);
+  font-size: var(--text-large);
 }
 
-.goalTitle {
-  color: var(--color-normal-light);
-  margin-right: var(--size-0);
-}
-
-.goalValue {
-  color: var(--color-normal-light);
-}
-*/
-
-/*
 .icon {
-  width: 1em;
-  height: 1em;
-  margin-right: var(--size-0);
+  --size: 24px;
+
+  position: relative;
+  top: 4px;
+  width: var(--size);
+  height: var(--size);
+  color: var(--color-same);
 }
-*/
+
+.up {
+  color: var(--color-up);
+}
+
+.down {
+  color: var(--color-down);
+}

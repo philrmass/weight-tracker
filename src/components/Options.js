@@ -9,6 +9,11 @@ export default function Options({
   onExport,
   onImport,
 }) {
+  const handleDateChange = (value) => {
+    const date = new Date(value);
+    setTrackingStartAt(date.valueOf());
+  };
+
   const renderStart = () => {
     if (!trackingStartAt) {
       return (
@@ -18,7 +23,7 @@ export default function Options({
             type='date'
             value={trackingStartAt}
             placeholder="OY!"
-            onChange={(e) => setTrackingStartAt(e.target.value)}
+            onChange={(e) => handleDateChange(e.target.value)}
           />
         </div>
       );

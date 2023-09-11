@@ -11,7 +11,10 @@ import Redirect from './Redirect';
 import Weekly from './Weekly';
 
 const icons = [
+  'caretDown',
+  'caretUp',
   'cross',
+  'flat',
   'menu',
 ];
 

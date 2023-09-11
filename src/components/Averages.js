@@ -1,4 +1,5 @@
-// import { getRangeGoal } from '../utilities/averages';
+import classnames from 'classnames';
+import Icon from 'utilities/Icon';
 import styles from './Averages.module.css';
 
 export default function Averages({
@@ -6,96 +7,74 @@ export default function Averages({
   getDateString,
   trackingStartAt,
 }) {
-  console.log('AVES', eras.length, trackingStartAt, typeof getDateString);
-  function buildEra(era) {
-    return (
-      <li
-        key={era.atStart}
-        className={styles.era}
-      >
-        {/*
-        <div className={styles.top}>
-          <div className={styles.date}>
-            {getDateString(era.atStart)}
-          </div>
-          <div className={styles.count}>
-            {`${era.items.length} measurements`}
-          </div>
-        </div>
-        <div className={styles.bottom}>
-          <div className={styles.average}>
-            <div className={styles.averageValue}>
-              {era.average.toFixed(1)}
-            </div>
-            <div className={styles.stdDev}>
-              {`\u00b1 ${era.stdDev.toFixed(1)}`}
-            </div>
-          </div>
-          {buildGoalDiff(era, goal)}
-        </div>
-        */}
-      </li>
+  const renderDiff = (diff) => {
+    const value = Math.abs(diff);
+    const classes = classnames(
+      styles.icon,
+      {
+        [styles.up]: diff > 0,
+        [styles.down]: diff < 0,
+      },
     );
-  }
+    let icon = 'flat';
+    let sign = '';
 
-  /*
-  function buildGoalDiff(era, goal) {
-    const goalWeight = getRangeGoal(era.atStart, era.atEnd, goal);
-    if (!goalWeight) {
-      return null;
+    if (diff > 0) {
+      icon = 'caretUp';
+      sign = '+';
+    } else if (diff < 0) {
+      icon = 'caretDown';
+      sign = '-';
     }
-
-    const diff = era.average - goalWeight;
-    const iconName = diff > 0 ? 'arrowUp' : 'arrowDown';
-    const iconColor = diff > 0 ? '#ff2105' : '#12d025';
-    const value = Math.abs(diff).toFixed(1);
-
-    return (
-      <div className={styles.goal}>
-        <div className={styles.icon}>
-          <Icon name={iconName} color={iconColor} />
-        </div>
-        <div className={styles.diff}>
-          {`${value}`}
-        </div>
-        <div className={styles.goalTitle}>
-          Goal
-        </div>
-        <div className={styles.goalValue}>
-          {goalWeight.toFixed(1)}
-        </div>
-      </div>
-    );
-  }
-  */
-
-  return (
-    <ul>
-      {eras.map((era) => buildEra(era))}
-    </ul>
-  );
-}
-
-/*
-  function buildGoalDiff() {
-    const goalWeight = getRangeGoal(data.atStart, data.atEnd, goal);
-    if (!goalWeight) {
-      return null;
-    }
-
-    const diff = data.average - goalWeight;
-    const iconName = diff > 0 ? 'arrowUp' : 'arrowDown';
-    const iconColor = diff > 0 ? '#ff2105' : '#12d025';
-    const value = Math.abs(diff).toFixed(1);
 
     return (
       <div className={styles.diff}>
-        <div className={styles.icon}>
-          <Icon name={iconName} color={iconColor} />
-        </div>
-        {`${value}`}
+        <Icon name={icon} className={classes} />
+        { `${sign} ${value.toFixed(1)}` }
       </div>
     );
-  }
-  */
-//import { getRangeGoal } from '../utilities/averages';
+  };
+
+  const renderTracking = (era, index) => {
+    if (trackingStartAt < era.atStart) {
+      const lastEra = eras[index + 1];
+
+      if (lastEra) {
+        return renderDiff(era.average - lastEra.average);
+      }
+    } else if (trackingStartAt < era.atEnd) {
+      return renderDiff(0);
+    }
+
+    return null;
+  };
+
+  return (
+    <ul>
+      {eras.map((era, index) => (
+        <li
+          key={era.atStart}
+          className={styles.era}
+        >
+          <div className={styles.item}>
+            <div>
+              {getDateString(era.atStart)}
+            </div>
+            <div className={styles.count}>
+              {`${era.items.length} measurements`}
+            </div>
+            <div className={styles.average}>
+              <span>
+                {era.average.toFixed(1)}
+              </span>
+              <span className={styles.stddev}>
+                {`\u00b1 ${era.stdDev.toFixed(1)}`}
+              </span>
+            </div>
+            { renderTracking(era, index) }
+          </div>
+        </li>
+      )) }
+    </ul>
+  );
+}

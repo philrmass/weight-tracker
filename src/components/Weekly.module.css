@@ -1,24 +1,21 @@
 .main {
-  /*
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  border: var(--size-2) solid var(--bg-alt);
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
   overflow-x: hidden;
   overflow-y: scroll;
-  */
 }
 
-/*
-.close {
-  position: fixed;
-  right: var(--size-1);
-  top: var(--size-1);
+.header {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: flex-end;
+  padding: var(--size-0) var(--size-1);
+  background: var(--bg-alt);
 }
 
-.close button {
-  background: var(--bg-normal);
+.averages {
+  flex-grow: 1;
+  border: var(--size-1) solid var(--bg-alt);
 }
-*/
