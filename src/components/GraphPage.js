@@ -1,26 +1,25 @@
-// import React from 'react';
-// import { useHistory } from 'react-router-dom';
-
+import { route } from 'preact-router';
+import Graph from './Graph';
 import styles from './GraphPage.module.css';
-// import Graph from './Graph';
-// import Icon from './Icon';
 
-function GraphPage() {
-  /*
-  const history = useHistory();
-
+function GraphPage({ weights }) {
   return (
     <main className={styles.main}>
+      <button
+        onClick={() => route('/')}
+      >
+        RETURN
+      </button>
+      {/*
       <div className={styles.close}>
         <button onClick={() => history.push('/weight-tracker')}>
           <Icon name='close' color='currentColor' />
         </button>
       </div>
-      <Graph />
+      */}
+      <Graph weights={weights} />
     </main>
   );
-  */
-  return <div className={styles.main}>GRAPH-PAGE</div>;
 }
 
 export default GraphPage;

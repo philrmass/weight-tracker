@@ -9,10 +9,14 @@ import {
 } from './time';
 
 export function calcAtView(items, atRange) {
-  const atStart = items[0]?.at - atRange;
-  const atEnd = items[0]?.at;
+  if (items?.length > 0) {
+    const atStart = items[0]?.at - atRange;
+    const atEnd = items[0]?.at;
 
-  return [atStart, atEnd];
+    return [atStart, atEnd];
+  }
+
+  return 0;
 }
 
 export function getAtLimits(items, rangeMin) {
@@ -28,7 +32,8 @@ export function getAtLimits(items, rangeMin) {
 
 export function adjustAtView(view, limits, moveRatio, scaleRatio, centerRatio) {
   const moved = applyAtMove(view, limits, moveRatio);
-  return applyScale(moved, limits, scaleRatio, centerRatio);
+  return moved;
+  // ??? return applyScale(moved, limits, scaleRatio, centerRatio);
 }
 
 function applyAtMove([start, end], [min, max], moveRatio) {
@@ -59,20 +64,17 @@ function applyScale([start, end], [min, max], scaleRatio, centerRatio) {
   return [limitedStart, limitedEnd];
 }
 
-export function render(ctx, items, goal, atView) {
-  if (items.length === 0) {
-    return;
+export function render(ctx, items, atView) {
+  if (items?.length > 0) {
+    const view = calcView(items, atView);
+    const viewItems = selectViewItems(items, atView);
+    const coord = calcCoord(ctx, view);
+
+    renderTimeLines(ctx, coord, view);
+    renderWeightLines(ctx, coord, view);
+    renderWeightLabels(ctx, coord, view);
+    renderWeights(ctx, coord, viewItems);
   }
-
-  const view = calcView(items, atView);
-  const viewItems = selectViewItems(items, atView);
-  const coord = calcCoord(ctx, view);
-
-  renderTimeLines(ctx, coord, view);
-  renderWeightLines(ctx, coord, view);
-  renderWeightLabels(ctx, coord, view);
-  renderGoal(ctx, coord, goal);
-  renderWeights(ctx, coord, viewItems);
 }
 
 function selectViewItems(items, [atStart, atEnd]) {
@@ -314,17 +316,6 @@ function renderLabel(ctx, text, deg = 0, x = 0, y = 0) {
   ctx.rotate(radians);
   ctx.fillText(text, 2 * gap, -gap);
   ctx.restore();
-}
-
-function renderGoal(ctx, coord, goal) {
-  if (goal) {
-    setLineStyle(ctx, 2);
-
-    ctx.beginPath();
-    ctx.moveTo(coord.x(goal.atStart), coord.y(goal.weightStart));
-    ctx.lineTo(coord.x(goal.atEnd), coord.y(goal.weightEnd));
-    ctx.stroke();
-  }
 }
 
 function renderWeights(ctx, coord, items) {

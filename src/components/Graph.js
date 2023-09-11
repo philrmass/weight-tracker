@@ -1,9 +1,4 @@
-import styles from './Graph.module.css';
-/*
-import React, { useEffect, useRef, useState } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-
+import { useEffect, useRef, useState } from 'preact/hooks';
 import {
   calcAtView,
   getAtLimits,
@@ -11,7 +6,8 @@ import {
   render,
 } from '../utilities/graph';
 import { getDays } from '../utilities/time';
-*/
+import { getMoveRatios, getTouches } from 'utilities/touch';
+import styles from './Graph.module.css';
 
 // ??? update to utility
 /*
@@ -50,7 +46,9 @@ function getAverage(diffs) {
   }
   return 0;
 }
+*/
 
+/*
 function getScaleX(lasts, nows) {
   const w = nows[0].w;
   const lastIds = lasts.map((last) => last.id);
@@ -76,75 +74,64 @@ function getScaleX(lasts, nows) {
 }
 */
 
-export default function Graph({ weights }) {
-  /*
-  const wrap = useRef(null);
-  const canvas = useRef(null);
-  const [atView, setAtView] = useState(calcAtView(items, getDays(56)));
-  const [touches, setTouches] = useState([]);
-
-  window.onresize = () => {
-    if (canvas.current) {
-      const ctx = canvas.current.getContext('2d');
-      ctx.canvas.width = wrap.current.clientWidth;
-      ctx.canvas.height = wrap.current.clientHeight;
-      render(ctx, items, goal, atView);
-    }
-  };
-
-  function handleStart(e) {
-    setTouches(getTouches(e));
-  }
-
-  function handleMove(e) {
-    const nows = getTouches(e);
-    const moveX = getMoveX(touches, nows);
-    const [scaleX, centerX] = getScaleX(touches, nows);
-    setTouches(nows);
-
-    const atLimits = getAtLimits(items, getDays(90));
-    setAtView(adjustAtView(atView, atLimits, -moveX, scaleX, centerX));
-  }
-
-  useEffect(() => {
-    setAtView(calcAtView(items, getDays(56)));
-  }, [items.length]);
-
-  useEffect(() => {
+function renderCanvas(canvas, wrap, weights, atView) {
+  if (canvas.current) {
     const ctx = canvas.current.getContext('2d');
     ctx.canvas.width = wrap.current.clientWidth;
     ctx.canvas.height = wrap.current.clientHeight;
-    render(ctx, items, goal, atView);
-  }, [items, goal, atView]);
-  */
+    render(ctx, weights, atView);
+  }
+}
+
+export default function Graph({ weights }) {
+  const wrap = useRef(null);
+  const canvas = useRef(null);
+  const [touches, setTouches] = useState([]);
+  const [atView, setAtView] = useState(calcAtView(weights, getDays(56)));
+
+  window.onresize = () => {
+    renderCanvas(canvas, wrap, weights, atView);
+  };
+
+  const handleStart = (e) => {
+    // e.preventDefault();
+
+    setTouches(getTouches(e));
+  };
+
+  const handleMove = (e) => {
+    e.preventDefault();
+
+    const nextTouches = getTouches(e);
+    const move = getMoveRatios(touches, nextTouches);
+    // const [scaleX, centerX] = getScaleX(touches, nows);
+    const scaleX = 1;
+    const centerX = 0;
+    setTouches(nextTouches);
+    console.log('move', move);
+    // setLch(adjustColor(lch, move, xAxis, yAxis));
+
+    const atLimits = getAtLimits(weights, getDays(90));
+    //setAtView(adjustAtView(atView, atLimits, -moveX, scaleX, centerX));
+    setAtView(adjustAtView(atView, atLimits, -move.x, scaleX, centerX));
+  };
+
+  useEffect(() => {
+    setAtView(calcAtView(weights, getDays(56)));
+  }, [weights]);
+
+  useEffect(() => {
+    renderCanvas(canvas, wrap, weights, atView);
+  }, [weights, atView]);
 
   return (
-    <div className={styles.main}>
-      GRAPH
-      {/*
-      <div
-        className={styles.wrap}
-        ref={wrap}
-        onTouchStart={handleStart}
-        onTouchMove={handleMove}
-      >
-        <canvas className={styles.canvas} ref={canvas}></canvas>
-      </div>
-      */}
+    <div
+      className={styles.wrap}
+      ref={wrap}
+      onTouchStart={handleStart}
+      onTouchMove={handleMove}
+    >
+      <canvas ref={canvas} onClick={() => console.log('YO')} />
     </div>
   );
 }
-/*
-
-Graph.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.object).isRequired,
-  goal: PropTypes.object,
-};
-
-const mapState = (state) => ({
-  items: state.weights.all,
-  goal: state.weights.goal,
-});
-
-export default connect(mapState)(Graph);
-*/

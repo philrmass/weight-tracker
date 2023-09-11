@@ -41,7 +41,9 @@ export default function Routes() {
           setTrackingStartAt={setTrackingStartAt}
           setWeights={setWeights}
         />
-        <GraphPage path='/graph' />
+        <GraphPage path='/graph'
+          weights={weights}
+        />
         <Monthly
           path='/monthly'
           months={months}

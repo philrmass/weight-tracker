@@ -94,7 +94,7 @@ export default function Home({
           className={styles.graph}
           onClick={() => route('/graph')}
         >
-          <Graph />
+          <Graph weights={weights} />
           <div className={styles.version}>
             {`v ${version}`}
           </div>
