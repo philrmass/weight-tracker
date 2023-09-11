@@ -1,21 +1,23 @@
 .main {
+  --header: 40px;
+
   position: fixed;
   inset: 0;
-  display: flex;
-  flex-direction: column;
-  overflow-x: hidden;
-  overflow-y: scroll;
-}
-
-.header {
-  flex-shrink: 0;
-  display: flex;
-  justify-content: flex-end;
-  padding: var(--size-0) var(--size-1);
   background: var(--bg-alt);
 }
 
+.header {
+  height: var(--header);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: var(--size-1);
+}
+
 .averages {
-  flex-grow: 1;
-  border: var(--size-1) solid var(--bg-alt);
+  position: fixed;
+  inset: var(--header) var(--size-1) var(--size-1) var(--size-1);
+  overflow-x: hidden;
+  overflow-y: scroll;
+  background: var(--bg-normal);
 }
