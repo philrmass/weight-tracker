@@ -21,13 +21,12 @@
 }
 
 .graph {
-  flex-grow: 5;
   border: var(--size-1) solid var(--bg-alt);
 }
 
 .version {
   position: fixed;
-  left: var(--size-2);
-  bottom: var(--size-1);
+  right: var(--size-2);
+  bottom: var(--size-2);
   font-size: var(--text-small);
 }

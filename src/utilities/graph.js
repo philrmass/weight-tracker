@@ -32,8 +32,7 @@ export function getAtLimits(items, rangeMin) {
 
 export function adjustAtView(view, limits, moveRatio, scaleRatio, centerRatio) {
   const moved = applyAtMove(view, limits, moveRatio);
-  return moved;
-  // ??? return applyScale(moved, limits, scaleRatio, centerRatio);
+  return applyScale(moved, limits, scaleRatio, centerRatio);
 }
 
 function applyAtMove([start, end], [min, max], moveRatio) {
@@ -333,7 +332,7 @@ function renderWeights(ctx, coord, items) {
 
 const red = '#ff2105';
 const green = '#12d025';
-const blue = '#9090ff';
+const blue = '#8080ef';
 const gray = '#a8a8a8';
 
 function setLineStyle(ctx, type) {

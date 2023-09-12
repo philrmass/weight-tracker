@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "weight-tracker",
-  "version": "1.5.2",
+  "version": "1.6.0",
   "license": "MIT",
   "scripts": {
     "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider preact build --no-prerender",
