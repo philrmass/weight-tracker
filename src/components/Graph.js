@@ -6,10 +6,11 @@ import {
   render,
 } from '../utilities/graph';
 import { getDays } from '../utilities/time';
-import { getMoveRatios, getTouches } from 'utilities/touch';
+import { getMoveRatios, getScaleRatios, getTouches } from 'utilities/touch';
 import styles from './Graph.module.css';
 
-function getScaleRatios(lastTouches, touches) {
+// ??? remove
+function getScaleRatiosOld(lastTouches, touches) {
   const w = touches[0].w;
   // const h = touches[0].h;
   const lastIds = lastTouches.map((last) => last.id);

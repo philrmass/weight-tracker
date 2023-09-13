@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "weight-tracker",
-  "version": "1.6.0",
+  "version": "1.7.1",
   "license": "MIT",
   "scripts": {
     "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider preact build --no-prerender",
@@ -30,6 +30,6 @@
     "preact": "^10.1.0",
     "preact-render-to-string": "^5.1.2",
     "preact-router": "^4.1.2",
-    "utilities": "https://github.com/philrmass/utilities#v0.11.0"
+    "utilities": "https://github.com/philrmass/utilities#v0.12.2"
   }
 }
