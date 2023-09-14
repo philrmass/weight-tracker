@@ -22,6 +22,7 @@
 
 .graph {
   border: var(--size-1) solid var(--bg-alt);
+  height: 45vh;
 }
 
 .version {

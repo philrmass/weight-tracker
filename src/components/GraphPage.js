@@ -2,24 +2,13 @@ import { route } from 'preact-router';
 import Graph from './Graph';
 import styles from './GraphPage.module.css';
 
-function GraphPage({ weights }) {
+export default function GraphPage({ weights }) {
   return (
-    <main className={styles.main}>
-      <button
-        onClick={() => route('/')}
-      >
-        RETURN
-      </button>
-      {/*
-      <div className={styles.close}>
-        <button onClick={() => history.push('/weight-tracker')}>
-          <Icon name='close' color='currentColor' />
-        </button>
-      </div>
-      */}
+    <div
+      className={styles.main}
+      onClick={() => route('/')}
+    >
       <Graph weights={weights} />
-    </main>
+    </div>
   );
 }
-
-export default GraphPage;
