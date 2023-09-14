@@ -13,6 +13,32 @@ import Modal from './Modal';
 import Options from './Options';
 import Weights from './Weights';
 import styles from './Home.module.css';
+// ??? implement GraphPage
+// ??? implement Backup
+// ??? remove unused utilities
+
+// averages.js
+//  calculateWeeks
+//  calculateMonths
+
+// data.js
+//  getDataFilePath
+//  getImportMessage
+//  importData
+
+// graph.js
+//  calcAtView
+//  getAtLimits
+//  adjustAtView
+//  render
+
+// time.js
+// getDate 
+// getDays 
+// getMonth
+// getTime 
+// getWeek 
+// inSameMonth 
 
 function checkBackup(weights, at) {
   if (weights.length < 10) {

@@ -9,46 +9,6 @@ import { getDays } from '../utilities/time';
 import { getMoveRatios, getScaleRatios, getTouches } from 'utilities/touch';
 import styles from './Graph.module.css';
 
-// ??? remove
-function getScaleRatiosOld(lastTouches, touches) {
-  const w = touches[0].w;
-  // const h = touches[0].h;
-  const lastIds = lastTouches.map((last) => last.id);
-  const matched = touches.filter((touch) => lastIds.includes(touch.id));
-
-  // ??? functionalize
-  // [x, xCenter] = getScale(lastTouches, matched, 'x');
-  if (matched.length >= 2) {
-    const min = matched.reduce((min, item) => item.x < min.x ? item : min, matched[0]);
-    const max = matched.reduce((max, item) => item.x > max.x ? item : max, matched[0]);
-    const dist = max.x - min.x;
-
-    const lastMax = lastTouches.find((last) => last.id === max.id);
-    const lastMin = lastTouches.find((last) => last.id === min.id);
-    const lastDist = lastMax.x - lastMin.x;
-
-    if (lastDist > 0) {
-      const scale = dist / lastDist;
-      const center = (min.x + max.x) / 2;
-      // ??? return [scale, center];
-
-      return {
-        x: scale,
-        xCenter: center / w,
-        y: 1.0,
-        yCenter: 0.5,
-      };
-    }
-  }
-
-  return {
-    x: 1.0,
-    xCenter: 0.5,
-    y: 1.0,
-    yCenter: 0.5,
-  };
-}
-
 function renderCanvas(canvas, wrap, weights, atView) {
   if (canvas.current) {
     const ctx = canvas.current.getContext('2d');
