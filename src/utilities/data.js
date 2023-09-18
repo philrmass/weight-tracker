@@ -1,3 +1,19 @@
+export function getDataFilePath(at = Date.now()) {
+  const when = new Date(at);
+  const year = when.getFullYear();
+  const month = `${when.getMonth() + 1}`.padStart(2, '0');
+  const date = `${when.getDate()}`.padStart(2, '0');
+
+  return `weights_${year}_${month}_${date}.json`;
+}
+
+export function getImportMessage(stats) {
+  return `Added ${stats.added} measurements\n` +
+    ` to ${stats.existing} existing measurements,\n` +
+    ` removed ${stats.duplicates} duplicates,\n` +
+    ` for a total of ${stats.all}`;
+}
+
 export function importData(existing, imported) {
   const added = cleanData(imported);
   const combined = [...existing, ...added];
@@ -20,19 +36,12 @@ export function importData(existing, imported) {
   };
 }
 
-export function getImportMessage(stats) {
-  return `Added ${stats.added} measurements\n` +
-    ` to ${stats.existing} existing measurements,\n` +
-    ` removed ${stats.duplicates} duplicates,\n` +
-    ` for a total of ${stats.all}`;
-}
-
-export function cleanData(input) {
+function cleanData(input) {
   const data = Array.isArray(input) ? input : [];
   const cleaned = data.map((item) => {
     const weight = parseFloat(item.weight);
     const itemAt = item.at ? item.at : item.time;
-    const at = parseInt(itemAt);
+    const at = parseInt(itemAt, 10);
 
     return {
       at,
@@ -40,16 +49,7 @@ export function cleanData(input) {
     };
   });
 
-  return cleaned.filter((item) => {
-    return item.at && item.weight;
-  });
-}
-
-export function getDataFilePath(at = Date.now()) {
-  const when = new Date(at);
-  const year = when.getFullYear();
-  const month = `${when.getMonth() + 1}`.padStart(2, '0');
-  const date = `${when.getDate()}`.padStart(2, '0');
-
-  return `weights_${year}_${month}_${date}.json`;
+  return cleaned.filter((item) => (
+    item.at && item.weight
+  ));
 }

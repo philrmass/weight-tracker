@@ -1,30 +1,13 @@
-.main {
-  background: red;
-}
-
-/*
-.fileInput {
-  display: none;
-}
-
-.save {
-  color: var(--color-normal);
-}
-
-.saveButtons {
-  margin-top: var(--size-2);
+.buttons {
   display: flex;
   justify-content: flex-end;
+  gap: var(--size-1);
+  margin-top: var(--size-2);
 }
 
-.saveButtons button {
-  width: auto;
-  padding: var(--size-0) var(--size-1);
-  border-radius: var(--border-radius);
-  margin-left: var(--size-0);
+.buttons button {
+  border-radius: var(--size-0);
+  background: var(--bg-accent);
+  color: var(--color-accent);
+  padding: var(--size-1) var(--size-2);
 }
-
-.saveButtons button:hover {
-  background: var(--bg-button-hover);
-}
-*/

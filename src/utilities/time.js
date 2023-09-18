@@ -77,13 +77,6 @@ export function getDays(count) {
   return count * oneDay;
 }
 
-export function getMonthsFrom(count, at) {
-  const start = new Date(at);
-  start.setMonth(start.getMonth() + count);
-
-  return start.getTime();
-}
-
 export function inSameMonth(at0, at1) {
   const date0 = new Date(at0);
   const date1 = new Date(at1);
