@@ -5,7 +5,7 @@
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#fff",
-  "theme_color": "#888",
+  "theme_color": "#201060",
   "icons": [
     {
       "src": "./assets/iconMaskable.png",
